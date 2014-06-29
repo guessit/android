@@ -8,5 +8,6 @@
 
     <string name="main_background">Main Background</string>
     <string name="guessit">GuessIt!</string>
+    <string name="tap_to_play">Tap to Play</string>
 
 </resources>

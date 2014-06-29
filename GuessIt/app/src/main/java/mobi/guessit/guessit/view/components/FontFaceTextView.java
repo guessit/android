@@ -29,11 +29,15 @@ public class FontFaceTextView extends TextView {
         if (attrs != null) {
             TypedArray array = getContext().obtainStyledAttributes(attrs,
                     R.styleable.FontFaceTextView);
+
             String fontFace = array.getString(R.styleable.FontFaceTextView_fontFace);
+            int fontStyle = array.getInteger(R.styleable.FontFaceTextView_fontStyle, Typeface.NORMAL);
 
             if (fontFace != null) {
-                setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/" + fontFace));
+                setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/" + fontFace), fontStyle);
             }
+
+
         }
     }
 }

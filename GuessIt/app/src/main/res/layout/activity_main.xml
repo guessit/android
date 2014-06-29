@@ -15,15 +15,33 @@
         android:contentDescription="@string/main_background"
         android:src="@drawable/main_background" />
 
-    <mobi.guessit.guessit.view.components.FontFaceTextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/guessit"
-        android:id="@+id/main_guessit_text_view"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        guessit:fontFace="Lobster.ttf"
-        android:textSize="70sp" />
+        android:orientation="vertical"
+        >
+
+        <mobi.guessit.guessit.view.components.FontFaceTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/main_guessit_text_view"
+            android:text="@string/guessit"
+            guessit:fontFace="Lobster.ttf"
+            android:textSize="74sp" />
+
+        <mobi.guessit.guessit.view.components.FontFaceTextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/main_tap_to_play_text_view"
+            android:gravity="center"
+            android:text="@string/tap_to_play"
+            guessit:fontFace="Avenir Next Condensed.ttc"
+            guessit:fontStyle="Bold"
+            android:textSize="22sp" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>
