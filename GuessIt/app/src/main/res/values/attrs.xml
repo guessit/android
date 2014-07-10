@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="fontFace" format="string" />
+    <attr name="fontStyle" format="enum">
+        <!-- Get from TypeFace -->
+        <enum name="Normal" value="0" />
+        <enum name="Bold" value="1" />
+        <enum name="Italic" value="2" />
+        <enum name="BoldItalic" value="3" />
+    </attr>
+
     <declare-styleable name="FontFaceTextView">
-        <attr name="fontFace" format="string" />
-        <attr name="fontStyle" format="enum">
-            <!-- Get from TypeFace -->
-            <enum name="Normal" value="0" />
-            <enum name="Bold" value="1" />
-            <enum name="Italic" value="2" />
-            <enum name="BoldItalic" value="3" />
-        </attr>
+        <attr name="fontFace" />
+        <attr name="fontStyle" />
     </declare-styleable>
 
 </resources>

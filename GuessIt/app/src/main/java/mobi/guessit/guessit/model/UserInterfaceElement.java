@@ -1,79 +1,94 @@
 package mobi.guessit.guessit.model;
 
+import com.google.gson.annotations.SerializedName;
 
 public class UserInterfaceElement {
 
-    private int backgroundColor;
-    private int color;
-    private int textColor;
-    private int shadowColor;
+    @SerializedName("background_color")
+    private String backgroundColor;
 
-    private int secondaryBackgroundColor;
-    private int secondaryColor;
-    private int secondaryTextColor;
-    private int secondaryShadowColor;
+    @SerializedName("color")
+    private String color;
 
-    public int getBackgroundColor() {
+    @SerializedName("text_color")
+    private String textColor;
+
+    @SerializedName("shadow_color")
+    private String shadowColor;
+
+    @SerializedName("secondary_background_color")
+    private String secondaryBackgroundColor;
+
+    @SerializedName("secondary_color")
+    private String secondaryColor;
+
+    @SerializedName("secondary_text_color")
+    private String secondaryTextColor;
+
+    @SerializedName("secondary_shadow_color")
+    private String secondaryShadowColor;
+
+    public String getBackgroundColor() {
         return backgroundColor;
     }
 
-    public void setBackgroundColor(int backgroundColor) {
+    public void setBackgroundColor(String backgroundColor) {
         this.backgroundColor = backgroundColor;
     }
 
-    public int getColor() {
+    public String getColor() {
         return color;
     }
 
-    public void setColor(int color) {
+    public void setColor(String color) {
         this.color = color;
     }
 
-    public int getTextColor() {
+    public String getTextColor() {
         return textColor;
     }
 
-    public void setTextColor(int textColor) {
+    public void setTextColor(String textColor) {
         this.textColor = textColor;
     }
 
-    public int getShadowColor() {
+    public String getShadowColor() {
         return shadowColor;
     }
 
-    public void setShadowColor(int shadowColor) {
+    public void setShadowColor(String shadowColor) {
         this.shadowColor = shadowColor;
     }
 
-    public int getSecondaryBackgroundColor() {
+    public String getSecondaryBackgroundColor() {
         return secondaryBackgroundColor;
     }
 
-    public void setSecondaryBackgroundColor(int secondaryBackgroundColor) {
+    public void setSecondaryBackgroundColor(String secondaryBackgroundColor) {
         this.secondaryBackgroundColor = secondaryBackgroundColor;
     }
 
-    public int getSecondaryColor() {
+    public String getSecondaryColor() {
         return secondaryColor;
     }
 
-    public void setSecondaryColor(int secondaryColor) {
+    public void setSecondaryColor(String secondaryColor) {
         this.secondaryColor = secondaryColor;
     }
 
-    public int getSecondaryTextColor() {
+    public String getSecondaryTextColor() {
         return secondaryTextColor;
     }
 
-    public void setSecondaryTextColor(int secondaryTextColor) {
+    public void setSecondaryTextColor(String secondaryTextColor) {
         this.secondaryTextColor = secondaryTextColor;
     }
 
-    public int getSecondaryShadowColor() {
+    public String getSecondaryShadowColor() {
         return secondaryShadowColor;
     }
 
-    public void setSecondaryShadowColor(int secondaryShadowColor) {
+    public void setSecondaryShadowColor(String secondaryShadowColor) {
         this.secondaryShadowColor = secondaryShadowColor;
     }
 }
