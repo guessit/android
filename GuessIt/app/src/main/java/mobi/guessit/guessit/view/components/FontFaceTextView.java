@@ -36,8 +36,6 @@ public class FontFaceTextView extends TextView {
             if (fontFace != null) {
                 setTypeface(Typeface.createFromAsset(getContext().getAssets(), "fonts/" + fontFace), fontStyle);
             }
-
-
         }
     }
 }
