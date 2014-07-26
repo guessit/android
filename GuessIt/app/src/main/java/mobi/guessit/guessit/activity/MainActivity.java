@@ -7,13 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.FileHelper;
+import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
 import mobi.guessit.guessit.model.UserInterfaceElement;
-
 
 public class MainActivity extends Activity {
 
@@ -22,17 +20,19 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String gameJson = loadJSONFile();
-        Game game = Game.fromJson(gameJson);
+        Configuration config = Configuration.getInstance();
+        config.setGame(Game.fromJson(loadJSONFile()));
 
-        initializeView(game);
+        initializeView();
     }
 
     private String loadJSONFile() {
         return new FileHelper(this).stringFromAssetFile("games/game.json");
     }
 
-    private void initializeView(Game game) {
+    private void initializeView() {
+        Game game = Configuration.getInstance().getGame();
+
         View contentView = findViewById(android.R.id.content);
         contentView.setOnClickListener(new View.OnClickListener() {
             @Override
