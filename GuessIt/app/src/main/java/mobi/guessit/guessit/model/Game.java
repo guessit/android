@@ -1,5 +1,6 @@
 package mobi.guessit.guessit.model;
 
+import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 
 public class Game {
@@ -23,5 +24,9 @@ public class Game {
 
     public void setUserInterface(UserInterface userInterface) {
         this.userInterface = userInterface;
+    }
+
+    public static Game fromJson(String json) {
+        return new Gson().fromJson(json, Game.class);
     }
 }

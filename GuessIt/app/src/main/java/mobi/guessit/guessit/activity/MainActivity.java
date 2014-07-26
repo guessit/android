@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         String gameJson = loadJSONFile();
-        Game game = gameFromJson(gameJson);
+        Game game = Game.fromJson(gameJson);
 
         initializeView(game);
     }
@@ -32,16 +32,7 @@ public class MainActivity extends Activity {
         return new FileHelper(this).stringFromAssetFile("games/game.json");
     }
 
-    private Game gameFromJson(String jsonString) {
-        Game game = new Gson().fromJson(jsonString, Game.class);
-
-        return game;
-    }
-
     private void initializeView(Game game) {
-        // TODO: get colors from config json file
-        // now I'm  using the colors from Retro Games
-
         View contentView = findViewById(android.R.id.content);
         contentView.setOnClickListener(new View.OnClickListener() {
             @Override
