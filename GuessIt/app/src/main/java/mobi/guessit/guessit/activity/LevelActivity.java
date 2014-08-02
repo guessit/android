@@ -25,12 +25,34 @@ public class LevelActivity extends Activity {
     private void initializeView() {
         Game game = Configuration.getInstance().getGame();
 
-        UserInterfaceElement main = game.getUserInterface().getMain();
+        UserInterfaceElement main = game.getUserInterface().getLevel();
 
         View background = findViewById(R.id.level_background);
         background.setBackgroundColor(Color.parseColor(main.getBackgroundColor()));
 
-        // adjust keyboard color
+        // secondary background image view
+        //   used when there's a background image instead of just a background color
+        //   for now its used only on Vida de Programador game
+
+        // category label
+        //   label to show category when level has one
+
+        // image view frame
+        //   just a view that contains the image to be guessed
+        //   used to show a small border around the image to be guessed
+
+        // input view
+        //   the view that contains the keyboard and anwser placeholders
+        //   fragment?
+        View inputView = findViewById(R.id.level_input_view);
+
+        UserInterfaceElement answerUI = game.getUserInterface().getAnswer();
+        View answerView = findViewById(R.id.level_answer);
+        answerView.setBackgroundColor(Color.parseColor(answerUI.getBackgroundColor()));
+
+        UserInterfaceElement keypadUI = game.getUserInterface().getKeypad();
+        View keypadView = findViewById(R.id.level_keypad);
+        keypadView.setBackgroundColor(Color.parseColor(keypadUI.getBackgroundColor()));
     }
 
     @Override

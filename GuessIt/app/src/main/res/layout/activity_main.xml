@@ -29,7 +29,8 @@
             android:id="@+id/main_guessit_text_view"
             android:text="@string/guessit"
             guessit:fontFace="Lobster.ttf"
-            android:textSize="74sp" />
+            android:textSize="74sp"
+            android:layout_marginBottom="-5dp" />
 
         <mobi.guessit.guessit.view.components.FontFaceTextView
             android:layout_width="match_parent"
@@ -39,7 +40,8 @@
             android:text="@string/tap_to_play"
             guessit:fontFace="Avenir Next Condensed.ttc"
             guessit:fontStyle="Bold"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            android:layout_marginTop="-5dp" />
 
     </LinearLayout>
 
