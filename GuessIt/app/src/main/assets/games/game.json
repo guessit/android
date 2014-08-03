@@ -1,7 +1,7 @@
 {
   "name": "GuessIt!",
-  "ad_mediation_id": "c5706b2009574d43",
-  "analytics_tracking_id": "UA-42974394-6",
+  "ad_mediation_id": "33e58635bd064069",
+  "analytics_tracking_id": "UA-42974394-5",
   "options": {
     "randomize": true,
     "keypad_rows": 2,
@@ -10,20 +10,20 @@
   },
   "ui": {
     "main": {
-      "background_color": "#262626"
+      "background_color": "#ffffffff"
     },
     "navigation": {
-      "background_color": "#262626",
-      "color": "#87ff04"
+      "background_color": "#ffffffff",
+      "color": "#195185ff"
     },
     "title": {
-      "text_color": "#87ff04",
-      "shadow_color": "#000000",
-      "secondary_color": "#b3ff61"
+      "text_color": "#195185ff",
+      "shadow_color": "#c2e2ffff",
+      "secondary_color": "#2c92f1ff"
     },
     "subtitle": {
-      "text_color": "#efefefff",
-      "shadow_color": "#2b2b2bff"
+      "text_color": "#2b2b2bff",
+      "shadow_color": "#efefefff"
     },
     "congratulations": {
       "text_color": "#ffcc00ff",
@@ -33,60 +33,60 @@
       "secondary_shadow_color": "#2b2b2bff"
     },
     "level": {
-      "background_color": "#000000"
+      "background_color": "#ffffffff"
     },
     "answer": {
-      "background_color": "#181818"
+      "background_color": "#efefefff"
     },
     "placeholder": {
-      "background_color": "#000000"
+      "background_color": "#ffffffff"
     },
     "category": {
-      "background_color": "#00000000",
-      "text_color": "#00000000",
-      "shadow_color": "#00000000"
+      "background_color": "#0000003f",
+      "text_color": "#ffffffd8",
+      "shadow_color": "#000000ff"
     },
     "image": {
-      "background_color": "#00000000"
+      "background_color": "#efefefff"
     },
     "frame": {
-      "background_color": "#00000000"
+      "background_color": "#efefefff"
     },
     "keypad": {
-      "background_color": "#121212"
+      "background_color": "#ffffffff"
     },
     "letter": {
-      "background_color": "#000000",
-      "text_color": "#87ff04",
-      "shadow_color": "#000000",
-      "secondary_background_color": "#080808",
-      "secondary_text_color": "#77ef04"
+      "background_color": "#efefefff",
+      "text_color": "#2b2b2bff",
+      "shadow_color": "#606060ff",
+      "secondary_background_color": "#aaaaaaff",
+      "secondary_text_color": "#f2f2f2ff"
     },
     "action": {
-      "background_color": "#000000",
-      "text_color": "#87ff04",
-      "shadow_color": "#000000",
-      "secondary_background_color": "#080808",
-      "secondary_text_color": "#77ef04"
+      "background_color": "#efefefff",
+      "text_color": "#2b2b2bff",
+      "shadow_color": "#ffffffff",
+      "secondary_background_color": "#666666ff",
+      "secondary_text_color": "#666666ff"
     },
     "help": {
-      "background_color": "#000000"
+      "background_color": "#efefefff"
     },
     "settings": {
-      "background_color": "#121212aa",
-      "text_color": "#ffffffaa",
-      "shadow_color": "#2b2b2b",
-      "secondary_background_color": "#222222",
-      "secondary_text_color": "#ffffffaa",
-      "secondary_shadow_color": "#2b2b2bff"
+      "background_color": "#d7d7d7bb",
+      "text_color": "#195185ff",
+      "shadow_color": "#c2e2ffff",
+      "secondary_background_color": "#ffffffff",
+      "secondary_text_color": "#12121288",
+      "secondary_shadow_color": "#e0e0e088"
     },
     "game_over": {
-      "background_color": "#121212ff",
+      "background_color": "#f7f7f7ff",
       "text_color": "#ffcc00ff",
       "shadow_color": "#000000ff",
       "secondary_color": "#f9fad6ff",
-      "secondary_text_color": "#efefefff",
-      "secondary_shadow_color": "#2b2b2bff"
+      "secondary_text_color": "#2b2b2bff",
+      "secondary_shadow_color": "#ffffffff"
     },
     "credits": {
       "background_color": "#000000ff",
@@ -152,6 +152,11 @@
     },
     {
       "image": "009",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "010",
       "category": "",
       "bundle": ""
     },
@@ -351,6 +356,11 @@
       "bundle": ""
     },
     {
+      "image": "050",
+      "category": "",
+      "bundle": ""
+    },
+    {
       "image": "051",
       "category": "",
       "bundle": ""
@@ -392,6 +402,11 @@
     },
     {
       "image": "059",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "060",
       "category": "",
       "bundle": ""
     },
