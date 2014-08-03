@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import mobi.guessit.guessit.R;
+import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.helper.FileHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
@@ -43,20 +44,20 @@ public class MainActivity extends Activity {
 
         UserInterfaceElement mainElement = game.getUserInterface().getMain();
         contentView.setBackgroundColor(
-            Color.parseColor(mainElement.getBackgroundColor()));
+            ColorHelper.parseColor(mainElement.getBackgroundColor()));
 
         UserInterfaceElement titleElement = game.getUserInterface().getTitle();
         TextView guessItTextView = (TextView) findViewById(R.id.main_guessit_text_view);
-        guessItTextView.setTextColor(Color.parseColor(
+        guessItTextView.setTextColor(ColorHelper.parseColor(
             titleElement.getTextColor()));
-        guessItTextView.setShadowLayer(1, 0, -1, Color.parseColor(
+        guessItTextView.setShadowLayer(1, 0, -1, ColorHelper.parseColor(
             titleElement.getShadowColor()));
 
         UserInterfaceElement subtitleElement = game.getUserInterface().getSubtitle();
         TextView tapToPlayTextView = (TextView) findViewById(R.id.main_tap_to_play_text_view);
-        tapToPlayTextView.setTextColor(Color.parseColor(
+        tapToPlayTextView.setTextColor(ColorHelper.parseColor(
             subtitleElement.getTextColor()));
-        tapToPlayTextView.setShadowLayer(1, 0, -1, Color.parseColor(
+        tapToPlayTextView.setShadowLayer(1, 0, -1, ColorHelper.parseColor(
             subtitleElement.getShadowColor()));
     }
 

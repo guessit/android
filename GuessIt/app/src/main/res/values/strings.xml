@@ -10,4 +10,6 @@
     <string name="guessit">" Guess It! "</string>
     <string name="tap_to_play">Tap to Play</string>
 
+    <string name="help_question_mark">"?"</string>
+
 </resources>
