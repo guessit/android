@@ -14,4 +14,9 @@
         <attr name="fontStyle" />
     </declare-styleable>
 
+    <declare-styleable name="FontFaceButton">
+        <attr name="fontFace" />
+        <attr name="fontStyle" />
+    </declare-styleable>
+
 </resources>
