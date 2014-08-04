@@ -26,6 +26,14 @@ public class Game {
         this.userInterface = userInterface;
     }
 
+    public GameOptions getOptions() {
+        return options;
+    }
+
+    public void setOptions(GameOptions options) {
+        this.options = options;
+    }
+
     public static Game fromJson(String json) {
         return new Gson().fromJson(json, Game.class);
     }

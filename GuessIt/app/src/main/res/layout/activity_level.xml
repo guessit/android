@@ -39,15 +39,16 @@
             android:background="#006600"
             >
 
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/level_keypad_keys_placeholder"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:layout_marginRight="@dimen/level_keypad_spacing"
-                android:background="#888800"
+                android:orientation="vertical"
                 >
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <mobi.guessit.guessit.view.components.FontFaceButton
                 android:id="@+id/level_help_button"

@@ -1,13 +1,17 @@
 package mobi.guessit.guessit.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.StateSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import mobi.guessit.guessit.R;
@@ -50,14 +54,70 @@ public class LevelActivity extends Activity {
         //   fragment?
         View inputView = findViewById(R.id.level_input_view);
 
+        setupAnswerView(game);
+        setupKeypad(game);
+        setupActionButton(game);
+    }
+
+    private void setupAnswerView(Game game) {
         UserInterfaceElement answerUI = game.getUserInterface().getAnswer();
+
         View answerView = findViewById(R.id.level_answer);
         answerView.setBackgroundColor(ColorHelper.parseColor(answerUI.getBackgroundColor()));
+    }
 
+    private void setupKeypad(Game game) {
         UserInterfaceElement keypadUI = game.getUserInterface().getKeypad();
+        UserInterfaceElement letterUI = game.getUserInterface().getLetter();
+
         View keypadView = findViewById(R.id.level_keypad);
         keypadView.setBackgroundColor(ColorHelper.parseColor(keypadUI.getBackgroundColor()));
 
+        LinearLayout keypadPlaceholder = (LinearLayout) findViewById(R.id.level_keypad_keys_placeholder);
+
+        int rows = game.getOptions().getKeypadRows();
+        int columns = game.getOptions().getKeypadColumns();
+
+        for (int i = 0; i < rows; i++) {
+            LinearLayout layout = new LinearLayout(this);
+            layout.setOrientation(LinearLayout.HORIZONTAL);
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT, 0, 1);
+
+            if (i == 0) {
+                layoutParams.setMargins(0, 0, 0, 2);
+            } else if (i == rows - 1) {
+                layoutParams.setMargins(0, 2, 0, 0);
+            }
+
+            keypadPlaceholder.addView(layout, layoutParams);
+
+            for (int j = 0; j < columns; j++) {
+                Button button = new Button(this);
+                button.setText("A" + i + j);
+                button.setTextSize(11);
+                button.setBackgroundColor(ColorHelper.parseColor(letterUI.getBackgroundColor()));
+                button.setTextColor(ColorHelper.parseColor(letterUI.getTextColor()));
+                button.setShadowLayer(1, 0, -1, ColorHelper.parseColor(letterUI.getShadowColor()));
+
+                LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
+                    0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+
+                if (j == 0) {
+                    buttonParams.setMargins(0, 0, 2, 0);
+                } else if (j == columns - 1) {
+                    buttonParams.setMargins(2, 0, 0, 0);
+                } else {
+                    buttonParams.setMargins(2, 0, 2, 0);
+                }
+
+                layout.addView(button, buttonParams);
+            }
+        }
+    }
+
+    private void setupActionButton(Game game) {
         Button helpButton = (Button) findViewById(R.id.level_help_button);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
