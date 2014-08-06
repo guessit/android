@@ -7,8 +7,8 @@
     tools:context="mobi.guessit.guessit.activity.LevelActivity">
 
     <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@+id/level_input_view">
 
         <ImageView
