@@ -1,22 +1,32 @@
 package mobi.guessit.guessit.activity;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ScaleDrawable;
+import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.util.StateSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -70,6 +80,7 @@ public class LevelActivity extends Activity {
         setupAnswerView(game);
         setupKeypad(game);
         setupActionButton(game);
+        setupImageView(game);
 
         dummyKeypad();
     }
@@ -118,6 +129,14 @@ public class LevelActivity extends Activity {
                 button.setBackground(backgroundColor(letterUI));
                 button.setTextColor(buttonTextColor(letterUI));
                 button.setShadowLayer(1, 0, -1, ColorHelper.parseColor(letterUI.getShadowColor()));
+
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Button b = (Button) view;
+                        Toast.makeText(LevelActivity.this, b.getText(), Toast.LENGTH_SHORT).show();
+                    }
+                });
 
                 LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
                     0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
@@ -191,6 +210,49 @@ public class LevelActivity extends Activity {
         });
 
         helpButton.setTextColor(colors);
+    }
+
+    private void setupImageView(Game game) {
+        float radius = 4.f;
+
+        float[] outerRadii = new float[]{
+            radius, radius, radius, radius, radius, radius, radius, radius
+        };
+        RectF inset = null;
+        float[] innerRadii = null;
+
+        RoundRectShape shape = new RoundRectShape(outerRadii, inset, innerRadii);
+
+        ShapeDrawable background = new ShapeDrawable(shape);
+        background.getPaint().setColor(Color.parseColor("#efefef"));
+
+        int padding = 8;
+
+        ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
+        imageView.setPadding(padding, padding, padding, padding);
+        imageView.setBackground(background);
+
+        animateImageView(imageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LevelActivity.this.animateImageView((ImageView) view);
+            }
+        });
+    }
+
+    private void animateImageView(ImageView imageView) {
+        imageView.setScaleX(0.01f);
+        imageView.setScaleY(0.01f);
+
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(imageView, "scaleX", 1.f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(imageView, "scaleY", 1.f);
+
+        AnimatorSet bumpScale = new AnimatorSet();
+        bumpScale.setInterpolator(new OvershootInterpolator());
+        bumpScale.play(scaleX).with(scaleY);
+        bumpScale.start();
     }
 
     private void dummyKeypad() {

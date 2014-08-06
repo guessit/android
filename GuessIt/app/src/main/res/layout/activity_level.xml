@@ -6,10 +6,19 @@
     android:layout_height="match_parent"
     tools:context="mobi.guessit.guessit.activity.LevelActivity">
 
-    <TextView
-        android:text="@string/title_activity_level"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/level_input_view">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/level_image_view"
+            android:src="@drawable/brazil" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
