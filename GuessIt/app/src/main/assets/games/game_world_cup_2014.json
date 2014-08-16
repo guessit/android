@@ -1,0 +1,684 @@
+{
+  "name": "GuessIt!",
+  "ad_mediation_id": "ca-app-pub-8051145290744246/7274662013",
+  "analytics_tracking_id": "UA-42974394-10",
+  "options": {
+    "randomize": true,
+    "keypad_rows": 2,
+    "keypad_columns": 7,
+    "keypad_help_width": 50
+  },
+  "ui": {
+    "main": {
+      "background_color": "#2d881fff"
+    },
+    "navigation": {
+      "background_color": "#2d881fff",
+      "color": "#fed90eff"
+    },
+    "title": {
+      "text_color": "#fed90eff",
+      "shadow_color": "#000000ff",
+      "secondary_color": "#f9fad6ff"
+    },
+    "subtitle": {
+      "text_color": "#ffffffff",
+      "shadow_color": "#666666ff"
+    },
+    "congratulations": {
+      "text_color": "#ffd603ff",
+      "shadow_color": "#000000ff",
+      "secondary_color": "#f9fad6ff",
+      "secondary_text_color": "#efefefff",
+      "secondary_shadow_color": "#2b2b2bff"
+    },
+    "level": {
+      "background_color": "#ffffffff"
+    },
+    "answer": {
+      "background_color": "#297a1cff"
+    },
+    "placeholder": {
+      "background_color": "#206116ff"
+    },
+    "category": {
+      "background_color": "#0000003f",
+      "text_color": "#ffffffd8",
+      "shadow_color": "#000000ff"
+    },
+    "image": {
+      "background_color": "#ffffffff"
+    },
+    "frame": {
+      "background_color": "#ffffffff"
+    },
+    "keypad": {
+      "background_color": "#2a801dff"
+    },
+    "letter": {
+      "background_color": "#2d881fff",
+      "text_color": "#fed90eff",
+      "shadow_color": "#1f3c0fff",
+      "secondary_background_color": "#7bec39ff",
+      "secondary_text_color": "#fed90eff"
+    },
+    "action": {
+      "background_color": "#2d881fff",
+      "text_color": "#fed90eff",
+      "shadow_color": "#1f3c0fff",
+      "secondary_background_color": "#7bec39ff",
+      "secondary_text_color": "#fed90eff"
+    },
+    "help": {
+      "background_color": "#ffffffff"
+    },
+    "settings": {
+      "background_color": "#3aad28ff",
+      "text_color": "#fed90eff",
+      "shadow_color": "#266104ff",
+      "secondary_background_color": "#2d881fff",
+      "secondary_text_color": "#fed90eff",
+      "secondary_shadow_color": "#266104ff"
+    },
+    "game_over": {
+      "background_color": "#2d881fff",
+      "text_color": "#fed90eff",
+      "shadow_color": "#1f3c0fff",
+      "secondary_color": "#f9fad6ff",
+      "secondary_text_color": "#efefefff",
+      "secondary_shadow_color": "#2b2b2bff"
+    },
+    "credits": {
+      "background_color": "#000000ff",
+      "text_color": "#ffffffff",
+      "shadow_color": "#606060ff",
+      "secondary_text_color": "#ffffffff"
+    },
+    "other_games": {
+      "text_color": "#ffcc00ff",
+      "shadow_color": "#00000077",
+      "secondary_text_color": "#ffffffff",
+      "secondary_shadow_color": "#2b2b2bff"
+    }
+  },
+  "sound": {
+    "keystroke": "keystroke.wav",
+    "fail": "fail.wav",
+    "success": "success.wav",
+    "remove_letter": "remove_letter.wav"
+  },
+  "bundles": [
+  ],
+  "levels": [
+    {
+      "image": "001",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "002",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "003",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "004",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "005",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "006",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "007",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "008",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "009",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "010",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "011",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "012",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "013",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "014",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "015",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "016",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "017",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "018",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "019",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "020",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "021",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "022",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "023",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "024",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "025",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "026",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "027",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "028",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "029",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "030",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "031",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "032",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "033",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "035",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "036",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "037",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "038",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "039",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "040",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "041",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "042",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "043",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "044",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "046",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "047",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "048",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "049",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "050",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "051",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "052",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "053",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "054",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "055",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "056",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "057",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "058",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "059",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "060",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "061",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "062",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "063",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "064",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "065",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "067",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "068",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "069",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "070",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "071",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "072",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "073",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "074",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "075",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "076",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "078",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "079",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "080",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "081",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "082",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "083",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "084",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "085",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "086",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "087",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "088",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "089",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "090",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "091",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "092",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "093",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "094",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "095",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "096",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "097",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "098",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "100",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "101",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "102",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "103",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "104",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "105",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "106",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "107",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "108",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "109",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "111",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "112",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "113",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "114",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "115",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "116",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "117",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "118",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "119",
+      "category": "",
+      "bundle": ""
+    },
+    {
+      "image": "120",
+      "category": "",
+      "bundle": ""
+    }
+  ]
+}
