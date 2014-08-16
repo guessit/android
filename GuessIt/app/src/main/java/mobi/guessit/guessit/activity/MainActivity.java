@@ -2,7 +2,6 @@ package mobi.guessit.guessit.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -28,7 +27,7 @@ public class MainActivity extends Activity {
     }
 
     private String loadJSONFile() {
-        return new FileHelper(this).stringFromAssetFile("games/game.json");
+        return new FileHelper(this).stringFromAssetFile("games/game_technology.json");
     }
 
     private void initializeView() {

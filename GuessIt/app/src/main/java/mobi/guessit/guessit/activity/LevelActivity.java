@@ -2,17 +2,13 @@ package mobi.guessit.guessit.activity;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.res.ColorStateList;
-import android.content.res.TypedArray;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.graphics.drawable.ScaleDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
@@ -22,8 +18,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.BounceInterpolator;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -41,7 +35,6 @@ import mobi.guessit.guessit.helper.ViewHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
 import mobi.guessit.guessit.model.UserInterfaceElement;
-import mobi.guessit.guessit.view.components.FontFaceButton;
 
 public class LevelActivity extends Activity {
 
@@ -158,7 +151,7 @@ public class LevelActivity extends Activity {
     }
 
     private Drawable backgroundColor(UserInterfaceElement ui) {
-        int[] pressedState = new int[] { android.R.attr.state_pressed };
+        int[] pressedState = new int[]{android.R.attr.state_pressed};
 
         StateListDrawable backgroundColor = new StateListDrawable();
         backgroundColor.addState(pressedState, new ColorDrawable(
@@ -172,12 +165,12 @@ public class LevelActivity extends Activity {
     }
 
     private ColorStateList buttonTextColor(UserInterfaceElement ui) {
-        int[] pressedState = new int[] { android.R.attr.state_pressed };
+        int[] pressedState = new int[]{android.R.attr.state_pressed};
 
         ColorStateList buttonTextColor = new ColorStateList(new int[][]{
             pressedState,
             StateSet.WILD_CARD
-        }, new int[] {
+        }, new int[]{
             ColorHelper.parseColor(ui.getSecondaryTextColor()),
             ColorHelper.parseColor(ui.getTextColor())
         });

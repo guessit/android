@@ -9,6 +9,6 @@
     <dimen name="level_keypad_spacing">2dp</dimen>
 
     <dimen name="level_help_width">60dp</dimen>
-    <dimen name="level_help_text_size">60dp</dimen>
+    <dimen name="level_help_text_size">60sp</dimen>
 
 </resources>
