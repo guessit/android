@@ -3,8 +3,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:guessit="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent" >
 
+    <mobi.guessit.guessit.view.components.FontFaceButton
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:id="@+id/action_bar_back_button"
+        android:layout_alignParentLeft="true"
+        android:paddingRight="54dp"
+        android:text="@string/back"
+        android:background="@android:color/transparent"
+        guessit:fontFace="EuphemiaCAS.ttf"
+        android:textSize="24sp"
+        />
 
     <mobi.guessit.guessit.view.components.FontFaceTextView
         android:layout_width="wrap_content"
@@ -14,5 +25,17 @@
         android:text="@string/guessit"
         guessit:fontFace="Lobster.ttf"
         android:textSize="30sp" />
+
+    <mobi.guessit.guessit.view.components.FontFaceButton
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:id="@+id/action_bar_settings_button"
+        android:layout_alignParentRight="true"
+        android:paddingLeft="42dp"
+        android:text="@string/question_mark"
+        android:background="@android:color/transparent"
+        guessit:fontFace="JotiOne-Regular.ttf"
+        android:textSize="32sp"
+        />
 
 </RelativeLayout>

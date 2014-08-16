@@ -64,7 +64,7 @@
                 android:id="@+id/level_help_button"
                 android:layout_width="@dimen/level_help_width"
                 android:layout_height="match_parent"
-                android:text="@string/help_question_mark"
+                android:text="@string/question_mark"
                 guessit:fontFace="JotiOne-Regular.ttf"
                 android:textSize="@dimen/level_help_text_size"
                 android:background="#008888"

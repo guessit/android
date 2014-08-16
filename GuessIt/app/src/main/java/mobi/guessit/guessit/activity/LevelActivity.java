@@ -16,15 +16,12 @@ import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.util.StateSet;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,30 +49,52 @@ public class LevelActivity extends Activity {
 
     private void setupActionBar(Game game) {
         ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setIcon(new ColorDrawable(Color.TRANSPARENT));
         actionBar.setBackgroundDrawable(getActionBarBackground(game));
 
-        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
-            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        View title = LayoutInflater.from(this).inflate(R.layout.action_bar, null);
+        View layout = LayoutInflater.from(this).inflate(R.layout.action_bar, null);
+
+        final int navColor = getNavColor(game);
+
+        Button backButton = (Button) layout.findViewById(R.id.action_bar_back_button);
+        backButton.setTextColor(navColor);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LevelActivity.this.onBackPressed();
+            }
+        });
 
         UserInterfaceElement titleElement = game.getUserInterface().getTitle();
 
-        TextView guessItTextView = (TextView) title.findViewById(R.id.action_bar_guessit_text_view);
+        TextView guessItTextView = (TextView) layout.findViewById(R.id.action_bar_guessit_text_view);
         guessItTextView.setTextColor(ColorHelper.parseColor(
             titleElement.getTextColor()));
         guessItTextView.setShadowLayer(1, 0, -1, ColorHelper.parseColor(
             titleElement.getShadowColor()));
 
-        actionBar.setCustomView(title, params);
+        Button settingsButton = (Button) layout.findViewById(R.id.action_bar_settings_button);
+        settingsButton.setTextColor(navColor);
+        settingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LevelActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        actionBar.setCustomView(layout);
     }
 
     private ColorDrawable getActionBarBackground(Game game) {
         return new ColorDrawable(ColorHelper.parseColor(
             game.getUserInterface().getNavigation().getBackgroundColor()));
+    }
+
+    private int getNavColor(Game game) {
+        return ColorHelper.parseColor(game.getUserInterface().getNavigation().getColor());
     }
 
     private void initializeView() {
@@ -322,24 +341,5 @@ public class LevelActivity extends Activity {
         final String consonants = "BCDFGHJKLMNPQRSTVWXYZ";
         int index = new Random().nextInt(consonants.length());
         return String.valueOf(consonants.charAt(index));
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.level, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            case R.id.action_settings:
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
     }
 }
