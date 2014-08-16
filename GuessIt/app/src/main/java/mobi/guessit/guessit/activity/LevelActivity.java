@@ -7,11 +7,8 @@ import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.RectF;
-import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.util.StateSet;
@@ -35,9 +32,25 @@ import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.helper.ViewHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
+import mobi.guessit.guessit.model.Level;
 import mobi.guessit.guessit.model.UserInterfaceElement;
+import mobi.guessit.guessit.view.AnswerView;
+import mobi.guessit.guessit.view.LetterButton;
 
 public class LevelActivity extends Activity {
+
+    private Level currentLevel;
+
+    public Level getCurrentLevel() {
+        return currentLevel;
+    }
+
+    public void setCurrentLevel(Level currentLevel) {
+        this.currentLevel = currentLevel;
+
+        this.setupKeypad();
+        this.setupPlaceholder();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +58,11 @@ public class LevelActivity extends Activity {
         setContentView(R.layout.activity_level);
 
         initializeView();
+
+        Level dummyLevel = new Level();
+        dummyLevel.setAnswer("BRAZIL");
+
+        this.setCurrentLevel(dummyLevel);
     }
 
     private void setupActionBar(Game game) {
@@ -61,6 +79,7 @@ public class LevelActivity extends Activity {
 
         Button backButton = (Button) layout.findViewById(R.id.action_bar_back_button);
         backButton.setTextColor(navColor);
+        backButton.setText("<");
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -123,22 +142,23 @@ public class LevelActivity extends Activity {
         //   fragment?
         View inputView = findViewById(R.id.level_input_view);
 
-        setupAnswerView(game);
-        setupKeypad(game);
-        setupActionButton(game);
-        setupImageView(game);
-
-        dummyKeypad();
+        initializeAnswerView(game);
+        initializeKeypad(game);
+        initializeActionButton(game);
+        initializeImageView(game);
     }
 
-    private void setupAnswerView(Game game) {
+    private void initializeAnswerView(Game game) {
         UserInterfaceElement answerUI = game.getUserInterface().getAnswer();
 
-        View answerView = findViewById(R.id.level_answer);
-        answerView.setBackgroundColor(ColorHelper.parseColor(answerUI.getBackgroundColor()));
+        View view = findViewById(R.id.level_answer);
+        view.setBackgroundColor(ColorHelper.parseColor(answerUI.getBackgroundColor()));
+
+        AnswerView answerView = (AnswerView) view.findViewById(R.id.answer_view);
+        answerView.setUI(game.getUserInterface());
     }
 
-    private void setupKeypad(Game game) {
+    private void initializeKeypad(Game game) {
         UserInterfaceElement keypadUI = game.getUserInterface().getKeypad();
         UserInterfaceElement letterUI = game.getUserInterface().getLetter();
 
@@ -167,14 +187,8 @@ public class LevelActivity extends Activity {
             keypadPlaceholder.addView(layout, layoutParams);
 
             for (int j = 0; j < columns; j++) {
-
-                Button button = new Button(this);
-                button.setTag("key_button");
-                button.setTextSize(18.f);
-                button.setTypeface(Typeface.createFromAsset(this.getAssets(), "fonts/Avenir Next Condensed-Medium.ttf"), Typeface.NORMAL);
-                button.setBackground(backgroundColor(letterUI));
-                button.setTextColor(buttonTextColor(letterUI));
-                button.setShadowLayer(1, 0, -1, ColorHelper.parseColor(letterUI.getShadowColor()));
+                LetterButton button = new LetterButton(this);
+                button.setLetterUI(letterUI);
 
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -203,36 +217,7 @@ public class LevelActivity extends Activity {
         }
     }
 
-    private Drawable backgroundColor(UserInterfaceElement ui) {
-        int[] pressedState = new int[]{android.R.attr.state_pressed};
-
-        StateListDrawable backgroundColor = new StateListDrawable();
-        backgroundColor.addState(pressedState, new ColorDrawable(
-            ColorHelper.parseColor(ui.getSecondaryBackgroundColor())
-        ));
-        backgroundColor.addState(StateSet.WILD_CARD, new ColorDrawable(
-            ColorHelper.parseColor(ui.getBackgroundColor())
-        ));
-
-        return backgroundColor;
-    }
-
-    private ColorStateList buttonTextColor(UserInterfaceElement ui) {
-        int[] pressedState = new int[]{android.R.attr.state_pressed};
-
-        ColorStateList buttonTextColor = new ColorStateList(new int[][]{
-            pressedState,
-            StateSet.WILD_CARD
-        }, new int[]{
-            ColorHelper.parseColor(ui.getSecondaryTextColor()),
-            ColorHelper.parseColor(ui.getTextColor())
-        });
-
-        return buttonTextColor;
-    }
-
-
-    private void setupActionButton(Game game) {
+    private void initializeActionButton(Game game) {
         Button helpButton = (Button) findViewById(R.id.level_help_button);
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,7 +243,7 @@ public class LevelActivity extends Activity {
         helpButton.setTextColor(colors);
     }
 
-    private void setupImageView(Game game) {
+    private void initializeImageView(Game game) {
         float radius = 4.f;
 
         float[] outerRadii = new float[]{
@@ -301,16 +286,15 @@ public class LevelActivity extends Activity {
         bumpScale.start();
     }
 
-    private void dummyKeypad() {
+    private void setupKeypad() {
         ViewGroup keypad = (ViewGroup) findViewById(R.id.level_keypad);
         List<View> keys = ViewHelper.getViewsWithTag(keypad, "key_button");
 
-        String answer = "BRAZIL";
-        final int answerLength = answer.length();
+        final int answerLength = this.currentLevel.getNoSpacesAnswer().length();
 
         List<String> letters = new ArrayList<String>();
         for (int i = 0; i < answerLength; i++) {
-            letters.add(String.valueOf(answer.charAt(i)));
+            letters.add(this.currentLevel.getLetterAt(i));
         }
 
         int missingLetterCount = keys.size() - answerLength;
@@ -329,6 +313,11 @@ public class LevelActivity extends Activity {
             Button key = (Button) keys.get(i);
             key.setText(letters.get(i));
         }
+    }
+
+    private void setupPlaceholder() {
+        AnswerView answerView = (AnswerView) findViewById(R.id.answer_view);
+        answerView.setAnswer(this.getCurrentLevel().getAnswer());
     }
 
     private String randomVowel() {

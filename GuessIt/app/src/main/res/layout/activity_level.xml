@@ -35,8 +35,16 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="#660000"
-            android:layout_alignParentTop="true"
-            >
+            android:layout_alignParentTop="true">
+
+            <mobi.guessit.guessit.view.AnswerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:id="@+id/answer_view">
+
+            </mobi.guessit.guessit.view.AnswerView>
 
         </RelativeLayout>
 

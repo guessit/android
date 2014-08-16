@@ -8,6 +8,8 @@ public class Level {
     private String url;
     private String bundle;
 
+    private String noSpacesAnswer;
+
     public static GuessingResult guessWithAnswer(String guessingAnswer) {
         return GuessingResult.WRONG;
     }
@@ -20,12 +22,17 @@ public class Level {
         this.imageName = imageName;
     }
 
+    public String getNoSpacesAnswer() {
+        return this.noSpacesAnswer;
+    }
+
     public String getAnswer() {
         return answer;
     }
 
     public void setAnswer(String answer) {
         this.answer = answer;
+        this.noSpacesAnswer = answer.replaceAll(" ", "");
     }
 
     public String getCategory() {
@@ -50,5 +57,9 @@ public class Level {
 
     public void setBundle(String bundle) {
         this.bundle = bundle;
+    }
+
+    public String getLetterAt(int i) {
+        return String.valueOf(this.getNoSpacesAnswer().charAt(i));
     }
 }
