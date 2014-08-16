@@ -2,6 +2,7 @@ package mobi.guessit.guessit.activity;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
@@ -14,6 +15,7 @@ import android.graphics.drawable.StateListDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.util.StateSet;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +24,8 @@ import android.view.animation.OvershootInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -46,8 +50,38 @@ public class LevelActivity extends Activity {
         initializeView();
     }
 
+    private void setupActionBar(Game game) {
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setBackgroundDrawable(getActionBarBackground(game));
+
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        View title = LayoutInflater.from(this).inflate(R.layout.action_bar, null);
+
+        UserInterfaceElement titleElement = game.getUserInterface().getTitle();
+
+        TextView guessItTextView = (TextView) title.findViewById(R.id.action_bar_guessit_text_view);
+        guessItTextView.setTextColor(ColorHelper.parseColor(
+            titleElement.getTextColor()));
+        guessItTextView.setShadowLayer(1, 0, -1, ColorHelper.parseColor(
+            titleElement.getShadowColor()));
+
+        actionBar.setCustomView(title, params);
+    }
+
+    private ColorDrawable getActionBarBackground(Game game) {
+        return new ColorDrawable(ColorHelper.parseColor(
+            game.getUserInterface().getNavigation().getBackgroundColor()));
+    }
+
     private void initializeView() {
         Game game = Configuration.getInstance().getGame();
+
+        setupActionBar(game);
 
         UserInterfaceElement main = game.getUserInterface().getLevel();
 
@@ -298,11 +332,14 @@ public class LevelActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            // show settings activity
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            case R.id.action_settings:
+                return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 }

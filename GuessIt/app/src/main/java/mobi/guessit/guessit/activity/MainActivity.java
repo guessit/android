@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
     }
 
     private String loadJSONFile() {
-        return new FileHelper(this).stringFromAssetFile("games/game_technology.json");
+        return new FileHelper(this).stringFromAssetFile("games/game_dragon_ball.json");
     }
 
     private void initializeView() {
