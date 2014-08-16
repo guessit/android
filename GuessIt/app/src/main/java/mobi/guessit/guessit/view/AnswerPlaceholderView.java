@@ -42,6 +42,7 @@ public class AnswerPlaceholderView extends RelativeLayout {
 
     private void adjustChildViews() {
         this.getButton().setText(this.letter);
+        this.getButton().setAlpha(0.f);
     }
 
     public void setPlaceholderUI(UserInterfaceElement placeholderUI) {
