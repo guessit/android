@@ -5,8 +5,8 @@
     android:layout_width="40dp"
     android:layout_height="45dp"
     android:padding="2dp"
-    android:layout_marginLeft="1dp"
-    android:layout_marginRight="1dp"
+    android:layout_marginLeft="1.5dp"
+    android:layout_marginRight="1.5dp"
     >
 
     <mobi.guessit.guessit.view.LetterButton
