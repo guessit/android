@@ -54,107 +54,18 @@ public class InputView extends LinearLayout {
         return answerView;
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-
-        initializeKeypad();
-        initializeActionButton();
-    }
-
-    private void initializeKeypad() {
-        Game game = Configuration.getInstance().getGame();
-
-        if (game != null) {
-            UserInterfaceElement keypadUI = game.getUserInterface().getKeypad();
-
-            View keypadView = findViewById(R.id.level_keypad);
-            keypadView.setBackgroundColor(ColorHelper.parseColor(keypadUI.getBackgroundColor()));
-
-            LinearLayout keypadPlaceholder = (LinearLayout) findViewById(R.id.level_keypad_keys_placeholder);
-
-            int rows = game.getOptions().getKeypadRows();
-            int columns = game.getOptions().getKeypadColumns();
-
-            for (int i = 0; i < rows; i++) {
-                LinearLayout layout = new LinearLayout(getContext());
-                layout.setOrientation(LinearLayout.HORIZONTAL);
-
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                    ViewGroup.LayoutParams.MATCH_PARENT, 0, 1);
-
-                boolean isFirstRow = i == 0;
-                if (isFirstRow) {
-                    layoutParams.setMargins(0, 0, 0, 2);
-                } else if (i == rows - 1) {
-                    layoutParams.setMargins(0, 2, 0, 0);
-                }
-
-                keypadPlaceholder.addView(layout, layoutParams);
-
-                for (int j = 0; j < columns; j++) {
-                    LetterButton button = new LetterButton(getContext());
-
-                    button.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Button b = (Button) view;
-                            Toast.makeText(b.getContext(), b.getText(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                    LinearLayout.LayoutParams buttonParams = new LinearLayout.LayoutParams(
-                        0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
-
-                    boolean isFirstColumn = j == 0;
-                    boolean isLastColumn = j == columns - 1;
-
-                    if (isFirstColumn) {
-                        buttonParams.setMargins(0, 0, 2, 0);
-                    } else if (isLastColumn) {
-                        buttonParams.setMargins(2, 0, 0, 0);
-                    } else {
-                        buttonParams.setMargins(2, 0, 2, 0);
-                    }
-
-                    layout.addView(button, buttonParams);
-                }
-            }
+    private KeypadView keypadView;
+    private KeypadView getKeypadView() {
+        if (keypadView == null) {
+            keypadView = (KeypadView) findViewById(R.id.level_keypad_view);
         }
+        return keypadView;
     }
 
-    private void initializeActionButton() {
-        Button helpButton = (Button) findViewById(R.id.level_help_button);
-        helpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(view.getContext(), "Help touched", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        Game game = Configuration.getInstance().getGame();
-
-        if (game != null) {
-            UserInterfaceElement actionUI = game.getUserInterface().getAction();
-
-            helpButton.setBackgroundColor(ColorHelper.parseColor(actionUI.getBackgroundColor()));
-            helpButton.setShadowLayer(1, 0, -1,
-                ColorHelper.parseColor(actionUI.getShadowColor()));
-
-            ColorStateList colors = new ColorStateList(new int[][]{
-                new int[]{android.R.attr.state_pressed},
-                StateSet.WILD_CARD
-            }, new int[]{
-                ColorHelper.parseColor(actionUI.getSecondaryTextColor()),
-                ColorHelper.parseColor(actionUI.getTextColor()),
-            });
-
-            helpButton.setTextColor(colors);
-        }
-    }
 
     private void setupKeypad(Level level) {
-        ViewGroup keypad = (ViewGroup) findViewById(R.id.level_keypad);
+        ViewGroup keypad = (ViewGroup) findViewById(R.id.level_keypad_view);
         List<View> keys = ViewHelper.getViewsWithTag(keypad, "key_button");
 
         final int answerLength = level.getNoSpacesAnswer().length();
