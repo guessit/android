@@ -148,4 +148,26 @@ public class AnswerView extends LinearLayout {
 
         addView(placeholderView, layoutParams);
     }
+
+    public boolean canAddLetter(LetterButton letter) {
+        boolean canAdd = false;
+
+        for (PlaceholderView placeholder : getPlaceholderViews()) {
+            if (placeholder.canDisplayLetter(letter)) {
+                canAdd = true;
+                break;
+            }
+        }
+
+        return canAdd;
+    }
+
+    public void addLetter(LetterButton letter) {
+        for (PlaceholderView placeholder : getPlaceholderViews()) {
+            if (placeholder.canDisplayLetter(letter)) {
+                placeholder.displayLetter(letter);
+                break;
+            }
+        }
+    }
 }

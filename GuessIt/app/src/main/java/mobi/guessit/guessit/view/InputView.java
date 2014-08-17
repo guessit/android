@@ -2,7 +2,9 @@ package mobi.guessit.guessit.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.model.Level;
@@ -42,6 +44,22 @@ public class InputView extends LinearLayout {
     private KeypadView getKeypadView() {
         if (keypadView == null) {
             keypadView = (KeypadView) findViewById(R.id.level_keypad_view);
+            keypadView.setKeypadListener(new KeypadView.OnKeypadListener() {
+                @Override
+                public boolean canAddLetter(KeypadView keypad, LetterButton letter) {
+                    return getAnswerView().canAddLetter(letter);
+                }
+
+                @Override
+                public void onLetterAdded(KeypadView keypad, LetterButton letter) {
+                    getAnswerView().addLetter(letter);
+                }
+
+                @Override
+                public void onHelpRequested(KeypadView keypad, Button helpButton) {
+                    Toast.makeText(getContext(), "HELP!", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         return keypadView;
     }

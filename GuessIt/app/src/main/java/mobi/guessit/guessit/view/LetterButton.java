@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BackgroundHelper;
+import mobi.guessit.guessit.helper.BumpAnimator;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
@@ -65,6 +66,11 @@ public class LetterButton extends Button {
         }
     }
 
+
+    public String getLetter() {
+        return (String) getText();
+    }
+
     public void setLetter(String letter) {
         setText(letter);
     }
@@ -72,8 +78,6 @@ public class LetterButton extends Button {
     public void setPlaceholder(String letter) {
         setLetter(letter);
         setAlpha(0.f);
-        setScaleX(0.01f);
-        setScaleY(0.01f);
     }
 
     private Drawable backgroundColor(UserInterfaceElement ui) {
@@ -102,5 +106,18 @@ public class LetterButton extends Button {
         });
 
         return buttonTextColor;
+    }
+
+    public boolean isActive() {
+        return getAlpha() == 1.f;
+    }
+
+    public boolean canDisplayLetter() {
+        return getAlpha() == 0.f;
+    }
+
+    public void displayLetter(LetterButton letter) {
+        setPlaceholder(letter.getLetter());
+        BumpAnimator.getInstance().animateIn(this);
     }
 }

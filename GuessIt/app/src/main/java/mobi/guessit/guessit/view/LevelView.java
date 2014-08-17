@@ -1,12 +1,9 @@
 package mobi.guessit.guessit.view;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.drawable.PaintDrawable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -14,6 +11,7 @@ import java.util.Random;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BackgroundHelper;
+import mobi.guessit.guessit.helper.BumpAnimator;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
@@ -72,12 +70,12 @@ public class LevelView extends RelativeLayout {
         ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
         BackgroundHelper.getInstance().setBackground(imageView, background);
 
-        animateImageView(imageView);
+        BumpAnimator.getInstance().animateIn(imageView);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LevelView.this.animateImageView((ImageView) view);
+                BumpAnimator.getInstance().animateIn(view);
                 Level level = new Level();
 
                 int index = new Random().nextInt(2);
@@ -90,19 +88,6 @@ public class LevelView extends RelativeLayout {
                 LevelView.this.setLevel(level);
             }
         });
-    }
-
-    private void animateImageView(ImageView imageView) {
-        imageView.setScaleX(0.01f);
-        imageView.setScaleY(0.01f);
-
-        ObjectAnimator scaleX = ObjectAnimator.ofFloat(imageView, "scaleX", 1.f);
-        ObjectAnimator scaleY = ObjectAnimator.ofFloat(imageView, "scaleY", 1.f);
-
-        AnimatorSet bumpScale = new AnimatorSet();
-        bumpScale.setInterpolator(new OvershootInterpolator());
-        bumpScale.play(scaleX).with(scaleY);
-        bumpScale.start();
     }
 
     private InputView inputView;
