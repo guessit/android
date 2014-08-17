@@ -2,18 +2,9 @@ package mobi.guessit.guessit.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import mobi.guessit.guessit.R;
-import mobi.guessit.guessit.helper.RandomLetterHelper;
-import mobi.guessit.guessit.helper.ViewHelper;
 import mobi.guessit.guessit.model.Level;
 
 public class InputView extends LinearLayout {
@@ -35,8 +26,8 @@ public class InputView extends LinearLayout {
     public void setLevel(Level level) {
         this.level = level;
 
+        getKeypadView().setLevel(level);
         getAnswerView().setAnswer(level.getAnswer());
-        setupKeypad(level);
     }
 
     private AnswerView answerView;
@@ -53,41 +44,5 @@ public class InputView extends LinearLayout {
             keypadView = (KeypadView) findViewById(R.id.level_keypad_view);
         }
         return keypadView;
-    }
-
-
-
-    private void setupKeypad(Level level) {
-        ViewGroup keypad = (ViewGroup) findViewById(R.id.level_keypad_view);
-        List<View> keys = ViewHelper.getViewsWithTag(keypad, "key_button");
-
-        final int answerLength = level.getNoSpacesAnswer().length();
-
-        List<String> letters = new ArrayList<String>();
-        for (int i = 0; i < answerLength; i++) {
-            letters.add(level.getLetterAt(i));
-        }
-
-        int missingLetterCount = keys.size() - answerLength;
-        for (int i = 0; i < missingLetterCount; i++) {
-            boolean isEven = i % 2 == 0;
-            if (isEven) {
-                letters.add(RandomLetterHelper.getInstance().randomVowel());
-            } else {
-                letters.add(RandomLetterHelper.getInstance().randomConsonant());
-            }
-        }
-
-        Collections.shuffle(letters);
-
-        for (int i = 0; i < keys.size(); i++) {
-            Button key = (Button) keys.get(i);
-            key.setText(letters.get(i));
-        }
-    }
-
-    @Override
-    public boolean isInEditMode() {
-        return true;
     }
 }

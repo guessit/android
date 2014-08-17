@@ -73,7 +73,7 @@ public class AnswerView extends LinearLayout {
     }
 
     private PlaceholderView getPlaceholderAtIndex(int index) {
-        PlaceholderView placeholder = null;
+        PlaceholderView placeholder;
 
         if (getPlaceholderViews().size() > index) {
             placeholder = getPlaceholderViews().get(index);

@@ -112,9 +112,4 @@ public class LevelView extends RelativeLayout {
         }
         return inputView;
     }
-
-    @Override
-    public boolean isInEditMode() {
-        return true;
-    }
 }

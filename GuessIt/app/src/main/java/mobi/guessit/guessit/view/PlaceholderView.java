@@ -49,6 +49,6 @@ public class PlaceholderView extends RelativeLayout {
     }
 
     public void setLetter(String letter) {
-        getButton().setLetter(letter);
+        getButton().setPlaceholder(letter);
     }
 }

@@ -67,10 +67,13 @@ public class LetterButton extends Button {
 
     public void setLetter(String letter) {
         setText(letter);
-//        CharSequence text = getText();
-//        setAlpha(0.f);
-//        setScaleX(0.01f);
-//        setScaleY(0.01f);
+    }
+
+    public void setPlaceholder(String letter) {
+        setLetter(letter);
+        setAlpha(0.f);
+        setScaleX(0.01f);
+        setScaleY(0.01f);
     }
 
     private Drawable backgroundColor(UserInterfaceElement ui) {
