@@ -51,7 +51,8 @@ public class PlaceholderView extends RelativeLayout {
 
         PaintDrawable background = new PaintDrawable(ColorHelper.parseColor(
             this.placeholderUI.getBackgroundColor()));
-        background.setCornerRadius(3.f);
+        background.setCornerRadius(getResources().getDimension(
+            R.dimen.level_placeholder_corner_radius));
 
         BackgroundHelper.getInstance().setBackground(this, background);
     }

@@ -3,8 +3,6 @@ package mobi.guessit.guessit.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.LinkedList;
@@ -15,8 +13,6 @@ import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.UserInterface;
 
 public class AnswerView extends LinearLayout {
-
-    public static final int AFTER_SPACE_MARGIN = 20;
 
     private UserInterface ui;
 
@@ -43,10 +39,6 @@ public class AnswerView extends LinearLayout {
         this.ui = ui;
 
         this.setBackgroundColor(ColorHelper.parseColor(ui.getAnswer().getBackgroundColor()));
-    }
-
-    public String getAnswer() {
-        return answer;
     }
 
     public void setAnswer(String answer) {

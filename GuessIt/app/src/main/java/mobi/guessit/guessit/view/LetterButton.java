@@ -11,13 +11,14 @@ import android.util.AttributeSet;
 import android.util.StateSet;
 import android.widget.Button;
 
+import mobi.guessit.guessit.R;
+import mobi.guessit.guessit.helper.BackgroundHelper;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class LetterButton extends Button {
 
     private UserInterfaceElement letterUI;
-    private AssetManager assets;
 
     public LetterButton(Context context) {
         super(context);
@@ -36,7 +37,7 @@ public class LetterButton extends Button {
 
     private void initializeView(Context context) {
         this.setTag("key_button");
-        this.setTextSize(18.f);
+        this.setTextSize(getResources().getDimension(R.dimen.level_letter_text_size));
         this.setTypeface(Typeface.createFromAsset(context.getAssets(),
             "fonts/Avenir Next Condensed-Medium.ttf"), Typeface.NORMAL);
     }
@@ -44,7 +45,7 @@ public class LetterButton extends Button {
     public void setLetterUI(UserInterfaceElement letterUI) {
         this.letterUI = letterUI;
 
-        this.setBackground(backgroundColor(letterUI));
+        BackgroundHelper.getInstance().setBackground(this, backgroundColor(letterUI));
         this.setTextColor(buttonTextColor(letterUI));
         this.setShadowLayer(1, 0, -1, ColorHelper.parseColor(letterUI.getShadowColor()));
     }
@@ -75,9 +76,5 @@ public class LetterButton extends Button {
         });
 
         return buttonTextColor;
-    }
-
-    public AssetManager getAssets() {
-        return assets;
     }
 }

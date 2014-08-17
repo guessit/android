@@ -13,11 +13,14 @@
     <dimen name="level_help_width">60dp</dimen>
     <dimen name="level_help_text_size">60sp</dimen>
 
+    <dimen name="level_letter_text_size">10sp</dimen>
+
     <dimen name="level_placeholder_margin">1.5dp</dimen>
-    <dimen name="level_placeholder_margin_after_space">12dp</dimen>
+    <dimen name="level_placeholder_margin_after_space">7dp</dimen>
     <dimen name="level_placeholder_padding">2dp</dimen>
     <dimen name="level_placeholder_width">40dp</dimen>
     <dimen name="level_placeholder_height">45dp</dimen>
+    <dimen name="level_placeholder_corner_radius">3dp</dimen>
 
 
 </resources>
