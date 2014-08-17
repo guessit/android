@@ -40,23 +40,27 @@ public class PlaceholderView extends RelativeLayout {
         BackgroundHelper.getInstance().setBackground(this, background);
     }
 
-    private LetterButton button;
-    private LetterButton getButton() {
-        if (button == null) {
-            button = (LetterButton) findViewById(R.id.letter_button);
+    private LetterButton letterButton;
+    public LetterButton getLetterButton() {
+        if (letterButton == null) {
+            letterButton = (LetterButton) findViewById(R.id.letter_button);
         }
-        return button;
+        return letterButton;
     }
 
     public void setLetter(String letter) {
-        getButton().setPlaceholder(letter);
+        getLetterButton().setPlaceholder(letter);
+    }
+
+    public boolean canRemoveLetter() {
+        return getLetterButton().isActive();
     }
 
     public boolean canDisplayLetter(LetterButton letter) {
-        return getButton().canDisplayLetter();
+        return getLetterButton().canDisplayLetter();
     }
 
     public void displayLetter(LetterButton letter) {
-        getButton().displayLetter(letter);
+        getLetterButton().displayLetter(letter);
     }
 }

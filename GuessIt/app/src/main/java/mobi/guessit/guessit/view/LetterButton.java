@@ -8,9 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
 import android.util.StateSet;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BackgroundHelper;
@@ -21,6 +19,8 @@ import mobi.guessit.guessit.model.Game;
 import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class LetterButton extends Button {
+
+    private LetterButton originLetter;
 
     public LetterButton(Context context) {
         super(context);
@@ -42,18 +42,19 @@ public class LetterButton extends Button {
         setupUI();
     }
 
+    public LetterButton getOriginLetter() {
+        return originLetter;
+    }
+
+    public void setOriginLetter(LetterButton originLetter) {
+        this.originLetter = originLetter;
+    }
+
     private void setupUI() {
         setTag("key_button");
         setTextSize(getResources().getDimension(R.dimen.level_letter_text_size));
         setTypeface(Typeface.createFromAsset(getContext().getAssets(),
             "fonts/Avenir Next Condensed-Medium.ttf"), Typeface.NORMAL);
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                CharSequence text = ((Button) view).getText();
-                Toast.makeText(view.getContext(), text, Toast.LENGTH_SHORT).show();
-            }
-        });
 
         Game game = Configuration.getInstance().getGame();
 
@@ -118,6 +119,7 @@ public class LetterButton extends Button {
 
     public void displayLetter(LetterButton letter) {
         setPlaceholder(letter.getLetter());
+        setOriginLetter(letter);
         BumpAnimator.getInstance().animateIn(this);
     }
 }

@@ -36,6 +36,12 @@ public class InputView extends LinearLayout {
     private AnswerView getAnswerView() {
         if (answerView == null) {
             answerView = (AnswerView) findViewById(R.id.level_answer_view);
+            answerView.setOnAnswerListener(new AnswerView.OnAnswerListener() {
+                @Override
+                public void onLetterRemoved(AnswerView answerView, PlaceholderView placeholder) {
+                    getKeypadView().recoverLetter(placeholder.getLetterButton());
+                }
+            });
         }
         return answerView;
     }
@@ -44,7 +50,7 @@ public class InputView extends LinearLayout {
     private KeypadView getKeypadView() {
         if (keypadView == null) {
             keypadView = (KeypadView) findViewById(R.id.level_keypad_view);
-            keypadView.setKeypadListener(new KeypadView.OnKeypadListener() {
+            keypadView.setOnKeypadListener(new KeypadView.OnKeypadListener() {
                 @Override
                 public boolean canAddLetter(KeypadView keypad, LetterButton letter) {
                     return getAnswerView().canAddLetter(letter);

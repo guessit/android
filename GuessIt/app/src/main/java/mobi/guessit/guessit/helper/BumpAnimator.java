@@ -23,7 +23,6 @@ public class BumpAnimator {
         view.setScaleX(origin);
         view.setScaleY(origin);
         view.setAlpha(origin);
-        view.setEnabled(!in);
 
         ObjectAnimator scaleX = ObjectAnimator.ofFloat(view, "scaleX", destination);
         ObjectAnimator scaleY = ObjectAnimator.ofFloat(view, "scaleY", destination);

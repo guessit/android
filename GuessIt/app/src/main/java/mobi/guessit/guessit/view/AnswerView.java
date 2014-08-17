@@ -3,6 +3,7 @@ package mobi.guessit.guessit.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import java.util.LinkedList;
@@ -18,6 +19,7 @@ public class AnswerView extends LinearLayout {
 
     private String answer;
     private List<PlaceholderView> placeholderViews;
+    private OnAnswerListener onAnswerListener;
 
     public AnswerView(Context context) {
         super(context);
@@ -72,6 +74,14 @@ public class AnswerView extends LinearLayout {
         return placeholderViews;
     }
 
+    public OnAnswerListener getOnAnswerListener() {
+        return onAnswerListener;
+    }
+
+    public void setOnAnswerListener(OnAnswerListener onAnswerListener) {
+        this.onAnswerListener = onAnswerListener;
+    }
+
     private PlaceholderView getPlaceholderAtIndex(int index) {
         PlaceholderView placeholder;
 
@@ -82,6 +92,17 @@ public class AnswerView extends LinearLayout {
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             placeholder = (PlaceholderView) inflater.inflate(
                 R.layout.placeholder_view, this, false);
+            placeholder.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    PlaceholderView placeholder = (PlaceholderView) view;
+                    if (placeholder.canRemoveLetter()) {
+                        getOnAnswerListener().onLetterRemoved(AnswerView.this, placeholder);
+                    }
+                }
+            });
+            placeholder.getLetterButton().setClickable(false);
+            placeholder.getLetterButton().setFocusable(false);
 
             getPlaceholderViews().add(placeholder);
         }
@@ -169,5 +190,9 @@ public class AnswerView extends LinearLayout {
                 break;
             }
         }
+    }
+
+    public interface OnAnswerListener {
+        void onLetterRemoved(AnswerView answerView, PlaceholderView placeholder);
     }
 }

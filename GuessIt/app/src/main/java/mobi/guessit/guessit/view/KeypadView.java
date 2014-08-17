@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,7 +26,7 @@ import mobi.guessit.guessit.model.UserInterfaceElement;
 public class KeypadView extends LinearLayout {
 
     private Level level;
-    private OnKeypadListener keypadListener;
+    private OnKeypadListener onKeypadListener;
 
     public KeypadView(Context context) {
         super(context);
@@ -54,12 +53,12 @@ public class KeypadView extends LinearLayout {
         this.setupKeypad(level);
     }
 
-    public OnKeypadListener getKeypadListener() {
-        return keypadListener;
+    public OnKeypadListener getOnKeypadListener() {
+        return onKeypadListener;
     }
 
-    public void setKeypadListener(OnKeypadListener keypadListener) {
-        this.keypadListener = keypadListener;
+    public void setOnKeypadListener(OnKeypadListener onKeypadListener) {
+        this.onKeypadListener = onKeypadListener;
     }
 
     private void setupUI() {
@@ -127,8 +126,8 @@ public class KeypadView extends LinearLayout {
             public void onClick(View view) {
                 LetterButton letter = (LetterButton) view;
                 if (letter.isActive()) {
-                    if (getKeypadListener().canAddLetter(KeypadView.this, letter)) {
-                        getKeypadListener().onLetterAdded(KeypadView.this, letter);
+                    if (getOnKeypadListener().canAddLetter(KeypadView.this, letter)) {
+                        getOnKeypadListener().onLetterAdded(KeypadView.this, letter);
                         BumpAnimator.getInstance().animateOut(view);
                     }
                 }
@@ -154,7 +153,7 @@ public class KeypadView extends LinearLayout {
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getKeypadListener().onHelpRequested(KeypadView.this, (Button) view);
+                getOnKeypadListener().onHelpRequested(KeypadView.this, (Button) view);
             }
         });
 
@@ -202,6 +201,12 @@ public class KeypadView extends LinearLayout {
             LetterButton key = (LetterButton) keys.get(i);
             key.setLetter(letters.get(i));
         }
+    }
+
+    public void recoverLetter(LetterButton letter) {
+        BumpAnimator.getInstance().animateIn(letter.getOriginLetter());
+        BumpAnimator.getInstance().animateOut(letter);
+        letter.setOriginLetter(null);
     }
 
     public interface OnKeypadListener {
