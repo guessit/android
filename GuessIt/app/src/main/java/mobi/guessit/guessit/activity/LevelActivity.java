@@ -8,6 +8,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.PaintDrawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import java.util.List;
 import java.util.Random;
 
 import mobi.guessit.guessit.R;
+import mobi.guessit.guessit.helper.BackgroundHelper;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.helper.ViewHelper;
 import mobi.guessit.guessit.model.Configuration;
@@ -60,7 +62,7 @@ public class LevelActivity extends Activity {
         initializeView();
 
         Level dummyLevel = new Level();
-        dummyLevel.setAnswer("BRAZIL");
+        dummyLevel.setAnswer("BRA ZIL");
 
         this.setCurrentLevel(dummyLevel);
     }
@@ -149,12 +151,7 @@ public class LevelActivity extends Activity {
     }
 
     private void initializeAnswerView(Game game) {
-        UserInterfaceElement answerUI = game.getUserInterface().getAnswer();
-
-        View view = findViewById(R.id.level_answer);
-        view.setBackgroundColor(ColorHelper.parseColor(answerUI.getBackgroundColor()));
-
-        AnswerView answerView = (AnswerView) view.findViewById(R.id.answer_view);
+        AnswerView answerView = (AnswerView) findViewById(R.id.answer_view);
         answerView.setUI(game.getUserInterface());
     }
 
@@ -244,24 +241,12 @@ public class LevelActivity extends Activity {
     }
 
     private void initializeImageView(Game game) {
-        float radius = 4.f;
-
-        float[] outerRadii = new float[]{
-            radius, radius, radius, radius, radius, radius, radius, radius
-        };
-        RectF inset = null;
-        float[] innerRadii = null;
-
-        RoundRectShape shape = new RoundRectShape(outerRadii, inset, innerRadii);
-
-        ShapeDrawable background = new ShapeDrawable(shape);
-        background.getPaint().setColor(Color.parseColor("#efefef"));
-
-        int padding = 8;
+        PaintDrawable background = new PaintDrawable(ColorHelper.parseColor(
+            game.getUserInterface().getFrame().getBackgroundColor()));
+        background.setCornerRadius(2.f);
 
         ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
-        imageView.setPadding(padding, padding, padding, padding);
-        imageView.setBackground(background);
+        BackgroundHelper.getInstance().setBackground(imageView, background);
 
         animateImageView(imageView);
 

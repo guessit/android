@@ -3,12 +3,15 @@ package mobi.guessit.guessit.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.LinkedList;
 import java.util.List;
 
 import mobi.guessit.guessit.R;
+import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.UserInterface;
 
 public class AnswerView extends LinearLayout {
@@ -18,7 +21,7 @@ public class AnswerView extends LinearLayout {
     private UserInterface ui;
 
     private String answer;
-    private List<AnswerPlaceholderView> placeholderViews;
+    private List<PlaceholderView> placeholderViews;
 
     public AnswerView(Context context) {
         super(context);
@@ -38,6 +41,8 @@ public class AnswerView extends LinearLayout {
 
     public void setUI(UserInterface ui) {
         this.ui = ui;
+
+        this.setBackgroundColor(ColorHelper.parseColor(ui.getAnswer().getBackgroundColor()));
     }
 
     public String getAnswer() {
@@ -50,23 +55,23 @@ public class AnswerView extends LinearLayout {
         this.adjustChildViews();
     }
 
-    public List<AnswerPlaceholderView> getPlaceholderViews() {
+    public List<PlaceholderView> getPlaceholderViews() {
         if (placeholderViews == null) {
-            placeholderViews = new LinkedList<AnswerPlaceholderView>();
+            placeholderViews = new LinkedList<PlaceholderView>();
         }
         return placeholderViews;
     }
 
-    private AnswerPlaceholderView getPlaceholderAtIndex(int index) {
-        AnswerPlaceholderView placeholder = null;
+    private PlaceholderView getPlaceholderAtIndex(int index) {
+        PlaceholderView placeholder = null;
 
         if (this.getPlaceholderViews().size() > index) {
             placeholder = this.getPlaceholderViews().get(index);
         } else {
             LayoutInflater inflater = (LayoutInflater) this.getContext().
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            placeholder = (AnswerPlaceholderView) inflater.inflate(
-                R.layout.answer_placeholder_view, this, false);
+            placeholder = (PlaceholderView) inflater.inflate(
+                R.layout.placeholder_view, this, false);
             placeholder.setPlaceholderUI(this.getUI().getPlaceholder());
             placeholder.setLetterUI(this.getUI().getLetter());
 
@@ -97,15 +102,13 @@ public class AnswerView extends LinearLayout {
     }
 
     private void setupPlaceholder(String letter, int letterIndex, boolean previousLetterWasSpace) {
-        AnswerPlaceholderView placeholderView = this.getPlaceholderAtIndex(letterIndex);
+        PlaceholderView placeholderView = this.getPlaceholderAtIndex(letterIndex);
         placeholderView.setLetter(letter);
 
         if (previousLetterWasSpace) {
-            MarginLayoutParams marginLayoutParams = new MarginLayoutParams(
-                placeholderView.getLayoutParams());
-            marginLayoutParams.leftMargin = AFTER_SPACE_MARGIN;
-
-            placeholderView.setLayoutParams(marginLayoutParams);
+            LinearLayout.LayoutParams layoutParams = (LayoutParams) placeholderView.getLayoutParams();
+            layoutParams.leftMargin += getResources().getDimension(
+                R.dimen.level_placeholder_margin_after_space);
         }
 
         this.addView(placeholderView);

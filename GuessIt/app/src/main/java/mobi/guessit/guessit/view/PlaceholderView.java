@@ -6,30 +6,31 @@ import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
 import mobi.guessit.guessit.R;
+import mobi.guessit.guessit.helper.BackgroundHelper;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.UserInterfaceElement;
 
-public class AnswerPlaceholderView extends RelativeLayout {
+public class PlaceholderView extends RelativeLayout {
 
     private String letter;
     private UserInterfaceElement placeholderUI;
 
-    public AnswerPlaceholderView(Context context) {
+    public PlaceholderView(Context context) {
         super(context);
     }
 
-    public AnswerPlaceholderView(Context context, AttributeSet attrs) {
+    public PlaceholderView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public AnswerPlaceholderView(Context context, AttributeSet attrs, int defStyle) {
+    public PlaceholderView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
     private LetterButton button;
     private LetterButton getButton() {
         if (button == null) {
-            button = (LetterButton) this.findViewById(R.id.answer_placeholder_button);
+            button = (LetterButton) this.findViewById(R.id.letter_button);
         }
         return button;
     }
@@ -52,11 +53,7 @@ public class AnswerPlaceholderView extends RelativeLayout {
             this.placeholderUI.getBackgroundColor()));
         background.setCornerRadius(3.f);
 
-        this.setBackground(background);
-    }
-
-    public UserInterfaceElement getPlaceholderUI() {
-        return placeholderUI;
+        BackgroundHelper.getInstance().setBackground(this, background);
     }
 
     public void setLetterUI(UserInterfaceElement letterUI) {
