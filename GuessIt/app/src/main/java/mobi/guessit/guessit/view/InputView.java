@@ -1,27 +1,20 @@
 package mobi.guessit.guessit.view;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.util.AttributeSet;
-import android.util.StateSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import mobi.guessit.guessit.R;
-import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.helper.RandomLetterHelper;
 import mobi.guessit.guessit.helper.ViewHelper;
-import mobi.guessit.guessit.model.Configuration;
-import mobi.guessit.guessit.model.Game;
 import mobi.guessit.guessit.model.Level;
-import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class InputView extends LinearLayout {
 
