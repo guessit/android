@@ -12,7 +12,6 @@ import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class PlaceholderView extends RelativeLayout {
 
-    private String letter;
     private UserInterfaceElement placeholderUI;
 
     public PlaceholderView(Context context) {
@@ -36,14 +35,7 @@ public class PlaceholderView extends RelativeLayout {
     }
 
     public void setLetter(String letter) {
-        this.letter = letter;
-
-        this.adjustChildViews();
-    }
-
-    private void adjustChildViews() {
-        this.getButton().setText(this.letter);
-        this.getButton().setAlpha(0.f);
+        this.getButton().setLetter(letter);
     }
 
     public void setPlaceholderUI(UserInterfaceElement placeholderUI) {

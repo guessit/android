@@ -6,11 +6,8 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
-import android.graphics.RectF;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.PaintDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.util.StateSet;
 import android.view.LayoutInflater;
@@ -23,35 +20,28 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Random;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BackgroundHelper;
 import mobi.guessit.guessit.helper.ColorHelper;
-import mobi.guessit.guessit.helper.ViewHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
 import mobi.guessit.guessit.model.Level;
 import mobi.guessit.guessit.model.UserInterfaceElement;
 import mobi.guessit.guessit.view.AnswerView;
 import mobi.guessit.guessit.view.LetterButton;
+import mobi.guessit.guessit.view.LevelView;
 
 public class LevelActivity extends Activity {
 
-    private Level currentLevel;
+    private LevelView levelView;
 
-    public Level getCurrentLevel() {
-        return currentLevel;
-    }
-
-    public void setCurrentLevel(Level currentLevel) {
-        this.currentLevel = currentLevel;
-
-        this.setupKeypad();
-        this.setupPlaceholder();
+    public LevelView getLevelView() {
+        if (levelView == null) {
+            levelView = (LevelView) findViewById(R.id.level_view);
+        }
+        return levelView;
     }
 
     @Override
@@ -61,10 +51,10 @@ public class LevelActivity extends Activity {
 
         initializeView();
 
-        Level dummyLevel = new Level();
-        dummyLevel.setAnswer("BRA ZIL");
+        Level currentDummyLevel = new Level();
+        currentDummyLevel.setAnswer("BRAZIL");
 
-        this.setCurrentLevel(dummyLevel);
+        this.getLevelView().setLevel(currentDummyLevel);
     }
 
     private void setupActionBar(Game game) {
@@ -125,8 +115,7 @@ public class LevelActivity extends Activity {
 
         UserInterfaceElement main = game.getUserInterface().getLevel();
 
-        View background = findViewById(R.id.level_background);
-        background.setBackgroundColor(ColorHelper.parseColor(main.getBackgroundColor()));
+        this.getLevelView().setBackgroundColor(ColorHelper.parseColor(main.getBackgroundColor()));
 
         // secondary background image view
         //   used when there's a background image instead of just a background color
@@ -254,6 +243,16 @@ public class LevelActivity extends Activity {
             @Override
             public void onClick(View view) {
                 LevelActivity.this.animateImageView((ImageView) view);
+                Level level = new Level();
+
+                int index = new Random().nextInt(2);
+                String answer = "BRASIL";
+                if (index == 0) {
+                    answer = "UNITED STATES";
+                }
+
+                level.setAnswer(answer);
+                LevelActivity.this.getLevelView().setLevel(level);
             }
         });
     }
@@ -269,51 +268,5 @@ public class LevelActivity extends Activity {
         bumpScale.setInterpolator(new OvershootInterpolator());
         bumpScale.play(scaleX).with(scaleY);
         bumpScale.start();
-    }
-
-    private void setupKeypad() {
-        ViewGroup keypad = (ViewGroup) findViewById(R.id.level_keypad);
-        List<View> keys = ViewHelper.getViewsWithTag(keypad, "key_button");
-
-        final int answerLength = this.currentLevel.getNoSpacesAnswer().length();
-
-        List<String> letters = new ArrayList<String>();
-        for (int i = 0; i < answerLength; i++) {
-            letters.add(this.currentLevel.getLetterAt(i));
-        }
-
-        int missingLetterCount = keys.size() - answerLength;
-        for (int i = 0; i < missingLetterCount; i++) {
-            boolean isEven = i % 2 == 0;
-            if (isEven) {
-                letters.add(randomVowel());
-            } else {
-                letters.add(randomConsonant());
-            }
-        }
-
-        Collections.shuffle(letters);
-
-        for (int i = 0; i < keys.size(); i++) {
-            Button key = (Button) keys.get(i);
-            key.setText(letters.get(i));
-        }
-    }
-
-    private void setupPlaceholder() {
-        AnswerView answerView = (AnswerView) findViewById(R.id.answer_view);
-        answerView.setAnswer(this.getCurrentLevel().getAnswer());
-    }
-
-    private String randomVowel() {
-        final String vowels = "AEIOU";
-        int index = new Random().nextInt(vowels.length());
-        return String.valueOf(vowels.charAt(index));
-    }
-
-    private String randomConsonant() {
-        final String consonants = "BCDFGHJKLMNPQRSTVWXYZ";
-        int index = new Random().nextInt(consonants.length());
-        return String.valueOf(consonants.charAt(index));
     }
 }

@@ -31,6 +31,15 @@ public class AnswerView extends LinearLayout {
         super(context, attrs, defStyle);
     }
 
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        if (this.answer != null) {
+            this.adjustChildViews();
+        }
+    }
+
     public UserInterface getUI() {
         return ui;
     }
@@ -44,7 +53,8 @@ public class AnswerView extends LinearLayout {
     public void setAnswer(String answer) {
         this.answer = answer;
 
-        this.adjustChildViews();
+        this.onSizeChanged(this.getWidth(), this.getHeight(),
+            this.getWidth(), this.getHeight());
     }
 
     public List<PlaceholderView> getPlaceholderViews() {
@@ -76,33 +86,60 @@ public class AnswerView extends LinearLayout {
     private void adjustChildViews() {
         this.removeAllViews();
 
+        int answerLength = this.answer.length();
+
         int letterIndex = 0;
         boolean previousLetterWasSpace = false;
 
-        for (int i = 0; i < this.answer.length(); i++) {
+        float initialWidth = getResources().getDimension(R.dimen.level_placeholder_width);
+        float initialHeight = getResources().getDimension(R.dimen.level_placeholder_height);
+        float margin = getResources().getDimension(R.dimen.level_placeholder_margin);
+        float marginAfterSpace = getResources().getDimension(R.dimen.level_placeholder_margin_after_space);
+        float ratio = initialWidth / initialHeight;
+
+        int noSpaces = this.answer.split(" ").length - 1;
+        float totalMargin = (2 + noSpaces) * marginAfterSpace + (answerLength - noSpaces - 1) * margin;
+
+        float width = (this.getWidth() - totalMargin) / answerLength;
+        if (width > initialWidth) {
+            width = initialWidth;
+        }
+
+        float height = width / ratio;
+
+        for (int i = 0; i < answerLength; i++) {
             String letter = String.valueOf(this.answer.charAt(i));
 
             boolean isSpace = letter.equals(" ");
             if (isSpace) {
                 previousLetterWasSpace = true;
             } else {
-                setupPlaceholder(letter, letterIndex, previousLetterWasSpace);
+                setupPlaceholder(letter, letterIndex, width, height, previousLetterWasSpace);
                 letterIndex++;
                 previousLetterWasSpace = false;
             }
         }
     }
 
-    private void setupPlaceholder(String letter, int letterIndex, boolean previousLetterWasSpace) {
+    private void setupPlaceholder(String letter, int letterIndex,
+                                  float width, float height,
+                                  boolean previousLetterWasSpace) {
         PlaceholderView placeholderView = this.getPlaceholderAtIndex(letterIndex);
         placeholderView.setLetter(letter);
 
+        LinearLayout.LayoutParams layoutParams = (LayoutParams) placeholderView.getLayoutParams();
+
+        layoutParams.width = (int) width;
+        layoutParams.height = (int) height;
+
+        float margin = getResources().getDimension(R.dimen.level_placeholder_margin);
+
         if (previousLetterWasSpace) {
-            LinearLayout.LayoutParams layoutParams = (LayoutParams) placeholderView.getLayoutParams();
-            layoutParams.leftMargin += getResources().getDimension(
-                R.dimen.level_placeholder_margin_after_space);
+            margin += getResources().getDimension(R.dimen.level_placeholder_margin_after_space);
         }
 
-        this.addView(placeholderView);
+        layoutParams.leftMargin = (int) margin;
+
+        this.addView(placeholderView, layoutParams);
     }
 }
