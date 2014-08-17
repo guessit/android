@@ -10,11 +10,11 @@ import java.util.List;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.ColorHelper;
-import mobi.guessit.guessit.model.UserInterface;
+import mobi.guessit.guessit.model.Configuration;
+import mobi.guessit.guessit.model.Game;
+import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class AnswerView extends LinearLayout {
-
-    private UserInterface ui;
 
     private String answer;
     private List<PlaceholderView> placeholderViews;
@@ -32,29 +32,37 @@ public class AnswerView extends LinearLayout {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        setupUI();
+    }
 
-        if (this.answer != null) {
-            this.adjustChildViews();
+    private void setupUI() {
+        Game game = Configuration.getInstance().getGame();
+
+        if (game != null) {
+            UserInterfaceElement ui = game.getUserInterface().getAnswer();
+            setBackgroundColor(ColorHelper.parseColor(ui.getBackgroundColor()));
         }
     }
 
-    public UserInterface getUI() {
-        return ui;
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+
+        if (getAnswer() != null) {
+            adjustChildViews();
+        }
     }
 
-    public void setUI(UserInterface ui) {
-        this.ui = ui;
-
-        this.setBackgroundColor(ColorHelper.parseColor(ui.getAnswer().getBackgroundColor()));
+    public String getAnswer() {
+        return answer;
     }
 
     public void setAnswer(String answer) {
         this.answer = answer;
 
-        this.onSizeChanged(this.getWidth(), this.getHeight(),
-            this.getWidth(), this.getHeight());
+        onSizeChanged(getWidth(), getHeight(), getWidth(), getHeight());
     }
 
     public List<PlaceholderView> getPlaceholderViews() {
@@ -67,26 +75,24 @@ public class AnswerView extends LinearLayout {
     private PlaceholderView getPlaceholderAtIndex(int index) {
         PlaceholderView placeholder = null;
 
-        if (this.getPlaceholderViews().size() > index) {
-            placeholder = this.getPlaceholderViews().get(index);
+        if (getPlaceholderViews().size() > index) {
+            placeholder = getPlaceholderViews().get(index);
         } else {
-            LayoutInflater inflater = (LayoutInflater) this.getContext().
+            LayoutInflater inflater = (LayoutInflater) getContext().
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             placeholder = (PlaceholderView) inflater.inflate(
                 R.layout.placeholder_view, this, false);
-            placeholder.setPlaceholderUI(this.getUI().getPlaceholder());
-            placeholder.setLetterUI(this.getUI().getLetter());
 
-            this.getPlaceholderViews().add(placeholder);
+            getPlaceholderViews().add(placeholder);
         }
 
         return placeholder;
     }
 
     private void adjustChildViews() {
-        this.removeAllViews();
+        removeAllViews();
 
-        int answerLength = this.answer.length();
+        int answerLength = getAnswer().length();
 
         int letterIndex = 0;
         boolean previousLetterWasSpace = false;
@@ -97,10 +103,10 @@ public class AnswerView extends LinearLayout {
         float marginAfterSpace = getResources().getDimension(R.dimen.level_placeholder_margin_after_space);
         float ratio = initialWidth / initialHeight;
 
-        int noSpaces = this.answer.split(" ").length - 1;
+        int noSpaces = getAnswer().split(" ").length - 1;
         float totalMargin = (2 + noSpaces) * marginAfterSpace + (answerLength - noSpaces - 1) * margin;
 
-        float width = (this.getWidth() - totalMargin) / answerLength;
+        float width = (getWidth() - totalMargin) / answerLength;
         if (width > initialWidth) {
             width = initialWidth;
         }
@@ -108,7 +114,7 @@ public class AnswerView extends LinearLayout {
         float height = width / ratio;
 
         for (int i = 0; i < answerLength; i++) {
-            String letter = String.valueOf(this.answer.charAt(i));
+            String letter = String.valueOf(getAnswer().charAt(i));
 
             boolean isSpace = letter.equals(" ");
             if (isSpace) {
@@ -124,7 +130,7 @@ public class AnswerView extends LinearLayout {
     private void setupPlaceholder(String letter, int letterIndex,
                                   float width, float height,
                                   boolean previousLetterWasSpace) {
-        PlaceholderView placeholderView = this.getPlaceholderAtIndex(letterIndex);
+        PlaceholderView placeholderView = getPlaceholderAtIndex(letterIndex);
         placeholderView.setLetter(letter);
 
         LinearLayout.LayoutParams layoutParams = (LayoutParams) placeholderView.getLayoutParams();
@@ -140,6 +146,6 @@ public class AnswerView extends LinearLayout {
 
         layoutParams.leftMargin = (int) margin;
 
-        this.addView(placeholderView, layoutParams);
+        addView(placeholderView, layoutParams);
     }
 }

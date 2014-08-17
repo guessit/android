@@ -24,7 +24,7 @@
 
     </RelativeLayout>
 
-    <LinearLayout
+    <mobi.guessit.guessit.view.InputView
         android:layout_width="match_parent"
         android:layout_height="@dimen/level_input_view_height"
         android:id="@+id/level_input_view"
@@ -33,7 +33,7 @@
         android:layout_alignParentBottom="true">
 
         <mobi.guessit.guessit.view.AnswerView
-            android:id="@+id/answer_view"
+            android:id="@+id/level_answer_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -77,6 +77,6 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+    </mobi.guessit.guessit.view.InputView>
 
 </mobi.guessit.guessit.view.LevelView>

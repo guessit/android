@@ -9,6 +9,7 @@
     <dimen name="level_keypad_spacing">2dp</dimen>
 
     <dimen name="level_image_view_padding">5dp</dimen>
+    <dimen name="level_image_view_corner_radius">2dp</dimen>
 
     <dimen name="level_help_width">60dp</dimen>
     <dimen name="level_help_text_size">60sp</dimen>

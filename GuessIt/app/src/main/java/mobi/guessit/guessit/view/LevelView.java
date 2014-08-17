@@ -1,20 +1,24 @@
 package mobi.guessit.guessit.view;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.content.Context;
+import android.graphics.drawable.PaintDrawable;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
+import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.Random;
 
 import mobi.guessit.guessit.R;
-import mobi.guessit.guessit.helper.RandomLetterHelper;
-import mobi.guessit.guessit.helper.ViewHelper;
+import mobi.guessit.guessit.helper.BackgroundHelper;
+import mobi.guessit.guessit.helper.ColorHelper;
+import mobi.guessit.guessit.model.Configuration;
+import mobi.guessit.guessit.model.Game;
 import mobi.guessit.guessit.model.Level;
+import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class LevelView extends RelativeLayout {
 
@@ -32,48 +36,85 @@ public class LevelView extends RelativeLayout {
         super(context, attrs, defStyle);
     }
 
-    public Level getLevel() {
-        return level;
-    }
-
     public void setLevel(Level level) {
         this.level = level;
-
-        this.setupKeypad();
-        this.setupPlaceholder();
+        getInputView().setLevel(level);
     }
 
-    private void setupKeypad() {
-        ViewGroup keypad = (ViewGroup) findViewById(R.id.level_keypad);
-        List<View> keys = ViewHelper.getViewsWithTag(keypad, "key_button");
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
 
-        final int answerLength = this.getLevel().getNoSpacesAnswer().length();
+        setupUI();
+    }
 
-        List<String> letters = new ArrayList<String>();
-        for (int i = 0; i < answerLength; i++) {
-            letters.add(this.getLevel().getLetterAt(i));
+    private void setupUI() {
+        Game game = Configuration.getInstance().getGame();
+
+        if (game != null) {
+            UserInterfaceElement level =  game.getUserInterface().getLevel();
+
+            setBackgroundColor(ColorHelper.parseColor(level.getBackgroundColor()));
+
+            initializeImageView();
         }
+    }
 
-        int missingLetterCount = keys.size() - answerLength;
-        for (int i = 0; i < missingLetterCount; i++) {
-            boolean isEven = i % 2 == 0;
-            if (isEven) {
-                letters.add(RandomLetterHelper.getInstance().randomVowel());
-            } else {
-                letters.add(RandomLetterHelper.getInstance().randomConsonant());
+    private void initializeImageView() {
+        UserInterfaceElement frame = Configuration.getInstance().getGame().
+            getUserInterface().getFrame();
+
+        PaintDrawable background = new PaintDrawable(ColorHelper.parseColor(
+            frame.getBackgroundColor()));
+        background.setCornerRadius(getResources().getDimension(
+            R.dimen.level_image_view_corner_radius));
+
+        ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
+        BackgroundHelper.getInstance().setBackground(imageView, background);
+
+        animateImageView(imageView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LevelView.this.animateImageView((ImageView) view);
+                Level level = new Level();
+
+                int index = new Random().nextInt(2);
+                String answer = "BRASIL";
+                if (index == 0) {
+                    answer = "UNITED STATES";
+                }
+
+                level.setAnswer(answer);
+                LevelView.this.setLevel(level);
             }
-        }
-
-        Collections.shuffle(letters);
-
-        for (int i = 0; i < keys.size(); i++) {
-            Button key = (Button) keys.get(i);
-            key.setText(letters.get(i));
-        }
+        });
     }
 
-    private void setupPlaceholder() {
-        AnswerView answerView = (AnswerView) findViewById(R.id.answer_view);
-        answerView.setAnswer(this.getLevel().getAnswer());
+    private void animateImageView(ImageView imageView) {
+        imageView.setScaleX(0.01f);
+        imageView.setScaleY(0.01f);
+
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(imageView, "scaleX", 1.f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(imageView, "scaleY", 1.f);
+
+        AnimatorSet bumpScale = new AnimatorSet();
+        bumpScale.setInterpolator(new OvershootInterpolator());
+        bumpScale.play(scaleX).with(scaleY);
+        bumpScale.start();
+    }
+
+    private InputView inputView;
+    private InputView getInputView() {
+        if (inputView == null) {
+            inputView = (InputView) findViewById(R.id.level_input_view);
+        }
+        return inputView;
+    }
+
+    @Override
+    public boolean isInEditMode() {
+        return true;
     }
 }
