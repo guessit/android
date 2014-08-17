@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BumpAnimator;
@@ -200,6 +201,9 @@ public class KeypadView extends LinearLayout {
         for (int i = 0; i < keys.size(); i++) {
             LetterButton key = (LetterButton) keys.get(i);
             key.setLetter(letters.get(i));
+
+            long delay = new Random().nextInt(250);
+            BumpAnimator.getInstance().animateIn(key, delay);
         }
     }
 

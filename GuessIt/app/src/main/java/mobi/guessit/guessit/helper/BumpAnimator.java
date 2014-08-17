@@ -16,7 +16,7 @@ public class BumpAnimator {
     private BumpAnimator() {
     }
 
-    private void animate(View view, boolean in) {
+    private void animate(View view, boolean in, long delay) {
         float origin = in ? 0.f : 1.f;
         float destination = in ? 1.f : 0.f;
 
@@ -29,16 +29,25 @@ public class BumpAnimator {
         ObjectAnimator alpha = ObjectAnimator.ofFloat(view, "alpha", destination);
 
         AnimatorSet bumpScale = new AnimatorSet();
-        bumpScale.setInterpolator(new OvershootInterpolator());
+        bumpScale.setInterpolator(new OvershootInterpolator(2.f));
         bumpScale.play(scaleX).with(scaleY).with(alpha);
+        bumpScale.setStartDelay(delay);
         bumpScale.start();
     }
 
     public void animateIn(View view) {
-        animate(view, true);
+        animateIn(view, 0);
+    }
+
+    public void animateIn(View view, long delay) {
+        animate(view, true, delay);
     }
 
     public void animateOut(View view) {
-        animate(view, false);
+        animateOut(view, 0);
+    }
+
+    public void animateOut(View view, long delay) {
+        animate(view, false, delay);
     }
 }

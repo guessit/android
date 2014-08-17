@@ -64,6 +64,10 @@ public class AnswerView extends LinearLayout {
     public void setAnswer(String answer) {
         this.answer = answer;
 
+        for (PlaceholderView placeholder : getPlaceholderViews()) {
+            placeholder.reset();
+        }
+
         onSizeChanged(getWidth(), getHeight(), getWidth(), getHeight());
     }
 
