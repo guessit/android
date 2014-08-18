@@ -113,8 +113,12 @@ public class LetterButton extends Button {
         return getAlpha() == 1.f;
     }
 
+    public boolean isPlacedOnAnswer() {
+        return getOriginLetter() != null;
+    }
+
     public boolean canDisplayLetter() {
-        return getAlpha() == 0.f;
+        return getOriginLetter() == null;
     }
 
     public void displayLetter(LetterButton letter) {

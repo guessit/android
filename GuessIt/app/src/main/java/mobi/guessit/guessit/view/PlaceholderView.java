@@ -55,7 +55,7 @@ public class PlaceholderView extends RelativeLayout {
     public String getLetter() {
         String letter = null;
 
-        if (getLetterButton().isActive()) {
+        if (getLetterButton().isPlacedOnAnswer()) {
             letter = getLetterButton().getLetter();
         }
 

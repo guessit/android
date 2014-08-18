@@ -10,8 +10,9 @@ public class Level {
 
     private String noSpacesAnswer;
 
-    public static GuessingResult guessWithAnswer(String guessingAnswer) {
-        return GuessingResult.WRONG;
+    public GuessingResult guessWithAnswer(String guessingAnswer) {
+        return guessingAnswer.equals(getNoSpacesAnswer()) ?
+            GuessingResult.CORRECT : GuessingResult.WRONG;
     }
 
     public String getImageName() {

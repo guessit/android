@@ -14,6 +14,7 @@ public class InputView extends LinearLayout {
     private Level level;
 
     private OnLetterAddedToAnswerListener onLetterAddedToAnswerListener;
+    private OnLetterRemovedFromAnswerListener onLetterRemovedFromAnswerListener;
     private OnFinishGuessingListener onFinishGuessingListener;
 
     public InputView(Context context) {
@@ -47,6 +48,14 @@ public class InputView extends LinearLayout {
         this.onLetterAddedToAnswerListener = onLetterAddedToAnswerListener;
     }
 
+    public OnLetterRemovedFromAnswerListener getOnLetterRemovedFromAnswerListener() {
+        return onLetterRemovedFromAnswerListener;
+    }
+
+    public void setOnLetterRemovedFromAnswerListener(OnLetterRemovedFromAnswerListener onLetterRemovedFromAnswerListener) {
+        this.onLetterRemovedFromAnswerListener = onLetterRemovedFromAnswerListener;
+    }
+
     public OnFinishGuessingListener getOnFinishGuessingListener() {
         return onFinishGuessingListener;
     }
@@ -63,6 +72,13 @@ public class InputView extends LinearLayout {
                 @Override
                 public void onLetterRemoved(AnswerView answerView, PlaceholderView placeholder) {
                     getKeypadView().recoverLetter(placeholder.getLetterButton());
+
+                    OnLetterRemovedFromAnswerListener letterRemovedListener =
+                        getOnLetterRemovedFromAnswerListener();
+                    if (letterRemovedListener != null) {
+                        letterRemovedListener.onLetterRemovedFromAnswer(
+                            placeholder.getLetterButton().getLetter());
+                    }
                 }
             });
         }
@@ -109,6 +125,10 @@ public class InputView extends LinearLayout {
 
     public interface OnLetterAddedToAnswerListener {
         void onLetterAddedToAnswer(String letter);
+    }
+
+    public interface OnLetterRemovedFromAnswerListener {
+        void onLetterRemovedFromAnswer(String letter);
     }
 
     public interface OnFinishGuessingListener {

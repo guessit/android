@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -15,6 +16,7 @@ import mobi.guessit.guessit.helper.BumpAnimator;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
+import mobi.guessit.guessit.model.GuessingResult;
 import mobi.guessit.guessit.model.Level;
 import mobi.guessit.guessit.model.UserInterfaceElement;
 
@@ -32,6 +34,10 @@ public class LevelView extends RelativeLayout {
 
     public LevelView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public Level getLevel() {
+        return level;
     }
 
     public void setLevel(Level level) {
@@ -100,6 +106,31 @@ public class LevelView extends RelativeLayout {
     private InputView getInputView() {
         if (inputView == null) {
             inputView = (InputView) findViewById(R.id.level_input_view);
+            inputView.setOnLetterAddedToAnswerListener(new InputView.OnLetterAddedToAnswerListener() {
+                @Override
+                public void onLetterAddedToAnswer(String letter) {
+
+                }
+            });
+            inputView.setOnLetterRemovedFromAnswerListener(new InputView.OnLetterRemovedFromAnswerListener() {
+                @Override
+                public void onLetterRemovedFromAnswer(String letter) {
+                }
+            });
+            inputView.setOnFinishGuessingListener(new InputView.OnFinishGuessingListener() {
+                @Override
+                public void onFinishGuessing(String answer) {
+                    String message = "Answer: " + answer + "\n";
+
+                    if (getLevel().guessWithAnswer(answer) == GuessingResult.CORRECT) {
+                        message += "CORRECT =)";
+                    } else {
+                        message += "WRONG =(";
+                    }
+
+                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
         return inputView;
     }
