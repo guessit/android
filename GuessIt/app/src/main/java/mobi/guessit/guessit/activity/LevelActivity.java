@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -39,7 +40,7 @@ public class LevelActivity extends Activity {
         Level currentDummyLevel = new Level();
         currentDummyLevel.setAnswer("BRAZIL");
 
-        this.getLevelView().setLevel(currentDummyLevel);
+        getLevelView().setLevel(currentDummyLevel, false);
     }
 
     private void setupActionBar() {

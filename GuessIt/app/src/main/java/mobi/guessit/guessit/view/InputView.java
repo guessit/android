@@ -29,9 +29,13 @@ public class InputView extends LinearLayout {
     }
 
     public void setLevel(Level level) {
+        setLevel(level, true);
+    }
+
+    public void setLevel(Level level, boolean animated) {
         this.level = level;
 
-        getKeypadView().setLevel(level);
+        getKeypadView().setLevel(level, animated);
         getAnswerView().setCorrectAnswer(level.getAnswer());
     }
 

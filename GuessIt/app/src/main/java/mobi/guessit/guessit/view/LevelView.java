@@ -35,8 +35,17 @@ public class LevelView extends RelativeLayout {
     }
 
     public void setLevel(Level level) {
+        setLevel(level, true);
+    }
+
+    public void setLevel(Level level, boolean animated) {
         this.level = level;
-        getInputView().setLevel(level);
+        getInputView().setLevel(level, animated);
+
+        if (animated) {
+            ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
+            BumpAnimator.getInstance().animateIn(imageView);
+        }
     }
 
     @Override
@@ -70,12 +79,9 @@ public class LevelView extends RelativeLayout {
         ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
         BackgroundHelper.getInstance().setBackground(imageView, background);
 
-        BumpAnimator.getInstance().animateIn(imageView);
-
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BumpAnimator.getInstance().animateIn(view);
                 Level level = new Level();
 
                 int index = new Random().nextInt(2);

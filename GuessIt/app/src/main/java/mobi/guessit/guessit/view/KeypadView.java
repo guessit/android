@@ -49,9 +49,13 @@ public class KeypadView extends LinearLayout {
     }
 
     public void setLevel(Level level) {
+        setLevel(level, true);
+    }
+
+    public void setLevel(Level level, boolean animated) {
         this.level = level;
 
-        this.setupKeypad(level);
+        this.setupKeypad(level, animated);
     }
 
     public OnKeypadListener getOnKeypadListener() {
@@ -176,6 +180,10 @@ public class KeypadView extends LinearLayout {
     }
 
     private void setupKeypad(Level level) {
+        setupKeypad(level, true);
+    }
+
+    private void setupKeypad(Level level, boolean animated) {
         ViewGroup keypad = (ViewGroup) findViewById(R.id.level_keypad_view);
         List<View> keys = ViewHelper.getViewsWithTag(keypad, "key_button");
 
@@ -202,8 +210,10 @@ public class KeypadView extends LinearLayout {
             LetterButton key = (LetterButton) keys.get(i);
             key.setLetter(letters.get(i));
 
-            long delay = new Random().nextInt(250);
-            BumpAnimator.getInstance().animateIn(key, delay);
+            if (animated) {
+                long delay = new Random().nextInt(250);
+                BumpAnimator.getInstance().animateIn(key, delay);
+            }
         }
     }
 
