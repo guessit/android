@@ -17,7 +17,8 @@ import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class AnswerView extends LinearLayout {
 
-    private String answer;
+    private String correctAnswer;
+
     private List<PlaceholderView> placeholderViews;
     private OnAnswerListener onAnswerListener;
 
@@ -52,23 +53,40 @@ public class AnswerView extends LinearLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        if (getAnswer() != null) {
+        if (getCorrectAnswer() != null) {
             adjustChildViews();
         }
     }
 
-    public String getAnswer() {
-        return answer;
+    public String getCorrectAnswer() {
+        return correctAnswer;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
 
         for (PlaceholderView placeholder : getPlaceholderViews()) {
             placeholder.reset();
         }
 
         onSizeChanged(getWidth(), getHeight(), getWidth(), getHeight());
+    }
+
+    public String getCurrentAnswer() {
+        String currentAnswer = "";
+
+        for (PlaceholderView placeholder : getPlaceholderViews()) {
+            String letter = "*";
+
+            String placeholderLetter = placeholder.getLetter();
+            if (placeholderLetter != null) {
+                letter = placeholderLetter;
+            }
+
+            currentAnswer += letter;
+        }
+
+        return currentAnswer;
     }
 
     public List<PlaceholderView> getPlaceholderViews() {
@@ -117,7 +135,7 @@ public class AnswerView extends LinearLayout {
     private void adjustChildViews() {
         removeAllViews();
 
-        int answerLength = getAnswer().length();
+        int answerLength = getCorrectAnswer().length();
 
         int letterIndex = 0;
         boolean previousLetterWasSpace = false;
@@ -128,7 +146,7 @@ public class AnswerView extends LinearLayout {
         float marginAfterSpace = getResources().getDimension(R.dimen.level_placeholder_margin_after_space);
         float ratio = initialWidth / initialHeight;
 
-        int noSpaces = getAnswer().split(" ").length - 1;
+        int noSpaces = getCorrectAnswer().split(" ").length - 1;
         float totalMargin = (2 + noSpaces) * marginAfterSpace + (answerLength - noSpaces - 1) * margin;
 
         float width = (getWidth() - totalMargin) / answerLength;
@@ -139,7 +157,7 @@ public class AnswerView extends LinearLayout {
         float height = width / ratio;
 
         for (int i = 0; i < answerLength; i++) {
-            String letter = String.valueOf(getAnswer().charAt(i));
+            String letter = String.valueOf(getCorrectAnswer().charAt(i));
 
             boolean isSpace = letter.equals(" ");
             if (isSpace) {

@@ -52,7 +52,7 @@ public class LetterButton extends Button {
 
     private void setupUI() {
         setTag("key_button");
-        setTextSize(getResources().getDimension(R.dimen.level_letter_text_size));
+        setTextSize(20);
         setTypeface(Typeface.createFromAsset(getContext().getAssets(),
             "fonts/Avenir Next Condensed-Medium.ttf"), Typeface.NORMAL);
 
@@ -69,7 +69,7 @@ public class LetterButton extends Button {
 
 
     public String getLetter() {
-        return (String) getText();
+        return getText().toString();
     }
 
     public void setLetter(String letter) {

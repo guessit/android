@@ -13,6 +13,9 @@ public class InputView extends LinearLayout {
 
     private Level level;
 
+    private OnLetterAddedToAnswerListener onLetterAddedToAnswerListener;
+    private OnFinishGuessingListener onFinishGuessingListener;
+
     public InputView(Context context) {
         super(context);
     }
@@ -29,7 +32,23 @@ public class InputView extends LinearLayout {
         this.level = level;
 
         getKeypadView().setLevel(level);
-        getAnswerView().setAnswer(level.getAnswer());
+        getAnswerView().setCorrectAnswer(level.getAnswer());
+    }
+
+    public OnLetterAddedToAnswerListener getOnLetterAddedToAnswerListener() {
+        return onLetterAddedToAnswerListener;
+    }
+
+    public void setOnLetterAddedToAnswerListener(OnLetterAddedToAnswerListener onLetterAddedToAnswerListener) {
+        this.onLetterAddedToAnswerListener = onLetterAddedToAnswerListener;
+    }
+
+    public OnFinishGuessingListener getOnFinishGuessingListener() {
+        return onFinishGuessingListener;
+    }
+
+    public void setOnFinishGuessingListener(OnFinishGuessingListener onFinishGuessingListener) {
+        this.onFinishGuessingListener = onFinishGuessingListener;
     }
 
     private AnswerView answerView;
@@ -59,6 +78,20 @@ public class InputView extends LinearLayout {
                 @Override
                 public void onLetterAdded(KeypadView keypad, LetterButton letter) {
                     getAnswerView().addLetter(letter);
+
+                    OnLetterAddedToAnswerListener letterAddedListener =
+                        getOnLetterAddedToAnswerListener();
+                    if (letterAddedListener != null) {
+                        letterAddedListener.onLetterAddedToAnswer(letter.getLetter());
+                    }
+
+                    if (!getAnswerView().canAddLetter(letter)) {
+                        OnFinishGuessingListener finishGuessingListener =
+                            getOnFinishGuessingListener();
+                        if (finishGuessingListener != null) {
+                            finishGuessingListener.onFinishGuessing(getAnswerView().getCurrentAnswer());
+                        }
+                    }
                 }
 
                 @Override
@@ -68,5 +101,13 @@ public class InputView extends LinearLayout {
             });
         }
         return keypadView;
+    }
+
+    public interface OnLetterAddedToAnswerListener {
+        void onLetterAddedToAnswer(String letter);
+    }
+
+    public interface OnFinishGuessingListener {
+        void onFinishGuessing(String answer);
     }
 }
