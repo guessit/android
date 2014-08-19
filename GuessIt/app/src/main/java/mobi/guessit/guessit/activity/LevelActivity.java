@@ -37,10 +37,9 @@ public class LevelActivity extends Activity {
 
         setupActionBar();
 
-        Level currentDummyLevel = new Level();
-        currentDummyLevel.setAnswer("BRAZIL");
-
-        getLevelView().setLevel(currentDummyLevel, false);
+        Level nextLevel = Configuration.getInstance().getGame().getNextLevel();
+        nextLevel.loadResources(this);
+        getLevelView().setLevel(nextLevel, false);
     }
 
     private void setupActionBar() {

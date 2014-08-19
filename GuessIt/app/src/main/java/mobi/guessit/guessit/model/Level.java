@@ -1,18 +1,58 @@
 package mobi.guessit.guessit.model;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
+
+import com.google.gson.annotations.SerializedName;
+
+import mobi.guessit.guessit.helper.ResourceHelper;
+
 public class Level {
 
+    @SerializedName("image")
     private String imageName;
-    private String answer;
+
     private String category;
     private String url;
     private String bundle;
 
-    private String noSpacesAnswer;
+    private String mAnswer;
+    private transient Drawable mImage;
+
+    private boolean finished;
+
+    public static Level guessItLevel() {
+        Level guessIt = new Level();
+
+        guessIt.setImageName("guessit_final");
+
+        return guessIt;
+    }
 
     public GuessingResult guessWithAnswer(String guessingAnswer) {
         return guessingAnswer.equals(getNoSpacesAnswer()) ?
             GuessingResult.CORRECT : GuessingResult.WRONG;
+    }
+
+    public void loadResources(Context context) {
+        ResourceHelper helper = ResourceHelper.getInstance();
+
+        String keyName = "img_" + getImageName();
+
+        mAnswer = helper.getString(context, keyName).toUpperCase();
+        mImage = helper.getImage(context, keyName);
+    }
+
+    public Drawable getImage() {
+        return mImage;
+    }
+
+    public String getAnswer() {
+        return mAnswer;
+    }
+
+    public String getNoSpacesAnswer() {
+        return getAnswer().replaceAll(" ", "");
     }
 
     public String getImageName() {
@@ -21,19 +61,6 @@ public class Level {
 
     public void setImageName(String imageName) {
         this.imageName = imageName;
-    }
-
-    public String getNoSpacesAnswer() {
-        return this.noSpacesAnswer;
-    }
-
-    public String getAnswer() {
-        return answer;
-    }
-
-    public void setAnswer(String answer) {
-        this.answer = answer;
-        this.noSpacesAnswer = answer.replaceAll(" ", "");
     }
 
     public String getCategory() {
@@ -58,6 +85,14 @@ public class Level {
 
     public void setBundle(String bundle) {
         this.bundle = bundle;
+    }
+
+    public boolean isFinished() {
+        return finished;
+    }
+
+    public void setFinished(boolean finished) {
+        this.finished = finished;
     }
 
     public String getLetterAt(int i) {

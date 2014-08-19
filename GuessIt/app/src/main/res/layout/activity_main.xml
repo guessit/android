@@ -12,7 +12,6 @@
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:contentDescription="@string/main_background"
         android:src="@drawable/main_background" />
 
     <LinearLayout

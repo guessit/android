@@ -75,7 +75,7 @@ public class AnswerView extends LinearLayout {
     public String getCurrentAnswer() {
         String currentAnswer = "";
 
-        for (PlaceholderView placeholder : getPlaceholderViews()) {
+        for (PlaceholderView placeholder : getActivePlaceholderViews()) {
             String letter = "*";
 
             String placeholderLetter = placeholder.getLetter();
@@ -94,6 +94,18 @@ public class AnswerView extends LinearLayout {
             placeholderViews = new LinkedList<PlaceholderView>();
         }
         return placeholderViews;
+    }
+
+    public List<PlaceholderView> getActivePlaceholderViews() {
+        List<PlaceholderView> placeholders = new LinkedList<PlaceholderView>();
+
+        for (PlaceholderView placeholder : getPlaceholderViews()) {
+            if (placeholder.getParent() != null) {
+                placeholders.add(placeholder);
+            }
+        }
+
+        return placeholders;
     }
 
     public OnAnswerListener getOnAnswerListener() {
@@ -147,7 +159,7 @@ public class AnswerView extends LinearLayout {
         float ratio = initialWidth / initialHeight;
 
         int noSpaces = getCorrectAnswer().split(" ").length - 1;
-        float totalMargin = (2 + noSpaces) * marginAfterSpace + (answerLength - noSpaces - 1) * margin;
+        float totalMargin = noSpaces * marginAfterSpace + (answerLength - noSpaces - 1) * margin;
 
         float width = (getWidth() - totalMargin) / answerLength;
         if (width > initialWidth) {
@@ -195,7 +207,7 @@ public class AnswerView extends LinearLayout {
     public boolean canAddLetter(LetterButton letter) {
         boolean canAdd = false;
 
-        for (PlaceholderView placeholder : getPlaceholderViews()) {
+        for (PlaceholderView placeholder : getActivePlaceholderViews()) {
             if (placeholder.canDisplayLetter(letter)) {
                 canAdd = true;
                 break;

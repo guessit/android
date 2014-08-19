@@ -20,7 +20,6 @@
             android:id="@+id/level_image_view"
             android:padding="@dimen/level_image_view_padding"
             android:background="#a9d8ff"
-            android:src="@drawable/brazil"
             />
 
     </RelativeLayout>
@@ -41,6 +40,8 @@
             android:background="#bbffbb"
             android:orientation="horizontal"
             android:gravity="center"
+            android:paddingLeft="@dimen/level_placeholder_margin_after_space"
+            android:paddingRight="@dimen/level_placeholder_margin_after_space"
             >
 
         </mobi.guessit.guessit.view.AnswerView>

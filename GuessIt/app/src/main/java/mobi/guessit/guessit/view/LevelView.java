@@ -48,8 +48,10 @@ public class LevelView extends RelativeLayout {
         this.level = level;
         getInputView().setLevel(level, animated);
 
+        ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
+        imageView.setImageDrawable(level.getImage());
+
         if (animated) {
-            ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
             BumpAnimator.getInstance().animateIn(imageView);
         }
     }
@@ -88,16 +90,9 @@ public class LevelView extends RelativeLayout {
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Level level = new Level();
-
-                int index = new Random().nextInt(2);
-                String answer = "BRASIL";
-                if (index == 0) {
-                    answer = "UNITED STATES";
-                }
-
-                level.setAnswer(answer);
-                LevelView.this.setLevel(level);
+                Level nextLevel = Configuration.getInstance().getGame().getNextLevel();
+                nextLevel.loadResources(getContext());
+                setLevel(nextLevel, true);
             }
         });
     }
