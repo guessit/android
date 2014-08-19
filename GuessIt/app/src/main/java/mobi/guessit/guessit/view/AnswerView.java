@@ -158,8 +158,20 @@ public class AnswerView extends LinearLayout {
         float marginAfterSpace = getResources().getDimension(R.dimen.level_placeholder_margin_after_space);
         float ratio = initialWidth / initialHeight;
 
+        boolean isLongWord = answerLength >= 10;
+
         int noSpaces = getCorrectAnswer().split(" ").length - 1;
-        float totalMargin = (2 + noSpaces) * marginAfterSpace + answerLength * margin * 2;
+
+        float totalLeftMargin = (answerLength - 1) * margin;
+        float totalRightMargin = (answerLength - 1) * margin;
+        float totalSpacesMargin = noSpaces * marginAfterSpace;
+        float totalPadding = 2 * marginAfterSpace;
+
+        if (isLongWord) {
+            totalLeftMargin /= 2;
+        }
+
+        float totalMargin = totalLeftMargin + totalRightMargin + totalSpacesMargin + totalPadding;
 
         float width = (getWidth() - totalMargin) / answerLength;
         if (width > initialWidth) {
@@ -175,7 +187,11 @@ public class AnswerView extends LinearLayout {
             if (isSpace) {
                 previousLetterWasSpace = true;
             } else {
-                setupPlaceholder(letter, letterIndex, width, height, previousLetterWasSpace);
+                boolean isFirstLetter = i == 0;
+                boolean isLastLetter = i == answerLength - 1;
+
+                setupPlaceholder(letter, letterIndex, width, height, previousLetterWasSpace,
+                        isFirstLetter, isLastLetter, isLongWord);
                 letterIndex++;
                 previousLetterWasSpace = false;
             }
@@ -184,7 +200,10 @@ public class AnswerView extends LinearLayout {
 
     private void setupPlaceholder(String letter, int letterIndex,
                                   float width, float height,
-                                  boolean previousLetterWasSpace) {
+                                  boolean previousLetterWasSpace,
+                                  boolean isFirstLetter,
+                                  boolean isLastLetter,
+                                  boolean isLongWord) {
         PlaceholderView placeholderView = getPlaceholderAtIndex(letterIndex);
         placeholderView.setLetter(letter);
 
@@ -193,13 +212,27 @@ public class AnswerView extends LinearLayout {
         layoutParams.width = (int) width;
         layoutParams.height = (int) height;
 
-        float margin = getResources().getDimension(R.dimen.level_placeholder_margin);
+        float leftMargin = getResources().getDimension(R.dimen.level_placeholder_margin);
+        float rightMargin = getResources().getDimension(R.dimen.level_placeholder_margin);
 
-        if (previousLetterWasSpace) {
-            margin += getResources().getDimension(R.dimen.level_placeholder_margin_after_space);
+        if (isLongWord) {
+            leftMargin /= 2;
         }
 
-        layoutParams.leftMargin = (int) margin;
+        if (previousLetterWasSpace) {
+            leftMargin += getResources().getDimension(R.dimen.level_placeholder_margin_after_space);
+        }
+
+        if (isFirstLetter) {
+            leftMargin = 0;
+        }
+
+        if (isLastLetter) {
+            rightMargin = 0;
+        }
+
+        layoutParams.leftMargin = (int) leftMargin;
+        layoutParams.rightMargin = (int) rightMargin;
 
         addView(placeholderView, layoutParams);
     }
