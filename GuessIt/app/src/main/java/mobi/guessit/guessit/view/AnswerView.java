@@ -159,7 +159,7 @@ public class AnswerView extends LinearLayout {
         float ratio = initialWidth / initialHeight;
 
         int noSpaces = getCorrectAnswer().split(" ").length - 1;
-        float totalMargin = (2 + noSpaces) * marginAfterSpace + (answerLength - noSpaces - 1) * margin * 2;
+        float totalMargin = (2 + noSpaces) * marginAfterSpace + answerLength * margin * 2;
 
         float width = (getWidth() - totalMargin) / answerLength;
         if (width > initialWidth) {
