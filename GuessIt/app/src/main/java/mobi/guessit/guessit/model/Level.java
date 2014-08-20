@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Set;
+
 import mobi.guessit.guessit.helper.ResourceHelper;
 
 public class Level {
@@ -19,8 +21,6 @@ public class Level {
     private String mAnswer;
     private transient Drawable mImage;
 
-    private boolean finished;
-
     public static Level guessItLevel() {
         Level guessIt = new Level();
 
@@ -30,8 +30,14 @@ public class Level {
     }
 
     public GuessingResult guessWithAnswer(String guessingAnswer) {
-        return guessingAnswer.equals(getNoSpacesAnswer()) ?
-            GuessingResult.CORRECT : GuessingResult.WRONG;
+        GuessingResult result = GuessingResult.WRONG;
+
+        if (guessingAnswer.equals(getNoSpacesAnswer())) {
+            result = GuessingResult.CORRECT;
+            markFinished();
+        }
+
+        return result;
     }
 
     public void loadResources(Context context) {
@@ -88,14 +94,14 @@ public class Level {
     }
 
     public boolean isFinished() {
-        return finished;
-    }
-
-    public void setFinished(boolean finished) {
-        this.finished = finished;
+        return Configuration.getInstance().getFinishedLevelNames().contains(getImageName());
     }
 
     public String getLetterAt(int i) {
         return String.valueOf(this.getNoSpacesAnswer().charAt(i));
+    }
+
+    private void markFinished() {
+        Configuration.getInstance().markLevelFinished(this);
     }
 }

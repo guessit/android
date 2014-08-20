@@ -2,46 +2,48 @@ package mobi.guessit.guessit.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Intent;
+import android.app.ListActivity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import mobi.guessit.guessit.R;
+import mobi.guessit.guessit.activity.adapter.Settings;
+import mobi.guessit.guessit.activity.adapter.SettingsArrayAdapter;
+import mobi.guessit.guessit.activity.adapter.SettingsType;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.Configuration;
-import mobi.guessit.guessit.model.Level;
 import mobi.guessit.guessit.model.UserInterfaceElement;
-import mobi.guessit.guessit.view.LevelView;
 
-public class LevelActivity extends Activity {
-
-    private LevelView levelView;
-
-    public LevelView getLevelView() {
-        if (levelView == null) {
-            levelView = (LevelView) findViewById(R.id.level_view);
-        }
-        return levelView;
-    }
+public class SettingsActivity extends ListActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_level);
+
+        Settings[] objs = new Settings[] {
+            new Settings(SettingsType.TITLE, R.string.settings_title),
+            new Settings(SettingsType.ACTION, R.string.settings_reset)
+        };
+
+        SettingsArrayAdapter adapter = new SettingsArrayAdapter(this, objs);
+
+        setListAdapter(adapter);
 
         setupActionBar();
+    }
 
-        Configuration.getInstance().setContext(getApplicationContext());
-        Level nextLevel = Configuration.getInstance().getCurrentLevel();
-        nextLevel.loadResources(this);
-        getLevelView().setLevel(nextLevel, false);
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        Toast.makeText(this, "YOO", Toast.LENGTH_SHORT).show();
     }
 
     private void setupActionBar() {
@@ -54,7 +56,7 @@ public class LevelActivity extends Activity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setIcon(new ColorDrawable(Color.TRANSPARENT));
         actionBar.setBackgroundDrawable(new ColorDrawable(ColorHelper.parseColor(
-                nav.getBackgroundColor())));
+            nav.getBackgroundColor())));
 
         View layout = LayoutInflater.from(this).inflate(R.layout.action_bar, null);
 
@@ -74,19 +76,12 @@ public class LevelActivity extends Activity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LevelActivity.this.onBackPressed();
+                SettingsActivity.this.onBackPressed();
             }
         });
 
         Button settingsButton = (Button) layout.findViewById(R.id.action_bar_settings_button);
-        settingsButton.setTextColor(navColor);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LevelActivity.this, "Settings", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LevelActivity.this, SettingsActivity.class));
-            }
-        });
+        settingsButton.setAlpha(0);
 
         actionBar.setCustomView(layout);
     }

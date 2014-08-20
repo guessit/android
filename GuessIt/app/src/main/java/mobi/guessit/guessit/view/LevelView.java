@@ -1,6 +1,9 @@
 package mobi.guessit.guessit.view;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.graphics.drawable.PaintDrawable;
 import android.util.AttributeSet;
 import android.view.View;
@@ -86,15 +89,6 @@ public class LevelView extends RelativeLayout {
 
         ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
         BackgroundHelper.getInstance().setBackground(imageView, background);
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Level nextLevel = Configuration.getInstance().getGame().getNextLevel();
-                nextLevel.loadResources(getContext());
-                setLevel(nextLevel, true);
-            }
-        });
     }
 
     private InputView inputView;
@@ -115,15 +109,22 @@ public class LevelView extends RelativeLayout {
             inputView.setOnFinishGuessingListener(new InputView.OnFinishGuessingListener() {
                 @Override
                 public void onFinishGuessing(String answer) {
-                    String message = "Answer: " + answer + "\n";
+                    GuessingResult result = getLevel().guessWithAnswer(answer);
 
-                    if (getLevel().guessWithAnswer(answer) == GuessingResult.CORRECT) {
-                        message += "CORRECT =)";
-                    } else {
-                        message += "WRONG =(";
+                    if (result == GuessingResult.CORRECT) {
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setMessage(R.string.congrats_message)
+                               .setNeutralButton(R.string.ok_button, new DialogInterface.OnClickListener() {
+                                   @Override
+                                   public void onClick(DialogInterface dialogInterface, int i) {
+                                       Level nextLevel = Configuration.getInstance().getCurrentLevel();
+                                       nextLevel.loadResources(getContext());
+                                       setLevel(nextLevel);
+                                   }
+                               });
+                        builder.create().show();
                     }
 
-                    Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
                 }
             });
         }

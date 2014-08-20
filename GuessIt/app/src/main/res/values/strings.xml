@@ -11,6 +11,12 @@
     <string name="back">&lt;</string>
     <string name="question_mark">"?"</string>
 
+    <string name="congrats_message">Congratulations!</string>
+    <string name="ok_button">Ok</string>
+
+    <string name="settings_title">Settings</string>
+    <string name="settings_reset">Reset progress</string>
+
     <string name="img_001">afghanistan</string>
     <string name="img_002">albania</string>
     <string name="img_003">algeria</string>
