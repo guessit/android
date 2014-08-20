@@ -37,7 +37,8 @@ public class LevelActivity extends Activity {
 
         setupActionBar();
 
-        Level nextLevel = Configuration.getInstance().getGame().getNextLevel();
+        Configuration.getInstance().setContext(getApplicationContext());
+        Level nextLevel = Configuration.getInstance().getCurrentLevel();
         nextLevel.loadResources(this);
         getLevelView().setLevel(nextLevel, false);
     }
