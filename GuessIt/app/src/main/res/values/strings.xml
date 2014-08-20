@@ -19,6 +19,11 @@
     <string name="settings_reset">Reset progress</string>
     <string name="settings_reset_confirm">Do you really want to reset your game progress?</string>
 
+    <string name="alert_congratulations">Congratulations</string>
+    <string name="alert_correct_answer">"You've guessed the correct answer!"</string>
+    <string name="alert_answer_was">The answer was</string>
+    <string name="alert_share">Share</string>
+
     <string name="img_001">afghanistan</string>
     <string name="img_002">albania</string>
     <string name="img_003">algeria</string>

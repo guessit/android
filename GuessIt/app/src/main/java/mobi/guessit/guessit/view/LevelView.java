@@ -1,17 +1,14 @@
 package mobi.guessit.guessit.view;
 
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Bitmap;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.PaintDrawable;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
-
-import java.util.Random;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BackgroundHelper;
@@ -112,19 +109,26 @@ public class LevelView extends RelativeLayout {
                     GuessingResult result = getLevel().guessWithAnswer(answer);
 
                     if (result == GuessingResult.CORRECT) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                        builder.setMessage(R.string.congrats_message)
-                               .setNeutralButton(R.string.ok_button, new DialogInterface.OnClickListener() {
-                                   @Override
-                                   public void onClick(DialogInterface dialogInterface, int i) {
-                                       Level nextLevel = Configuration.getInstance().getCurrentLevel();
-                                       nextLevel.loadResources(getContext());
-                                       setLevel(nextLevel);
-                                   }
-                               });
-                        builder.create().show();
-                    }
+                        final Dialog dialog = new Dialog(getContext());
+                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                        dialog.setContentView(R.layout.congratulations_dialog);
+                        dialog.getWindow().setBackgroundDrawable(
+                                new ColorDrawable(android.R.color.transparent));
 
+                        View layout = dialog.findViewById(R.id.alert_congratulations_layout);
+                        layout.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                dialog.dismiss();
+
+                                Level nextLevel = Configuration.getInstance().getCurrentLevel();
+                                nextLevel.loadResources(getContext());
+                                setLevel(nextLevel);
+                            }
+                        });
+
+                        dialog.show();
+                    }
                 }
             });
         }

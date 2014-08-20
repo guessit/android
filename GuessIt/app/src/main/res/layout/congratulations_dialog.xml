@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:guessit="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/alert_congratulations_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@android:color/transparent"
+    >
+
+    <mobi.guessit.guessit.view.components.FontFaceTextView
+        android:id="@+id/alert_congratulations_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:gravity="center"
+        android:text="@string/alert_congratulations"
+        guessit:fontFace="Lobster.ttf"
+        android:textSize="44sp"
+        />
+
+    <mobi.guessit.guessit.view.components.FontFaceTextView
+        android:id="@+id/alert_correct_answer_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/alert_congratulations_text_view"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="@string/alert_correct_answer"
+        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+        guessit:fontStyle="Bold"
+        android:textSize="18sp"
+        />
+
+    <mobi.guessit.guessit.view.components.FontFaceTextView
+        android:id="@+id/alert_answer_was_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/alert_correct_answer_text_view"
+        android:layout_marginTop="170dp"
+        android:gravity="center"
+        android:text="@string/alert_answer_was"
+        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+        guessit:fontStyle="Bold"
+        android:textSize="18sp"
+        />
+
+    <mobi.guessit.guessit.view.components.FontFaceTextView
+        android:id="@+id/alert_answer_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/alert_answer_was_text_view"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="BRAZIL"
+        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+        guessit:fontStyle="Bold"
+        android:textSize="34sp"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:text="@string/alert_share"
+        />
+
+</RelativeLayout>

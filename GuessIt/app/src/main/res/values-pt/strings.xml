@@ -11,6 +11,11 @@
 
     <string name="cancel_button">Cancelar</string>
 
+    <string name="alert_congratulations">Parabéns</string>
+    <string name="alert_correct_answer">Você adivinhou a resposta correta!</string>
+    <string name="alert_answer_was">A resposta era</string>
+    <string name="alert_share">Compartilhar</string>
+
     <string name="img_001">afeganistao</string>
     <string name="img_002">albania</string>
     <string name="img_003">argelia</string>
