@@ -13,7 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.activity.adapter.Settings;
