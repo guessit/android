@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BackgroundHelper;
@@ -109,23 +110,13 @@ public class LevelView extends RelativeLayout {
                     GuessingResult result = getLevel().guessWithAnswer(answer);
 
                     if (result == GuessingResult.CORRECT) {
-                        final Dialog dialog = new Dialog(getContext());
+                        Dialog dialog = new Dialog(getContext());
                         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                         dialog.setContentView(R.layout.congratulations_dialog);
                         dialog.getWindow().setBackgroundDrawable(
                                 new ColorDrawable(android.R.color.transparent));
 
-                        View layout = dialog.findViewById(R.id.alert_congratulations_layout);
-                        layout.setOnClickListener(new OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                dialog.dismiss();
-
-                                Level nextLevel = Configuration.getInstance().getCurrentLevel();
-                                nextLevel.loadResources(getContext());
-                                setLevel(nextLevel);
-                            }
-                        });
+                        setupCongratulationsDialog(dialog, answer);
 
                         dialog.show();
                     }
@@ -133,5 +124,38 @@ public class LevelView extends RelativeLayout {
             });
         }
         return inputView;
+    }
+
+    private void setupCongratulationsDialog(final Dialog dialog, String correctAnswer) {
+        View layout = dialog.findViewById(R.id.alert_congratulations_layout);
+        layout.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+
+                Level nextLevel = Configuration.getInstance().getCurrentLevel();
+                nextLevel.loadResources(getContext());
+                setLevel(nextLevel);
+            }
+        });
+
+        UserInterfaceElement ui = Configuration.getInstance().getGame().
+                getUserInterface().getCongratulations();
+
+        TextView titleTextView = (TextView) dialog.findViewById(R.id.alert_congratulations_text_view);
+        titleTextView.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
+        titleTextView.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getShadowColor()));
+        titleTextView.setRotation(-4);
+
+        TextView subtitleTextView = (TextView) dialog.findViewById(R.id.alert_correct_answer_text_view);
+        subtitleTextView.setRotation(-4);
+
+        TextView answerTextView = (TextView) dialog.findViewById(R.id.alert_answer_text_view);
+        answerTextView.setText(getLevel().getAnswer());
+
+        PaintDrawable background = new PaintDrawable(ColorHelper.parseColor("#000000"));
+        background.setCornerRadius(getResources().getDimension(
+                R.dimen.congratulations_answer_corner_radius));
+        BackgroundHelper.getInstance().setBackground(answerTextView, background);
     }
 }
