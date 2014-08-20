@@ -1,14 +1,12 @@
 package mobi.guessit.guessit.activity;
 
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.ListActivity;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +21,8 @@ import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class SettingsActivity extends ListActivity {
+
+    private Settings[] objs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,17 @@ public class SettingsActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
-        Toast.makeText(this, "YOO", Toast.LENGTH_SHORT).show();
+
+        Settings obj = (Settings) getListAdapter().getItem(position);
+
+        switch (obj.getType()) {
+            case TITLE:
+                break;
+            case ACTION:
+                Configuration.getInstance().resetProgress();
+                onBackPressed();
+                break;
+        }
     }
 
     private void setupActionBar() {

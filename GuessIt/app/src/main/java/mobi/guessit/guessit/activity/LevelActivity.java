@@ -39,6 +39,12 @@ public class LevelActivity extends Activity {
         setupActionBar();
 
         Configuration.getInstance().setContext(getApplicationContext());
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
         Level nextLevel = Configuration.getInstance().getCurrentLevel();
         nextLevel.loadResources(this);
         getLevelView().setLevel(nextLevel, false);
@@ -83,7 +89,6 @@ public class LevelActivity extends Activity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LevelActivity.this, "Settings", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(LevelActivity.this, SettingsActivity.class));
             }
         });
