@@ -13,9 +13,11 @@
 
     <string name="congrats_message">Congratulations!</string>
     <string name="ok_button">Ok</string>
+    <string name="cancel_button">Cancel</string>
 
     <string name="settings_title">Settings</string>
     <string name="settings_reset">Reset progress</string>
+    <string name="settings_reset_confirm">Do you really want to reset your game progress?</string>
 
     <string name="img_001">afghanistan</string>
     <string name="img_002">albania</string>

@@ -7,6 +7,9 @@
 
     <string name="settings_title">Configurações</string>
     <string name="settings_reset">Reiniciar jogo</string>
+    <string name="settings_reset_confirm">Você deseja realmente reiniciar seu progresso no jogo?</string>
+
+    <string name="cancel_button">Cancelar</string>
 
     <string name="img_001">afeganistao</string>
     <string name="img_002">albania</string>

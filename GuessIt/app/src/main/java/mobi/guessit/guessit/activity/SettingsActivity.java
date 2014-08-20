@@ -1,7 +1,10 @@
 package mobi.guessit.guessit.activity;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -28,9 +31,9 @@ public class SettingsActivity extends ListActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Settings[] objs = new Settings[] {
-            new Settings(SettingsType.TITLE, R.string.settings_title),
-            new Settings(SettingsType.ACTION, R.string.settings_reset)
+        Settings[] objs = new Settings[]{
+                new Settings(SettingsType.TITLE, R.string.settings_title),
+                new Settings(SettingsType.ACTION, R.string.settings_reset)
         };
 
         SettingsArrayAdapter adapter = new SettingsArrayAdapter(this, objs);
@@ -50,15 +53,27 @@ public class SettingsActivity extends ListActivity {
             case TITLE:
                 break;
             case ACTION:
-                Configuration.getInstance().resetProgress();
-                onBackPressed();
+                new AlertDialog.Builder(this).
+                        setMessage(R.string.settings_reset_confirm).
+                        setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Configuration.getInstance().resetProgress();
+
+                                Intent intent = new Intent(SettingsActivity.this, MainActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intent);
+                            }
+                        }).
+                        setNegativeButton(R.string.cancel_button, null).create().show();
+
                 break;
         }
     }
 
     private void setupActionBar() {
         UserInterfaceElement nav = Configuration.getInstance().getGame().
-            getUserInterface().getNavigation();
+                getUserInterface().getNavigation();
 
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
@@ -66,17 +81,17 @@ public class SettingsActivity extends ListActivity {
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setIcon(new ColorDrawable(Color.TRANSPARENT));
         actionBar.setBackgroundDrawable(new ColorDrawable(ColorHelper.parseColor(
-            nav.getBackgroundColor())));
+                nav.getBackgroundColor())));
 
         View layout = LayoutInflater.from(this).inflate(R.layout.action_bar, null);
 
         UserInterfaceElement title = Configuration.getInstance().getGame().
-            getUserInterface().getTitle();
+                getUserInterface().getTitle();
 
         TextView guessItTextView = (TextView) layout.findViewById(R.id.action_bar_guessit_text_view);
         guessItTextView.setTextColor(ColorHelper.parseColor(title.getTextColor()));
         guessItTextView.setShadowLayer(1, 0, -1, ColorHelper.parseColor(
-            title.getShadowColor()));
+                title.getShadowColor()));
 
         final int navColor = ColorHelper.parseColor(nav.getColor());
 
