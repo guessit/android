@@ -159,10 +159,4 @@ public class LevelView extends RelativeLayout {
                 R.dimen.congratulations_answer_corner_radius));
         BackgroundHelper.getInstance().setBackground(answerTextView, background);
     }
-
-    private Bitmap takeScreenShot() {
-        setDrawingCacheEnabled(true);
-        buildDrawingCache(true);
-        return Bitmap.createBitmap(getDrawingCache());
-    }
 }
