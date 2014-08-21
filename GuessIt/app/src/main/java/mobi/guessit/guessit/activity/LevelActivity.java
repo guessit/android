@@ -37,11 +37,6 @@ public class LevelActivity extends Activity {
         setupActionBar();
 
         Configuration.getInstance().setContext(getApplicationContext());
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
 
         Level nextLevel = Configuration.getInstance().getCurrentLevel();
         nextLevel.loadResources(this);

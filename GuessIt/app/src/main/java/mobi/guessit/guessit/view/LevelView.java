@@ -2,6 +2,7 @@ package mobi.guessit.guessit.view;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.PaintDrawable;
 import android.util.AttributeSet;
@@ -157,5 +158,11 @@ public class LevelView extends RelativeLayout {
         background.setCornerRadius(getResources().getDimension(
                 R.dimen.congratulations_answer_corner_radius));
         BackgroundHelper.getInstance().setBackground(answerTextView, background);
+    }
+
+    private Bitmap takeScreenShot() {
+        setDrawingCacheEnabled(true);
+        buildDrawingCache(true);
+        return Bitmap.createBitmap(getDrawingCache());
     }
 }

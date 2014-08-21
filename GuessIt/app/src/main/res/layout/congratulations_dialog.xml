@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/transparent"
+    android:paddingBottom="80dp"
     >
 
     <mobi.guessit.guessit.view.components.FontFaceTextView
@@ -38,28 +39,10 @@
         />
 
     <mobi.guessit.guessit.view.components.FontFaceTextView
-        android:id="@+id/alert_answer_was_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@id/alert_correct_answer_text_view"
-        android:layout_marginTop="200dp"
-        android:gravity="center"
-        android:text="@string/alert_answer_was"
-        android:textColor="@android:color/white"
-        android:shadowColor="@android:color/black"
-        android:shadowDy="-1"
-        android:shadowRadius="1"
-        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
-        guessit:fontStyle="Bold"
-        android:textSize="18sp"
-        />
-
-    <mobi.guessit.guessit.view.components.FontFaceTextView
         android:id="@+id/alert_answer_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@id/alert_answer_was_text_view"
-        android:layout_marginTop="20dp"
+        android:layout_alignParentBottom="true"
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="5dp"
@@ -77,12 +60,21 @@
         android:background="@android:color/black"
         />
 
-    <Button
+    <mobi.guessit.guessit.view.components.FontFaceTextView
+        android:id="@+id/alert_answer_was_text_view"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_gravity="center"
-        android:text="@string/alert_share"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/alert_answer_text_view"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:text="@string/alert_answer_was"
+        android:textColor="@android:color/white"
+        android:shadowColor="@android:color/black"
+        android:shadowDy="-1"
+        android:shadowRadius="1"
+        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+        guessit:fontStyle="Bold"
+        android:textSize="18sp"
         />
 
 </RelativeLayout>

@@ -5,8 +5,6 @@ import android.graphics.drawable.Drawable;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.Set;
-
 import mobi.guessit.guessit.helper.ResourceHelper;
 
 public class Level {
