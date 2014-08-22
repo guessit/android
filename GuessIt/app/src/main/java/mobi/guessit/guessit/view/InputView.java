@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import mobi.guessit.guessit.R;
+import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Level;
 
 public class InputView extends LinearLayout {
@@ -133,6 +134,11 @@ public class InputView extends LinearLayout {
                     Toast.makeText(getContext(), "Skip Level!", Toast.LENGTH_SHORT).show();
                     helpView.dismiss();
                 }
+
+                @Override
+                public boolean canSkipLevel(HelpView view) {
+                    return Configuration.getInstance().hasMoreLevels();
+                }
             });
             
             helpView.setOnEliminateWrongLetterListener(new HelpView.OnEliminateWrongLetterListener() {
@@ -141,6 +147,12 @@ public class InputView extends LinearLayout {
                     Toast.makeText(getContext(), "Remove Wrong Letter!", Toast.LENGTH_SHORT).show();
                     helpView.dismiss();
                 }
+
+                @Override
+                public boolean canEliminateWrongLetter(HelpView view) {
+                    // verificar se existe letra no teclado inválida
+                    return false;
+                }
             });
             
             helpView.setOnPlaceCorrectLetterListener(new HelpView.OnPlaceCorrectLetterListener() {
@@ -148,6 +160,12 @@ public class InputView extends LinearLayout {
                 public void onPlaceCorrectLetterRequested(HelpView view) {
                     Toast.makeText(getContext(), "Place Correct Letter!", Toast.LENGTH_SHORT).show();
                     helpView.dismiss();
+                }
+
+                @Override
+                public boolean canPlaceCorrectLetter(HelpView view) {
+                    // verificar se existe espaço na resposta e se existe letra correta no teclado
+                    return false;
                 }
             });
         }

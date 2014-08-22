@@ -58,6 +58,20 @@ public class HelpView extends Dialog {
         setupUI(context);
     }
 
+    @Override
+    public void show() {
+        super.show();
+
+        boolean canSkipLevel = getOnSkipLevelListener().canSkipLevel(this);
+        getSkipLevelButton().setEnabled(canSkipLevel);
+
+        boolean canEliminateWrongLetter = getOnEliminateWrongLetterListener().canEliminateWrongLetter(this);
+        getEliminateWrongLetterButton().setEnabled(canEliminateWrongLetter);
+
+        boolean canPlaceCorrectLetter = getOnPlaceCorrectLetterListener().canPlaceCorrectLetter(this);
+        getPlaceCorrectLetterButton().setEnabled(canPlaceCorrectLetter);
+    }
+
     public OnSkipLevelListener getOnSkipLevelListener() {
         return onSkipLevelListener;
     }
@@ -128,13 +142,16 @@ public class HelpView extends Dialog {
 
     public interface OnSkipLevelListener {
         public void onSkipLevelRequested(HelpView view);
+        public boolean canSkipLevel(HelpView view);
     }
 
     public interface OnEliminateWrongLetterListener {
         public void onEliminateWrongLetterRequested(HelpView view);
+        public boolean canEliminateWrongLetter(HelpView view);
     }
 
     public interface OnPlaceCorrectLetterListener {
         public void onPlaceCorrectLetterRequested(HelpView view);
+        public boolean canPlaceCorrectLetter(HelpView view);
     }
 }

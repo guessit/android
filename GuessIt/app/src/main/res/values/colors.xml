@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="help_skip_level">#6FA0B3</color>
+    <color name="help_skip_level_pressed">#ff44677a</color>
+
     <color name="help_eliminate_wrong_letter">#B37078</color>
+    <color name="help_eliminate_wrong_letter_pressed">#ff7a444c</color>
+
     <color name="help_place_correct_letter">#8A6FB3</color>
+    <color name="help_place_correct_letter_pressed">#ff59437a</color>
+
     <color name="help_buttons_border">#26000000</color>
+
+    <color name="help_disabled">#334C4C4C</color>
+    <color name="help_disabled_text_color">#66666666</color>
 
 </resources>
