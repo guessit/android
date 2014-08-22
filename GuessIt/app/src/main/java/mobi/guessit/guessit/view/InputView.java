@@ -116,12 +116,44 @@ public class InputView extends LinearLayout {
 
                 @Override
                 public void onHelpRequested(KeypadView keypad, Button helpButton) {
-                    Toast.makeText(getContext(), "HELP!", Toast.LENGTH_SHORT).show();
+                    getHelpView().show();
                 }
             });
         }
         return keypadView;
     }
+
+    private HelpView helpView;
+    private HelpView getHelpView() {
+        if (helpView == null) {
+            helpView = new HelpView(getContext());
+            helpView.setOnSkipLevelListener(new HelpView.OnSkipLevelListener() {
+                @Override
+                public void onSkipLevelRequested(HelpView view) {
+                    Toast.makeText(getContext(), "Skip Level!", Toast.LENGTH_SHORT).show();
+                    helpView.dismiss();
+                }
+            });
+            
+            helpView.setOnEliminateWrongLetterListener(new HelpView.OnEliminateWrongLetterListener() {
+                @Override
+                public void onEliminateWrongLetterRequested(HelpView view) {
+                    Toast.makeText(getContext(), "Remove Wrong Letter!", Toast.LENGTH_SHORT).show();
+                    helpView.dismiss();
+                }
+            });
+            
+            helpView.setOnPlaceCorrectLetterListener(new HelpView.OnPlaceCorrectLetterListener() {
+                @Override
+                public void onPlaceCorrectLetterRequested(HelpView view) {
+                    Toast.makeText(getContext(), "Place Correct Letter!", Toast.LENGTH_SHORT).show();
+                    helpView.dismiss();
+                }
+            });
+        }
+        return helpView;
+    }
+
 
     public interface OnLetterAddedToAnswerListener {
         void onLetterAddedToAnswer(String letter);

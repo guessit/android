@@ -14,6 +14,11 @@
     <dimen name="level_help_width">60dp</dimen>
     <dimen name="level_help_text_size">60sp</dimen>
 
+    <dimen name="help_buttons_container_padding">2dp</dimen>
+    <dimen name="help_button_height">50dp</dimen>
+    <dimen name="help_button_text_size">20sp</dimen>
+    <dimen name="help_button_border_size">2dp</dimen>
+
     <dimen name="level_placeholder_margin">1dp</dimen>
     <dimen name="level_placeholder_margin_after_space">5dp</dimen>
     <dimen name="level_placeholder_padding">2dp</dimen>

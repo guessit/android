@@ -22,7 +22,10 @@
     <string name="alert_congratulations">Congratulations</string>
     <string name="alert_correct_answer">"You've guessed the correct answer!"</string>
     <string name="alert_answer_was">The answer was</string>
-    <string name="alert_share">Share</string>
+
+    <string name="help_skip_level">Skip level</string>
+    <string name="help_eliminate_wrong_letter">Eliminate wrong letter</string>
+    <string name="help_place_correct_letter">Place correct letter</string>
 
     <string name="img_001">afghanistan</string>
     <string name="img_002">albania</string>

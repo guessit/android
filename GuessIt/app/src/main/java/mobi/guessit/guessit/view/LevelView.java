@@ -115,7 +115,6 @@ public class LevelView extends RelativeLayout {
             inputView.setOnLetterAddedToAnswerListener(new InputView.OnLetterAddedToAnswerListener() {
                 @Override
                 public void onLetterAddedToAnswer(String letter) {
-
                 }
             });
             inputView.setOnLetterRemovedFromAnswerListener(new InputView.OnLetterRemovedFromAnswerListener() {

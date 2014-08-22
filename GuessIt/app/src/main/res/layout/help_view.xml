@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:guessit="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/help_buttons_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/help_buttons_container_padding"
+    android:background="@android:color/white"
+    android:layout_alignParentBottom="true"
+    >
+
+    <mobi.guessit.guessit.view.components.FontFaceButton
+        android:id="@+id/help_place_correct_letter_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/help_button_height"
+        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+        guessit:fontStyle="Bold"
+        android:textSize="@dimen/help_button_text_size"
+        android:textColor="@android:color/white"
+        android:text="@string/help_place_correct_letter"
+        android:background="@drawable/help_place_correct_letter"
+        android:layout_marginBottom="@dimen/help_buttons_container_padding"
+        />
+
+    <mobi.guessit.guessit.view.components.FontFaceButton
+        android:id="@+id/help_eliminate_wrong_letter_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/help_button_height"
+        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+        guessit:fontStyle="Bold"
+        android:textSize="@dimen/help_button_text_size"
+        android:textColor="@android:color/white"
+        android:text="@string/help_eliminate_wrong_letter"
+        android:background="@drawable/help_eliminate_wrong_letter"
+        android:layout_marginBottom="@dimen/help_buttons_container_padding"
+        />
+
+    <mobi.guessit.guessit.view.components.FontFaceButton
+        android:id="@+id/help_skip_button"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/help_button_height"
+        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+        guessit:fontStyle="Bold"
+        android:textSize="@dimen/help_button_text_size"
+        android:textColor="@android:color/white"
+        android:text="@string/help_skip_level"
+        android:background="@drawable/help_skip_level"
+        />
+
+</LinearLayout>
