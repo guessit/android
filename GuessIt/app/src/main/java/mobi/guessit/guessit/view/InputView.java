@@ -132,6 +132,7 @@ public class InputView extends LinearLayout {
                 @Override
                 public void onSkipLevelRequested(HelpView view) {
                     Toast.makeText(getContext(), "Skip Level!", Toast.LENGTH_SHORT).show();
+                    Configuration.getInstance().incrementNumberOfHelpRequested();
                     helpView.dismiss();
                 }
 
@@ -145,13 +146,14 @@ public class InputView extends LinearLayout {
                 @Override
                 public void onEliminateWrongLetterRequested(HelpView view) {
                     Toast.makeText(getContext(), "Remove Wrong Letter!", Toast.LENGTH_SHORT).show();
+                    getKeypadView().removeWrongLetter();
+                    Configuration.getInstance().incrementNumberOfHelpRequested();
                     helpView.dismiss();
                 }
 
                 @Override
                 public boolean canEliminateWrongLetter(HelpView view) {
-                    // verificar se existe letra no teclado inválida
-                    return false;
+                    return getKeypadView().hasWrongLetterToBeRemoved();
                 }
             });
             
@@ -159,6 +161,7 @@ public class InputView extends LinearLayout {
                 @Override
                 public void onPlaceCorrectLetterRequested(HelpView view) {
                     Toast.makeText(getContext(), "Place Correct Letter!", Toast.LENGTH_SHORT).show();
+                    Configuration.getInstance().incrementNumberOfHelpRequested();
                     helpView.dismiss();
                 }
 

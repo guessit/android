@@ -10,7 +10,11 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
@@ -18,6 +22,7 @@ import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BumpAnimator;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.helper.RandomLetterHelper;
+import mobi.guessit.guessit.helper.StringHelper;
 import mobi.guessit.guessit.helper.ViewHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
@@ -46,6 +51,10 @@ public class KeypadView extends LinearLayout {
         super.onFinishInflate();
 
         setupUI();
+    }
+
+    private Level getLevel() {
+        return level;
     }
 
     public void setLevel(Level level) {
@@ -179,15 +188,18 @@ public class KeypadView extends LinearLayout {
         helpButton.setTextColor(colors);
     }
 
+    private List<View> getKeys() {
+        ViewGroup keypad = (ViewGroup) findViewById(R.id.level_keypad_view);
+        return ViewHelper.getViewsWithTag(keypad, "key_button");
+    }
+
     private void setupKeypad(Level level) {
         setupKeypad(level, true);
     }
 
     private void setupKeypad(Level level, boolean animated) {
-        ViewGroup keypad = (ViewGroup) findViewById(R.id.level_keypad_view);
-        List<View> keys = ViewHelper.getViewsWithTag(keypad, "key_button");
-
         final int answerLength = level.getNoSpacesAnswer().length();
+        List<View> keys = getKeys();
 
         List<String> letters = new ArrayList<String>();
         for (int i = 0; i < answerLength; i++) {
@@ -221,6 +233,69 @@ public class KeypadView extends LinearLayout {
         BumpAnimator.getInstance().animateIn(letter.getOriginLetter());
         BumpAnimator.getInstance().animateOut(letter);
         letter.setOriginLetter(null);
+    }
+
+    public boolean hasWrongLetterToBeRemoved() {
+        return getFirstWrongKey() != null;
+    }
+
+    public void removeWrongLetter() {
+    }
+
+    private View getFirstWrongKey() {
+        List<View> keys = getKeys();
+
+        String correctAnswer = getLevel().getAnswer();
+        HashMap<String, Integer> letters = new HashMap<String, Integer>(correctAnswer.length());
+
+        List<LetterButton> activeLetters = new LinkedList<LetterButton>();
+        List<LetterButton> inactiveLetters = new LinkedList<LetterButton>();
+
+        for (View view : keys) {
+            LetterButton letterButton = (LetterButton) view;
+
+            if (letterButton.isActive()) {
+                activeLetters.add(letterButton);
+            } else {
+                inactiveLetters.add(letterButton);
+            }
+        }
+
+        for (LetterButton letterButton : inactiveLetters) {
+            increaseLetterCountOnMapWithLetter(letters, letterButton.getLetter());
+        }
+
+        View wrongLetter = null;
+        for (LetterButton letterButton : activeLetters) {
+            String letter = letterButton.getLetter();
+
+            if (!correctAnswer.contains(letter)) {
+                wrongLetter = letterButton;
+                break;
+            } else {
+                increaseLetterCountOnMapWithLetter(letters, letter);
+
+                Integer letterCount = letters.get(letterButton.getLetter());
+                Integer occurences = StringHelper.countOcurrencesOf(correctAnswer, letter);
+
+                if (letterCount > occurences) {
+                    wrongLetter = letterButton;
+                    break;
+                }
+            }
+        }
+
+        return wrongLetter;
+    }
+
+    private void increaseLetterCountOnMapWithLetter(HashMap<String, Integer> letters, String letter) {
+        Integer count = 0;
+
+        if (letters.containsKey(letter)) {
+            count = letters.get(letter);
+        }
+
+        letters.put(letter, count + 1);
     }
 
     public interface OnKeypadListener {
