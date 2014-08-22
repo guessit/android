@@ -1,16 +1,10 @@
 package mobi.guessit.guessit.view;
 
-import android.app.Dialog;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.PaintDrawable;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BackgroundHelper;
@@ -25,6 +19,7 @@ import mobi.guessit.guessit.model.UserInterfaceElement;
 public class LevelView extends RelativeLayout {
 
     private Level level;
+    private CongratulationsDialog congratulationsDialog;
 
     public LevelView(Context context) {
         super(context);
@@ -56,6 +51,19 @@ public class LevelView extends RelativeLayout {
         if (animated) {
             BumpAnimator.getInstance().animateIn(imageView);
         }
+    }
+
+    public CongratulationsDialog getCongratulationsDialog() {
+        if (congratulationsDialog == null) {
+            congratulationsDialog = new CongratulationsDialog(getContext());
+            congratulationsDialog.setOnDialogDismissed(new CongratulationsDialog.OnDialogDismissed() {
+                @Override
+                public void onDialogDismissed(CongratulationsDialog dialog) {
+                    dismissCongratulations();
+                }
+            });
+        }
+        return congratulationsDialog;
     }
 
     @Override
@@ -111,15 +119,7 @@ public class LevelView extends RelativeLayout {
                     GuessingResult result = getLevel().guessWithAnswer(answer);
 
                     if (result == GuessingResult.CORRECT) {
-                        Dialog dialog = new Dialog(getContext());
-                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-                        dialog.setContentView(R.layout.congratulations_dialog);
-                        dialog.getWindow().setBackgroundDrawable(
-                                new ColorDrawable(android.R.color.transparent));
-
-                        setupCongratulationsDialog(dialog, answer);
-
-                        dialog.show();
+                        showCongratulationsDialog();
                     }
                 }
             });
@@ -127,36 +127,19 @@ public class LevelView extends RelativeLayout {
         return inputView;
     }
 
-    private void setupCongratulationsDialog(final Dialog dialog, String correctAnswer) {
-        View layout = dialog.findViewById(R.id.alert_congratulations_layout);
-        layout.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.dismiss();
+    public boolean isShowingCongratulations() {
+        return getCongratulationsDialog().isShowing();
+    }
 
-                Level nextLevel = Configuration.getInstance().getCurrentLevel();
-                nextLevel.loadResources(getContext());
-                setLevel(nextLevel);
-            }
-        });
+    public void dismissCongratulations() {
+        getCongratulationsDialog().dismiss();
 
-        UserInterfaceElement ui = Configuration.getInstance().getGame().
-                getUserInterface().getCongratulations();
+        Level nextLevel = Configuration.getInstance().getCurrentLevel();
+        nextLevel.loadResources(getContext());
+        setLevel(nextLevel);
+    }
 
-        TextView titleTextView = (TextView) dialog.findViewById(R.id.alert_congratulations_text_view);
-        titleTextView.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
-        titleTextView.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getShadowColor()));
-        titleTextView.setRotation(-4);
-
-        TextView subtitleTextView = (TextView) dialog.findViewById(R.id.alert_correct_answer_text_view);
-        subtitleTextView.setRotation(-4);
-
-        TextView answerTextView = (TextView) dialog.findViewById(R.id.alert_answer_text_view);
-        answerTextView.setText(getLevel().getAnswer());
-
-        PaintDrawable background = new PaintDrawable(ColorHelper.parseColor("#000000"));
-        background.setCornerRadius(getResources().getDimension(
-                R.dimen.congratulations_answer_corner_radius));
-        BackgroundHelper.getInstance().setBackground(answerTextView, background);
+    private void showCongratulationsDialog() {
+        getCongratulationsDialog().setCorrectAnswer(getLevel().getAnswer()).show();
     }
 }
