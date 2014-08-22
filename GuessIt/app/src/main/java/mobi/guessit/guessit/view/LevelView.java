@@ -18,6 +18,8 @@ import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class LevelView extends RelativeLayout {
 
+    private OnLevelGuessedCorrect onLevelGuessedCorrect;
+
     private Level level;
     private CongratulationsDialog congratulationsDialog;
 
@@ -31,6 +33,14 @@ public class LevelView extends RelativeLayout {
 
     public LevelView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+    }
+
+    public OnLevelGuessedCorrect getOnLevelGuessedCorrect() {
+        return onLevelGuessedCorrect;
+    }
+
+    public void setOnLevelGuessedCorrect(OnLevelGuessedCorrect onLevelGuessedCorrect) {
+        this.onLevelGuessedCorrect = onLevelGuessedCorrect;
     }
 
     public Level getLevel() {
@@ -134,12 +144,22 @@ public class LevelView extends RelativeLayout {
     public void dismissCongratulations() {
         getCongratulationsDialog().dismiss();
 
+        Level previousLevel = getLevel();
+
         Level nextLevel = Configuration.getInstance().getCurrentLevel();
         nextLevel.loadResources(getContext());
         setLevel(nextLevel);
+
+        if (getOnLevelGuessedCorrect() != null) {
+            getOnLevelGuessedCorrect().onLevelGuessedCorrect(this, previousLevel);
+        }
     }
 
     private void showCongratulationsDialog() {
         getCongratulationsDialog().setCorrectAnswer(getLevel().getAnswer()).show();
+    }
+
+    public interface OnLevelGuessedCorrect {
+        public void onLevelGuessedCorrect(LevelView levelView, Level level);
     }
 }

@@ -2,7 +2,6 @@ package mobi.guessit.guessit.model;
 
 import android.content.Context;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -128,6 +127,18 @@ public class Configuration {
 
     public void incrementNumberOfHelpRequested() {
         setNumberOfHelpRequested(getNumberOfLevelsPresented() + 1);
+    }
+
+    public boolean isTimeToShowAd() {
+        int levelsToShowAd = (int) (getGame().getLevels().size() / 10.f);
+        int levelsPlusHelps = getNumberOfLevelsPresented() + getNumberOfHelpRequested();
+
+        return levelsPlusHelps >= levelsToShowAd && hasMoreLevels();
+    }
+
+    public void resetCountersAfterShowingAd() {
+        setNumberOfLevelsPresented(0);
+        setNumberOfHelpRequested(0);
     }
 
     public boolean showAds() {

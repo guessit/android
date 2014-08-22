@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import mobi.guessit.guessit.R;
+import mobi.guessit.guessit.helper.AdHelper;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Level;
@@ -25,6 +26,16 @@ public class LevelActivity extends Activity {
     public LevelView getLevelView() {
         if (levelView == null) {
             levelView = (LevelView) findViewById(R.id.level_view);
+            levelView.setOnLevelGuessedCorrect(new LevelView.OnLevelGuessedCorrect() {
+                @Override
+                public void onLevelGuessedCorrect(LevelView levelView, Level level) {
+                    Configuration conf = Configuration.getInstance();
+                    if (conf.showAds() && conf.isTimeToShowAd()) {
+                        AdHelper.getInstance().presentAd(LevelActivity.this);
+                        conf.resetCountersAfterShowingAd();
+                    }
+                }
+            });
         }
         return levelView;
     }
@@ -41,6 +52,15 @@ public class LevelActivity extends Activity {
         Level nextLevel = Configuration.getInstance().getCurrentLevel();
         nextLevel.loadResources(this);
         getLevelView().setLevel(nextLevel, false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (Configuration.getInstance().showAds()) {
+            AdHelper.getInstance().loadAds();
+        }
     }
 
     private void setupActionBar() {
