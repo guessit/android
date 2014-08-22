@@ -232,6 +232,7 @@ public class KeypadView extends LinearLayout {
     public void recoverLetter(LetterButton letter) {
         BumpAnimator.getInstance().animateIn(letter.getOriginLetter());
         BumpAnimator.getInstance().animateOut(letter);
+
         letter.setOriginLetter(null);
     }
 
@@ -240,6 +241,7 @@ public class KeypadView extends LinearLayout {
     }
 
     public void removeWrongLetter() {
+        BumpAnimator.getInstance().animateOut(getFirstWrongKey());
     }
 
     private View getFirstWrongKey() {
@@ -249,19 +251,19 @@ public class KeypadView extends LinearLayout {
         HashMap<String, Integer> letters = new HashMap<String, Integer>(correctAnswer.length());
 
         List<LetterButton> activeLetters = new LinkedList<LetterButton>();
-        List<LetterButton> inactiveLetters = new LinkedList<LetterButton>();
+        List<LetterButton> placedLetters = new LinkedList<LetterButton>();
 
         for (View view : keys) {
             LetterButton letterButton = (LetterButton) view;
 
             if (letterButton.isActive()) {
                 activeLetters.add(letterButton);
-            } else {
-                inactiveLetters.add(letterButton);
+            } else if (letterButton.isPlacedOnAnswer()) {
+                placedLetters.add(letterButton);
             }
         }
 
-        for (LetterButton letterButton : inactiveLetters) {
+        for (LetterButton letterButton : placedLetters) {
             increaseLetterCountOnMapWithLetter(letters, letterButton.getLetter());
         }
 

@@ -10,7 +10,6 @@ import android.util.AttributeSet;
 import android.util.StateSet;
 import android.widget.Button;
 
-import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BackgroundHelper;
 import mobi.guessit.guessit.helper.BumpAnimator;
 import mobi.guessit.guessit.helper.ColorHelper;
@@ -21,6 +20,7 @@ import mobi.guessit.guessit.model.UserInterfaceElement;
 public class LetterButton extends Button {
 
     private LetterButton originLetter;
+    private LetterButton answerLetter;
 
     public LetterButton(Context context) {
         super(context);
@@ -47,7 +47,23 @@ public class LetterButton extends Button {
     }
 
     public void setOriginLetter(LetterButton originLetter) {
+        if (originLetter == null) {
+            if (this.originLetter != null) {
+                this.originLetter.setAnswerLetter(null);
+            }
+        } else {
+            originLetter.setAnswerLetter(this);
+        }
+
         this.originLetter = originLetter;
+    }
+
+    public LetterButton getAnswerLetter() {
+        return answerLetter;
+    }
+
+    public void setAnswerLetter(LetterButton answerLetter) {
+        this.answerLetter = answerLetter;
     }
 
     private void setupUI() {
@@ -66,7 +82,6 @@ public class LetterButton extends Button {
             setShadowLayer(1, 0, -1, ColorHelper.parseColor(letterUI.getShadowColor()));
         }
     }
-
 
     public String getLetter() {
         return getText().toString();
@@ -114,7 +129,7 @@ public class LetterButton extends Button {
     }
 
     public boolean isPlacedOnAnswer() {
-        return getOriginLetter() != null;
+        return getOriginLetter() != null || getAnswerLetter() != null;
     }
 
     public boolean canDisplayLetter() {
