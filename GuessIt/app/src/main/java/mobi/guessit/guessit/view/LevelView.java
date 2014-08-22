@@ -53,6 +53,8 @@ public class LevelView extends RelativeLayout {
 
     public void setLevel(Level level, boolean animated) {
         this.level = level;
+        this.level.loadResources(getContext());
+
         getInputView().setLevel(level, animated);
 
         ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
@@ -117,11 +119,20 @@ public class LevelView extends RelativeLayout {
                 public void onLetterAddedToAnswer(String letter) {
                 }
             });
+
             inputView.setOnLetterRemovedFromAnswerListener(new InputView.OnLetterRemovedFromAnswerListener() {
                 @Override
                 public void onLetterRemovedFromAnswer(String letter) {
                 }
             });
+
+            inputView.setOnLevelSkippedListener(new InputView.OnLevelSkippedListener() {
+                @Override
+                public void onLevelSkipped(Level oldLevel, Level nextLevel) {
+                    setLevel(nextLevel);
+                }
+            });
+
             inputView.setOnFinishGuessingListener(new InputView.OnFinishGuessingListener() {
                 @Override
                 public void onFinishGuessing(String answer) {

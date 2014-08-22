@@ -81,7 +81,7 @@ public class Configuration {
         }
     }
 
-    private Level getNextLevel() {
+    public Level getNextLevel() {
         Level nextLevel;
 
         List<Level> todoLevels = getGame().getTodolevels();

@@ -50,7 +50,6 @@ public class LevelActivity extends Activity {
         Configuration.getInstance().setContext(getApplicationContext());
 
         Level nextLevel = Configuration.getInstance().getCurrentLevel();
-        nextLevel.loadResources(this);
         getLevelView().setLevel(nextLevel, false);
     }
 

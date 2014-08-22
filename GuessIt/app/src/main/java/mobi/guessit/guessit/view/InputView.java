@@ -16,6 +16,7 @@ public class InputView extends LinearLayout {
 
     private OnLetterAddedToAnswerListener onLetterAddedToAnswerListener;
     private OnLetterRemovedFromAnswerListener onLetterRemovedFromAnswerListener;
+    private OnLevelSkippedListener onLevelSkippedListener;
     private OnFinishGuessingListener onFinishGuessingListener;
 
     public InputView(Context context) {
@@ -55,6 +56,14 @@ public class InputView extends LinearLayout {
 
     public void setOnLetterRemovedFromAnswerListener(OnLetterRemovedFromAnswerListener onLetterRemovedFromAnswerListener) {
         this.onLetterRemovedFromAnswerListener = onLetterRemovedFromAnswerListener;
+    }
+
+    public OnLevelSkippedListener getOnLevelSkippedListener() {
+        return onLevelSkippedListener;
+    }
+
+    public void setOnLevelSkippedListener(OnLevelSkippedListener onLevelSkippedListener) {
+        this.onLevelSkippedListener = onLevelSkippedListener;
     }
 
     public OnFinishGuessingListener getOnFinishGuessingListener() {
@@ -131,7 +140,12 @@ public class InputView extends LinearLayout {
             helpView.setOnSkipLevelListener(new HelpView.OnSkipLevelListener() {
                 @Override
                 public void onSkipLevelRequested(HelpView view) {
-                    Toast.makeText(getContext(), "Skip Level!", Toast.LENGTH_SHORT).show();
+                    Level oldLevel = Configuration.getInstance().getCurrentLevel();
+                    Level nextLevel = Configuration.getInstance().getNextLevel();
+                    if (getOnLevelSkippedListener() != null) {
+                        getOnLevelSkippedListener().onLevelSkipped(oldLevel, nextLevel);
+                    }
+
                     Configuration.getInstance().incrementNumberOfHelpRequested();
                     helpView.dismiss();
                 }
@@ -182,6 +196,10 @@ public class InputView extends LinearLayout {
 
     public interface OnLetterRemovedFromAnswerListener {
         void onLetterRemovedFromAnswer(String letter);
+    }
+
+    public interface OnLevelSkippedListener {
+        void onLevelSkipped(Level oldLevel, Level nextLevel);
     }
 
     public interface OnFinishGuessingListener {
