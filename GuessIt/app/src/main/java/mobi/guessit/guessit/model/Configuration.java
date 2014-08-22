@@ -126,7 +126,7 @@ public class Configuration {
     }
 
     public void incrementNumberOfHelpRequested() {
-        setNumberOfHelpRequested(getNumberOfLevelsPresented() + 1);
+        setNumberOfHelpRequested(getNumberOfHelpRequested() + 1);
     }
 
     public boolean isTimeToShowAd() {

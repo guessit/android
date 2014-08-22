@@ -66,7 +66,7 @@ public class PlaceholderView extends RelativeLayout {
         return getLetterButton().isActive();
     }
 
-    public boolean canDisplayLetter(LetterButton letter) {
+    public boolean canDisplayLetter() {
         return getLetterButton().canDisplayLetter();
     }
 

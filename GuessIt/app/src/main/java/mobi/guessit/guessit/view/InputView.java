@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.model.Configuration;
@@ -39,7 +38,7 @@ public class InputView extends LinearLayout {
         this.level = level;
 
         getKeypadView().setLevel(level, animated);
-        getAnswerView().setCorrectAnswer(level.getAnswer());
+        getAnswerView().setLevel(level);
     }
 
     public OnLetterAddedToAnswerListener getOnLetterAddedToAnswerListener() {
@@ -102,26 +101,13 @@ public class InputView extends LinearLayout {
             keypadView.setOnKeypadListener(new KeypadView.OnKeypadListener() {
                 @Override
                 public boolean canAddLetter(KeypadView keypad, LetterButton letter) {
-                    return getAnswerView().canAddLetter(letter);
+                    return getAnswerView().canAddLetter();
                 }
 
                 @Override
                 public void onLetterAdded(KeypadView keypad, LetterButton letter) {
                     getAnswerView().addLetter(letter);
-
-                    OnLetterAddedToAnswerListener letterAddedListener =
-                        getOnLetterAddedToAnswerListener();
-                    if (letterAddedListener != null) {
-                        letterAddedListener.onLetterAddedToAnswer(letter.getLetter());
-                    }
-
-                    if (!getAnswerView().canAddLetter(letter)) {
-                        OnFinishGuessingListener finishGuessingListener =
-                            getOnFinishGuessingListener();
-                        if (finishGuessingListener != null) {
-                            finishGuessingListener.onFinishGuessing(getAnswerView().getCurrentAnswer());
-                        }
-                    }
+                    notifyLetterAddedToAnswer(letter);
                 }
 
                 @Override
@@ -133,6 +119,24 @@ public class InputView extends LinearLayout {
         return keypadView;
     }
 
+    private void notifyFinishGuessing() {
+        OnFinishGuessingListener listener = getOnFinishGuessingListener();
+        if (listener != null) {
+            listener.onFinishGuessing(getAnswerView().getCurrentAnswer());
+        }
+    }
+
+    private void notifyLetterAddedToAnswer(LetterButton letter) {
+        OnLetterAddedToAnswerListener listener = getOnLetterAddedToAnswerListener();
+        if (listener != null) {
+            listener.onLetterAddedToAnswer(letter.getLetter());
+        }
+
+        if (!getAnswerView().canAddLetter()) {
+            notifyFinishGuessing();
+        }
+    }
+
     private HelpView helpView;
     private HelpView getHelpView() {
         if (helpView == null) {
@@ -140,11 +144,7 @@ public class InputView extends LinearLayout {
             helpView.setOnSkipLevelListener(new HelpView.OnSkipLevelListener() {
                 @Override
                 public void onSkipLevelRequested(HelpView view) {
-                    Level oldLevel = Configuration.getInstance().getCurrentLevel();
-                    Level nextLevel = Configuration.getInstance().getNextLevel();
-                    if (getOnLevelSkippedListener() != null) {
-                        getOnLevelSkippedListener().onLevelSkipped(oldLevel, nextLevel);
-                    }
+                    notifyLevelSkipped();
 
                     Configuration.getInstance().incrementNumberOfHelpRequested();
                     helpView.dismiss();
@@ -159,7 +159,6 @@ public class InputView extends LinearLayout {
             helpView.setOnEliminateWrongLetterListener(new HelpView.OnEliminateWrongLetterListener() {
                 @Override
                 public void onEliminateWrongLetterRequested(HelpView view) {
-                    Toast.makeText(getContext(), "Remove Wrong Letter!", Toast.LENGTH_SHORT).show();
                     getKeypadView().removeWrongLetter();
                     Configuration.getInstance().incrementNumberOfHelpRequested();
                     helpView.dismiss();
@@ -174,21 +173,43 @@ public class InputView extends LinearLayout {
             helpView.setOnPlaceCorrectLetterListener(new HelpView.OnPlaceCorrectLetterListener() {
                 @Override
                 public void onPlaceCorrectLetterRequested(HelpView view) {
-                    Toast.makeText(getContext(), "Place Correct Letter!", Toast.LENGTH_SHORT).show();
+                    LetterButton correctLetter = firstCorrectLetterAvailable();
+                    getKeypadView().removeLetter(correctLetter);
+                    getAnswerView().addLetterToCorrectPlace(correctLetter);
+                    notifyLetterAddedToAnswer(correctLetter);
+
                     Configuration.getInstance().incrementNumberOfHelpRequested();
                     helpView.dismiss();
                 }
 
                 @Override
                 public boolean canPlaceCorrectLetter(HelpView view) {
-                    // verificar se existe espaço na resposta e se existe letra correta no teclado
-                    return false;
+                    return getAnswerView().canAddLetter() && hasCorrectLetterAvailable();
                 }
             });
         }
         return helpView;
     }
 
+    private void notifyLevelSkipped() {
+        Level oldLevel = Configuration.getInstance().getCurrentLevel();
+        Level nextLevel = Configuration.getInstance().getNextLevel();
+
+        OnLevelSkippedListener listener = getOnLevelSkippedListener();
+        if (listener != null) {
+            listener.onLevelSkipped(oldLevel, nextLevel);
+        }
+    }
+
+    private LetterButton firstCorrectLetterAvailable() {
+        String missingLetters = getAnswerView().getMissingLetters();
+        return (LetterButton) getKeypadView().getFirstCorrectKey(missingLetters);
+    }
+
+    private boolean hasCorrectLetterAvailable() {
+        String missingLetters = getAnswerView().getMissingLetters();
+        return getKeypadView().hasLetterForAnswer(missingLetters);
+    }
 
     public interface OnLetterAddedToAnswerListener {
         void onLetterAddedToAnswer(String letter);

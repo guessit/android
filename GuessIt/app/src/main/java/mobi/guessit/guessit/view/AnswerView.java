@@ -13,11 +13,12 @@ import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
+import mobi.guessit.guessit.model.Level;
 import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class AnswerView extends LinearLayout {
 
-    private String correctAnswer;
+    private Level level;
 
     private List<PlaceholderView> placeholderViews;
     private OnAnswerListener onAnswerListener;
@@ -53,17 +54,17 @@ public class AnswerView extends LinearLayout {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        if (getCorrectAnswer() != null) {
+        if (getLevel() != null) {
             adjustChildViews();
         }
     }
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
+    public Level getLevel() {
+        return level;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setLevel(Level level) {
+        this.level = level;
 
         for (PlaceholderView placeholder : getPlaceholderViews()) {
             placeholder.reset();
@@ -87,6 +88,25 @@ public class AnswerView extends LinearLayout {
         }
 
         return currentAnswer;
+    }
+
+    public String getMissingLetters() {
+        String missingLetters = "";
+
+        String currentAnswer = getCurrentAnswer();
+        String noSpacesAnswer = getLevel().getNoSpacesAnswer();
+
+        for (int i = 0; i < noSpacesAnswer.length(); i++) {
+            String letter = "*";
+
+            if (currentAnswer.charAt(i) == '*') {
+                letter = String.valueOf(noSpacesAnswer.charAt(i));
+            }
+
+            missingLetters += letter;
+        }
+
+        return missingLetters;
     }
 
     public List<PlaceholderView> getPlaceholderViews() {
@@ -147,7 +167,8 @@ public class AnswerView extends LinearLayout {
     private void adjustChildViews() {
         removeAllViews();
 
-        int answerLength = getCorrectAnswer().length();
+        String correctAnswer = getLevel().getAnswer();
+        int answerLength = correctAnswer.length();
 
         int letterIndex = 0;
         boolean previousLetterWasSpace = false;
@@ -160,7 +181,7 @@ public class AnswerView extends LinearLayout {
 
         boolean isLongWord = answerLength >= 10;
 
-        int noSpaces = getCorrectAnswer().split(" ").length - 1;
+        int noSpaces = correctAnswer.split(" ").length - 1;
 
         float totalLeftMargin = (answerLength - 1) * margin;
         float totalRightMargin = (answerLength - 1) * margin;
@@ -181,7 +202,7 @@ public class AnswerView extends LinearLayout {
         float height = width / ratio;
 
         for (int i = 0; i < answerLength; i++) {
-            String letter = String.valueOf(getCorrectAnswer().charAt(i));
+            String letter = String.valueOf(correctAnswer.charAt(i));
 
             boolean isSpace = letter.equals(" ");
             if (isSpace) {
@@ -237,11 +258,11 @@ public class AnswerView extends LinearLayout {
         addView(placeholderView, layoutParams);
     }
 
-    public boolean canAddLetter(LetterButton letter) {
+    public boolean canAddLetter() {
         boolean canAdd = false;
 
         for (PlaceholderView placeholder : getActivePlaceholderViews()) {
-            if (placeholder.canDisplayLetter(letter)) {
+            if (placeholder.canDisplayLetter()) {
                 canAdd = true;
                 break;
             }
@@ -252,8 +273,20 @@ public class AnswerView extends LinearLayout {
 
     public void addLetter(LetterButton letter) {
         for (PlaceholderView placeholder : getPlaceholderViews()) {
-            if (placeholder.canDisplayLetter(letter)) {
+            if (placeholder.canDisplayLetter()) {
                 placeholder.displayLetter(letter);
+                break;
+            }
+        }
+    }
+
+    public void addLetterToCorrectPlace(LetterButton letterButton) {
+        String missingLetters = getMissingLetters();
+        for (int i = 0; i < missingLetters.length(); i++) {
+            char letter = missingLetters.charAt(i);
+            if (letter == letterButton.getLetter().charAt(0)) {
+                PlaceholderView placeholder = getActivePlaceholderViews().get(i);
+                placeholder.displayLetter(letterButton);
                 break;
             }
         }

@@ -10,10 +10,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -142,7 +140,7 @@ public class KeypadView extends LinearLayout {
                 if (letter.isActive()) {
                     if (getOnKeypadListener().canAddLetter(KeypadView.this, letter)) {
                         getOnKeypadListener().onLetterAdded(KeypadView.this, letter);
-                        BumpAnimator.getInstance().animateOut(view);
+                        BumpAnimator.getInstance().animateOut(letter);
                     }
                 }
             }
@@ -160,6 +158,10 @@ public class KeypadView extends LinearLayout {
         }
 
         layout.addView(button, buttonParams);
+    }
+
+    public void removeLetter(LetterButton letter) {
+        BumpAnimator.getInstance().animateOut(letter);
     }
 
     private void initializeActionButton(Game game) {
@@ -234,6 +236,38 @@ public class KeypadView extends LinearLayout {
         BumpAnimator.getInstance().animateOut(letter);
 
         letter.setOriginLetter(null);
+    }
+
+    public boolean hasLetterForAnswer(String answer) {
+        return getFirstCorrectKey(answer) != null;
+    }
+
+    public View getFirstCorrectKey(String answer) {
+        View correctLetter = null;
+
+        for (int i = 0; i < answer.length(); i++) {
+            char letter = answer.charAt(i);
+            if (letter != '*') {
+                correctLetter = getLetterButtonForLetter(String.valueOf(letter));
+                if (correctLetter != null) break;
+            }
+        }
+
+        return correctLetter;
+    }
+
+    private View getLetterButtonForLetter(String letter) {
+        View correctLetter = null;
+
+        for (View view : getKeys()) {
+            LetterButton letterButton = (LetterButton) view;
+            if (letterButton.isActive() && letterButton.getLetter().equals(letter)) {
+                correctLetter = letterButton;
+                break;
+            }
+        }
+
+        return correctLetter;
     }
 
     public boolean hasWrongLetterToBeRemoved() {
