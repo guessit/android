@@ -1,7 +1,7 @@
 {
   "name": "GuessIt!",
-  "ad_mediation_id": "33e58635bd064069",
-  "analytics_tracking_id": "UA-42974394-5",
+  "ad_unit_id": "ca-app-pub-8051145290744246/7780421212",
+  "analytics_tracking_id": "UA-42974394-11",
   "options": {
     "randomize": true,
     "keypad_rows": 2,

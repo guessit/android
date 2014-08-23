@@ -1,10 +1,15 @@
 package mobi.guessit.guessit.helper;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
+import android.app.Activity;
+import android.app.Dialog;
 
-import mobi.guessit.guessit.R;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+
+import mobi.guessit.guessit.model.Configuration;
 
 public class AdHelper {
 
@@ -18,17 +23,73 @@ public class AdHelper {
         return instance;
     }
 
-    public void loadAds() {
+    private InterstitialAd interstitial;
+    private boolean isLoadingAd;
+
+    public InterstitialAd getInterstitial() {
+        return interstitial;
     }
 
-    public void presentAd(Context context) {
-        new AlertDialog.Builder(context).
-            setMessage("Show Ad!").
-            setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener() {
+    public void setInterstitial(InterstitialAd interstitial) {
+        this.interstitial = interstitial;
+    }
+
+    public boolean isLoadingAd() {
+        return isLoadingAd;
+    }
+
+    public void setLoadingAd(boolean isLoadingAd) {
+        this.isLoadingAd = isLoadingAd;
+    }
+
+    public void loadAd(final Activity context) {
+        int result = GooglePlayServicesUtil.isGooglePlayServicesAvailable(context);
+        Dialog dialog = GooglePlayServicesUtil.getErrorDialog(result, context, 0);
+
+        if (dialog != null) {
+            dialog.show();
+        }
+
+        if (result == ConnectionResult.SUCCESS && !isLoadingAd()) {
+            if (getInterstitial() != null && !getInterstitial().isLoaded()) {
+                return;
+            }
+
+            InterstitialAd ad = new InterstitialAd(context);
+            ad.setAdUnitId(Configuration.getInstance().getGame().getAdUnitId());
+
+            AdRequest adRequest = new AdRequest.Builder().build();
+
+            ad.loadAd(adRequest);
+            ad.setAdListener(new AdListener() {
                 @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    // dismiss
+                public void onAdFailedToLoad(int errorCode) {
+                    super.onAdFailedToLoad(errorCode);
+                    AdHelper.this.setLoadingAd(false);
+                    loadAd(context);
                 }
-            }).create().show();
+
+                @Override
+                public void onAdLoaded() {
+                    super.onAdLoaded();
+                    AdHelper.this.setLoadingAd(false);
+                }
+            });
+
+            setLoadingAd(true);
+            setInterstitial(ad);
+        }
+    }
+
+    public void presentAd(Activity context) {
+        InterstitialAd ad = getInterstitial();
+        if (ad == null) {
+            loadAd(context);
+        } else if (ad.isLoaded()) {
+            ad.show();
+            loadAd(context);
+        } else if (!this.isLoadingAd()) {
+            loadAd(context);
+        }
     }
 }

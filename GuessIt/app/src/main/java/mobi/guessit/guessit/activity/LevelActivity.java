@@ -58,7 +58,7 @@ public class LevelActivity extends Activity {
         super.onResume();
 
         if (Configuration.getInstance().showAds()) {
-            AdHelper.getInstance().loadAds();
+            AdHelper.getInstance().loadAd(this);
         }
     }
 

@@ -13,8 +13,8 @@ public class Game {
 
     private String name;
 
-    @SerializedName("ad_mediation_id")
-    private String adMediationId;
+    @SerializedName("ad_unit_id")
+    private String adUnitId;
 
     @SerializedName("analytics_tracking_id")
     private String analyticsTrackingId;
@@ -25,6 +25,14 @@ public class Game {
     private UserInterface userInterface;
 
     private List<Level> levels;
+
+    public String getAdUnitId() {
+        return adUnitId;
+    }
+
+    public void setAdUnitId(String adUnitId) {
+        this.adUnitId = adUnitId;
+    }
 
     public UserInterface getUserInterface() {
         return userInterface;
