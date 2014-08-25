@@ -86,6 +86,10 @@ public class Configuration {
 
         List<Level> todoLevels = getGame().getTodolevels();
         if (todoLevels.size() > 0) {
+            if (!getCurrentLevelName().equals("")) {
+                todoLevels.remove(getCurrentLevel());
+            }
+
             if (getGame().getOptions().isRandomize()) {
                 int randomIndex = new Random().nextInt(todoLevels.size());
                 nextLevel = todoLevels.get(randomIndex);
@@ -152,8 +156,8 @@ public class Configuration {
     }
 
     public boolean hasMoreLevels() {
-        Level currentLevel = getCurrentLevel();
-        return currentLevel != null && !currentLevel.equals(getLastLevel());
+        List<Level> todoLevels = getGame().getTodolevels();
+        return todoLevels.size() > 1;
     }
 
     public void setContext(Context applicationContext) {
