@@ -8,8 +8,10 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.util.AttributeSet;
 import android.util.StateSet;
+import android.util.TypedValue;
 import android.widget.Button;
 
+import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BackgroundHelper;
 import mobi.guessit.guessit.helper.BumpAnimator;
 import mobi.guessit.guessit.helper.ColorHelper;
@@ -68,7 +70,7 @@ public class LetterButton extends Button {
 
     private void setupUI() {
         setTag("key_button");
-        setTextSize(20);
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.level_keypad_text_size));
         setTypeface(Typeface.createFromAsset(getContext().getAssets(),
             "fonts/Avenir Next Condensed-Medium.ttf"), Typeface.NORMAL);
 

@@ -3,10 +3,14 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="main_title_font_size">74sp</dimen>
+    <dimen name="main_tap_to_play_font_size">22sp</dimen>
+
     <dimen name="level_input_view_height">160dp</dimen>
 
     <dimen name="level_keypad_height">100dp</dimen>
     <dimen name="level_keypad_spacing">2dp</dimen>
+    <dimen name="level_keypad_text_size">20sp</dimen>
 
     <dimen name="level_image_view_padding">5dp</dimen>
     <dimen name="level_image_view_corner_radius">2dp</dimen>

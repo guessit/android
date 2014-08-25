@@ -9,6 +9,7 @@ import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.BackgroundHelper;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.Configuration;
+import mobi.guessit.guessit.model.Game;
 import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class PlaceholderView extends RelativeLayout {
@@ -29,15 +30,22 @@ public class PlaceholderView extends RelativeLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
 
-        UserInterfaceElement placeholderUI = Configuration.getInstance().getGame().
-            getUserInterface().getPlaceholder();
+        setupUI();
+    }
 
-        PaintDrawable background = new PaintDrawable(ColorHelper.parseColor(
-            placeholderUI.getBackgroundColor()));
-        background.setCornerRadius(getResources().getDimension(
-            R.dimen.level_placeholder_corner_radius));
+    private void setupUI() {
+        Game game = Configuration.getInstance().getGame();
 
-        BackgroundHelper.getInstance().setBackground(this, background);
+        if (game != null) {
+            UserInterfaceElement placeholderUI = game.getUserInterface().getPlaceholder();
+
+            PaintDrawable background = new PaintDrawable(ColorHelper.parseColor(
+                placeholderUI.getBackgroundColor()));
+            background.setCornerRadius(getResources().getDimension(
+                R.dimen.level_placeholder_corner_radius));
+
+            BackgroundHelper.getInstance().setBackground(this, background);
+        }
     }
 
     private LetterButton letterButton;
