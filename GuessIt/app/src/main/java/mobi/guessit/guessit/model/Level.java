@@ -102,4 +102,22 @@ public class Level {
     private void markFinished() {
         Configuration.getInstance().markLevelFinished(this);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Level)) return false;
+
+        Level level = (Level) o;
+
+        if (imageName != null ? !imageName.equals(level.imageName) : level.imageName != null)
+            return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return imageName != null ? imageName.hashCode() : 0;
+    }
 }

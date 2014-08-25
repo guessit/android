@@ -153,7 +153,7 @@ public class Configuration {
 
     public boolean hasMoreLevels() {
         Level currentLevel = getCurrentLevel();
-        return currentLevel != null && currentLevel != getLastLevel();
+        return currentLevel != null && !currentLevel.equals(getLastLevel());
     }
 
     public void setContext(Context applicationContext) {
