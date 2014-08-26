@@ -95,6 +95,10 @@ public class Level {
         return Configuration.getInstance().getFinishedLevelNames().contains(getImageName());
     }
 
+    public boolean isLastLevel() {
+        return this.equals(Level.guessItLevel());
+    }
+
     public String getLetterAt(int i) {
         return String.valueOf(this.getNoSpacesAnswer().charAt(i));
     }

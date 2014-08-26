@@ -19,6 +19,31 @@
     <string name="help_eliminate_wrong_letter">Eliminar letra errada</string>
     <string name="help_place_correct_letter">Preencher com letra correta</string>
 
+    <string name="game_over">GAME OVER</string>
+    <string name="game_over_congratulations">" Parabéns! "</string>
+    <string name="game_over_description">Você terminou o game!</string>
+    <string name="game_over_reset_progress">Acesse os ajustes para reiniciar o jogo</string>
+
+    <string name="game_over_liked_guessit">Gostou do jogo?</string>
+    <string name="game_over_other_games">Jogue todos outros jogos!</string>
+    <string name="game_over_visit_website">Visite nosso website</string>
+
+    <string name="game_over_credits">Créditos</string>
+    <string name="game_over_thank_your">Muito obrigado!</string>
+    <string name="game_over_development">Desenvolvimento</string>
+    <string name="game_over_game_design">Game Design</string>
+    <string name="game_over_level_design">Level Design</string>
+    <string name="game_over_beta_tester">Beta Test</string>
+    <string name="game_over_other">Outros</string>
+    <string name="game_over_marlon">Marlon Andrade</string>
+    <string name="game_over_rosiene">Rosiene Dilly</string>
+    <string name="game_over_maurilio">Maurílio Andrade</string>
+    <string name="game_over_david">David Yagi</string>
+    <string name="game_over_fabim">Fábio Nogueira</string>
+    <string name="game_over_iuri">Iuri Matos</string>
+    <string name="game_over_victor">Victor Hugo</string>
+    <string name="game_over_alexssandro">Alexssandro Reis</string>
+
     <string name="img_001">afeganistao</string>
     <string name="img_002">albania</string>
     <string name="img_003">argelia</string>

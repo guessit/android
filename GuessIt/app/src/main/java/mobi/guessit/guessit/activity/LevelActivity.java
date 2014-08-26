@@ -2,6 +2,7 @@ package mobi.guessit.guessit.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -34,10 +35,18 @@ public class LevelActivity extends Activity {
                         AdHelper.getInstance().presentAd(LevelActivity.this);
                         conf.resetCountersAfterShowingAd();
                     }
+
+                    if (level.isLastLevel()) {
+                        showGameOver(true);
+                    }
                 }
             });
         }
         return levelView;
+    }
+
+    private void showGameOver(boolean animated) {
+        setContentView(R.layout.activity_level_game_over);
     }
 
     @Override
@@ -50,7 +59,11 @@ public class LevelActivity extends Activity {
         Configuration.getInstance().setContext(getApplicationContext());
 
         Level nextLevel = Configuration.getInstance().getCurrentLevel();
-        getLevelView().setLevel(nextLevel, false);
+        if (nextLevel.isLastLevel() && nextLevel.isFinished()) {
+            showGameOver(false);
+        } else {
+            getLevelView().setLevel(nextLevel, false);
+        }
     }
 
     @Override

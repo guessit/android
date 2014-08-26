@@ -32,5 +32,11 @@
 
     <dimen name="congratulations_answer_corner_radius">10dp</dimen>
 
+    <dimen name="game_over_text_size">46sp</dimen>
+    <dimen name="game_over_margin_top">50dp</dimen>
+    <dimen name="game_over_congratulations_text_size">50sp</dimen>
+    <dimen name="game_over_description_text_size">22sp</dimen>
+    <dimen name="game_over_reset_progress_text_size">17sp</dimen>
+
 
 </resources>
