@@ -135,6 +135,7 @@
 
         </mobi.guessit.guessit.view.GameOverOtherGamesView>
 
+        <!-- GameOverCreditsView extends RelativeLayout -->
         <mobi.guessit.guessit.view.GameOverCreditsView
             android:layout_width="match_parent"
             android:layout_height="500dp"

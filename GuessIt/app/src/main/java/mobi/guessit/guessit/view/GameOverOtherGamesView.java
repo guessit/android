@@ -11,6 +11,7 @@ import android.widget.TextView;
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.Configuration;
+import mobi.guessit.guessit.model.Game;
 import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class GameOverOtherGamesView extends RelativeLayout {
@@ -35,33 +36,36 @@ public class GameOverOtherGamesView extends RelativeLayout {
     }
 
     private void setupUI() {
-        UserInterfaceElement ui = Configuration.getInstance().getGame().
-                getUserInterface().getOtherGames();
+        Game game = Configuration.getInstance().getGame();
 
-        TextView likedGuessit = (TextView) findViewById(R.id.game_over_liked_guessit);
-        likedGuessit.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
-        likedGuessit.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getShadowColor()));
-        likedGuessit.setRotation(-2.f);
+        if (game != null) {
+            UserInterfaceElement ui = game.getUserInterface().getOtherGames();
 
-        TextView otherGames = (TextView) findViewById(R.id.game_over_other_games);
-        otherGames.setTextColor(ColorHelper.parseColor(ui.getSecondaryTextColor()));
-        otherGames.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getSecondaryShadowColor()));
-        otherGames.setRotation(-2.f);
+            TextView likedGuessit = (TextView) findViewById(R.id.game_over_liked_guessit);
+            likedGuessit.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
+            likedGuessit.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getShadowColor()));
+            likedGuessit.setRotation(-2.f);
 
-        TextView visitWebsite = (TextView) findViewById(R.id.game_over_visit_website);
-        visitWebsite.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
-        visitWebsite.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getShadowColor()));
+            TextView otherGames = (TextView) findViewById(R.id.game_over_other_games);
+            otherGames.setTextColor(ColorHelper.parseColor(ui.getSecondaryTextColor()));
+            otherGames.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getSecondaryShadowColor()));
+            otherGames.setRotation(-2.f);
 
-        TextView website = (TextView) findViewById(R.id.game_over_website);
-        website.setTextColor(ColorHelper.parseColor(ui.getSecondaryTextColor()));
-        website.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getSecondaryShadowColor()));
+            TextView visitWebsite = (TextView) findViewById(R.id.game_over_visit_website);
+            visitWebsite.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
+            visitWebsite.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getShadowColor()));
 
-        setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://guessit.mobi"));
-                getContext().startActivity(intent);
-            }
-        });
+            TextView website = (TextView) findViewById(R.id.game_over_website);
+            website.setTextColor(ColorHelper.parseColor(ui.getSecondaryTextColor()));
+            website.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getSecondaryShadowColor()));
+
+            setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://guessit.mobi"));
+                    getContext().startActivity(intent);
+                }
+            });
+        }
     }
 }

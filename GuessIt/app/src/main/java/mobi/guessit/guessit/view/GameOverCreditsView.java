@@ -8,6 +8,7 @@ import android.widget.TextView;
 import mobi.guessit.guessit.R;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.Configuration;
+import mobi.guessit.guessit.model.Game;
 import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class GameOverCreditsView extends RelativeLayout {
@@ -31,15 +32,18 @@ public class GameOverCreditsView extends RelativeLayout {
     }
 
     private void setupUI() {
-        UserInterfaceElement ui = Configuration.getInstance().getGame().
-                getUserInterface().getCredits();
+        Game game = Configuration.getInstance().getGame();
 
-        TextView credits = (TextView) findViewById(R.id.game_over_credits);
-        credits.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
-        credits.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getShadowColor()));
+        if (game != null) {
+            UserInterfaceElement ui = game.getUserInterface().getCredits();
 
-        TextView thankYou = (TextView) findViewById(R.id.game_over_thank_you);
-        thankYou.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
-        thankYou.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getShadowColor()));
+            TextView credits = (TextView) findViewById(R.id.game_over_credits);
+            credits.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
+            credits.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getShadowColor()));
+
+            TextView thankYou = (TextView) findViewById(R.id.game_over_thank_you);
+            thankYou.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
+            thankYou.setShadowLayer(1, 0, -1, ColorHelper.parseColor(ui.getShadowColor()));
+        }
     }
 }
