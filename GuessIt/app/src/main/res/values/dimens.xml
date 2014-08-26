@@ -38,5 +38,12 @@
     <dimen name="game_over_description_text_size">22sp</dimen>
     <dimen name="game_over_reset_progress_text_size">17sp</dimen>
 
+    <dimen name="game_over_liked_guessit_text_size">40sp</dimen>
+    <dimen name="game_over_other_games_text_size">26sp</dimen>
+    <dimen name="game_over_visit_website_text_size">17sp</dimen>
+    <dimen name="game_over_website_text_size">22sp</dimen>
+
+    <dimen name="game_over_credits_text_size">40sp</dimen>
+    <dimen name="game_over_thank_you_text_size">20sp</dimen>
 
 </resources>

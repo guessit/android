@@ -36,32 +36,27 @@ public class GameOverCongratulationsView extends RelativeLayout {
         UserInterfaceElement ui = Configuration.getInstance().getGame().
             getUserInterface().getGameOver();
 
-        View rootView = getRootView();
-        rootView.setBackgroundColor(
+        setBackgroundColor(
             ColorHelper.parseColor(ui.getBackgroundColor())
         );
 
-        TextView gameOverLabel = (TextView) rootView.findViewById(
-            R.id.game_over);
+        TextView gameOverLabel = (TextView) findViewById(R.id.game_over);
         gameOverLabel.setTextColor(ColorHelper.parseColor(ui.getSecondaryTextColor()));
 
-        TextView congratsLabel = (TextView) rootView.findViewById(
-            R.id.game_over_congratulations);
+        TextView congratsLabel = (TextView) findViewById(R.id.game_over_congratulations);
         congratsLabel.setTextColor(ColorHelper.parseColor(ui.getTextColor()));
         congratsLabel.setShadowLayer(1, 0, -1, ColorHelper.parseColor(
             ui.getShadowColor()));
         congratsLabel.setRotation(-4.f);
         congratsLabel.bringToFront();
 
-        TextView descriptionLabel = (TextView) rootView.findViewById(
-            R.id.game_over_description);
+        TextView descriptionLabel = (TextView) findViewById(R.id.game_over_description);
         descriptionLabel.setTextColor(ColorHelper.parseColor(ui.getSecondaryTextColor()));
         descriptionLabel.setShadowLayer(1, 0, -1, ColorHelper.parseColor(
             ui.getSecondaryShadowColor()));
         descriptionLabel.setRotation(congratsLabel.getRotation());
 
-        TextView resetProgressLabel = (TextView) rootView.findViewById(
-            R.id.game_over_reset_progress);
+        TextView resetProgressLabel = (TextView) findViewById(R.id.game_over_reset_progress);
         resetProgressLabel.setTextColor(ColorHelper.parseColor(ui.getSecondaryTextColor()));
         resetProgressLabel.setShadowLayer(1, 0, -1, ColorHelper.parseColor(
             ui.getSecondaryShadowColor()));

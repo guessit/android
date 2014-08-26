@@ -35,6 +35,7 @@
     <string name="game_over_liked_guessit">Have you liked it?</string>
     <string name="game_over_other_games">Play all the other games!</string>
     <string name="game_over_visit_website">Visit our website</string>
+    <string name="game_over_website">http://guessit.mobi</string>
 
     <string name="game_over_credits">Credits</string>
     <string name="game_over_thank_your">Thank You!</string>
