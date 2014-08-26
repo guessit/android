@@ -45,5 +45,7 @@
 
     <dimen name="game_over_credits_text_size">40sp</dimen>
     <dimen name="game_over_thank_you_text_size">20sp</dimen>
+    <dimen name="game_over_role_text_size">12sp</dimen>
+    <dimen name="game_over_person_text_size">15sp</dimen>
 
 </resources>

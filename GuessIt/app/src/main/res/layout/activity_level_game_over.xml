@@ -138,8 +138,10 @@
         <!-- GameOverCreditsView extends RelativeLayout -->
         <mobi.guessit.guessit.view.GameOverCreditsView
             android:layout_width="match_parent"
-            android:layout_height="500dp"
+            android:layout_height="wrap_content"
             android:background="@android:color/black"
+            android:paddingTop="40dp"
+            android:paddingBottom="20dp"
             >
 
             <mobi.guessit.guessit.view.components.FontFaceTextView
@@ -150,8 +152,18 @@
                 guessit:fontFace="Avenir Next Condensed-Bold.ttf"
                 android:textSize="@dimen/game_over_credits_text_size"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="40dp"
                 />
+
+            <LinearLayout
+                android:id="@+id/game_over_credits_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="50dp"
+                >
+
+            </LinearLayout>
 
             <mobi.guessit.guessit.view.components.FontFaceTextView
                 android:id="@+id/game_over_thank_you"
@@ -162,7 +174,6 @@
                 android:textSize="@dimen/game_over_thank_you_text_size"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="10dp"
                 />
 
         </mobi.guessit.guessit.view.GameOverCreditsView>

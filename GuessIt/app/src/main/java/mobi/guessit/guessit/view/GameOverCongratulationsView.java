@@ -1,12 +1,14 @@
 package mobi.guessit.guessit.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import mobi.guessit.guessit.R;
+import mobi.guessit.guessit.activity.SettingsActivity;
 import mobi.guessit.guessit.helper.ColorHelper;
 import mobi.guessit.guessit.model.Configuration;
 import mobi.guessit.guessit.model.Game;
@@ -63,6 +65,13 @@ public class GameOverCongratulationsView extends RelativeLayout {
             resetProgressLabel.setTextColor(ColorHelper.parseColor(ui.getSecondaryTextColor()));
             resetProgressLabel.setShadowLayer(1, 0, -1, ColorHelper.parseColor(
                     ui.getSecondaryShadowColor()));
+
+            setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    getContext().startActivity(new Intent(getContext(), SettingsActivity.class));
+                }
+            });
         }
     }
 }
