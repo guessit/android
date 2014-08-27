@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Clubes Brasileiros?</string>
+
+    <string name="img_001">abc</string>
+    <string name="img_002">america mg</string>
+    <string name="img_003">america rj</string>
+    <string name="img_004">america rn</string>
+    <string name="img_005">asa</string>
+    <string name="img_006">atletico mg</string>
+    <string name="img_007">atletico pr</string>
+    <string name="img_008">avai</string>
+    <string name="img_009">bahia</string>
+    <string name="img_010">bangu</string>
+    <string name="img_011">bonsucesso</string>
+    <string name="img_012">botafogo pb</string>
+    <string name="img_013">botafogo sp</string>
+    <string name="img_014">botafogo</string>
+    <string name="img_015">bragantino</string>
+    <string name="img_016">brasiliense</string>
+    <string name="img_017">caxias</string>
+    <string name="img_018">ceara</string>
+    <string name="img_019">chapecoense</string>
+    <string name="img_020">corinthians</string>
+    <string name="img_021">coritiba</string>
+    <string name="img_022">criciuma</string>
+    <string name="img_023">cruzeiro</string>
+    <string name="img_024">figueirense</string>
+    <string name="img_025">flamengo</string>
+    <string name="img_026">fluminense</string>
+    <string name="img_027">fortaleza</string>
+    <string name="img_028">goias</string>
+    <string name="img_029">barueri</string>
+    <string name="img_030">gremio</string>
+    <string name="img_031">guarani</string>
+    <string name="img_032">guaratingueta</string>
+    <string name="img_033">internacional</string>
+    <string name="img_034">ituano</string>
+    <string name="img_035">joinville</string>
+    <string name="img_036">juventude</string>
+    <string name="img_037">juventus</string>
+    <string name="img_038">londrina</string>
+    <string name="img_039">madureira</string>
+    <string name="img_040">marcilio dias</string>
+    <string name="img_041">mogi mirim</string>
+    <string name="img_042">nautico</string>
+    <string name="img_043">oeste</string>
+    <string name="img_044">olaria</string>
+    <string name="img_045">operario</string>
+    <string name="img_046">palmeiras</string>
+    <string name="img_047">parana</string>
+    <string name="img_048">paulista</string>
+    <string name="img_049">paysandu</string>
+    <string name="img_050">ponte preta</string>
+    <string name="img_051">portuguesa</string>
+    <string name="img_052">remo</string>
+    <string name="img_053">santa cruz</string>
+    <string name="img_054">santos</string>
+    <string name="img_055">sao caetano</string>
+    <string name="img_056">sao paulo</string>
+    <string name="img_057">sport jf</string>
+    <string name="img_058">sport</string>
+    <string name="img_059">sportivo</string>
+    <string name="img_060">treze</string>
+    <string name="img_061">tupi</string>
+    <string name="img_062">tupinambas</string>
+    <string name="img_063">barbarense</string>
+    <string name="img_064">vasco</string>
+    <string name="img_065">vila nova</string>
+    <string name="img_066">villa nova</string>
+    <string name="img_067">vitoria</string>
+    <string name="img_068">volta redonda</string>
+    <string name="img_069">xv de piracicaba</string>
+    <string name="img_070">ypiranga</string>
+
+</resources>
