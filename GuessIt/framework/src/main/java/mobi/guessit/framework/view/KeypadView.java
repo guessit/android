@@ -133,6 +133,10 @@ public class KeypadView extends LinearLayout {
                                            boolean isLastColumn) {
         LetterButton button = new LetterButton(getContext());
 
+        button.setPadding(0, 0, 0, 0);
+        button.setMinHeight(0);
+        button.setMinWidth(0);
+
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
