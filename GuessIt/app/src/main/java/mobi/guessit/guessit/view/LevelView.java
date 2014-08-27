@@ -55,6 +55,12 @@ public class LevelView extends RelativeLayout {
         this.level = level;
         this.level.loadResources(getContext());
 
+        Configuration.getInstance().trackEvent(
+            Configuration.Events.GAME_CATEGORY,
+            Configuration.Events.LEVEL_LOADED,
+            this.level.getImageName()
+        );
+
         getInputView().setLevel(level, animated);
 
         ImageView imageView = (ImageView) findViewById(R.id.level_image_view);

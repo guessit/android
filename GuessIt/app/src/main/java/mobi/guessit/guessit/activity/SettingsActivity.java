@@ -24,8 +24,6 @@ import mobi.guessit.guessit.model.UserInterfaceElement;
 
 public class SettingsActivity extends ListActivity {
 
-    private Settings[] objs;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +41,12 @@ public class SettingsActivity extends ListActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        Configuration.getInstance().trackView(Configuration.Views.SETTINGS_VIEW);
+    }
+
+    @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         super.onListItemClick(l, v, position, id);
 
@@ -57,6 +61,12 @@ public class SettingsActivity extends ListActivity {
                         setPositiveButton(R.string.ok_button, new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                Configuration.getInstance().trackEvent(
+                                    Configuration.Events.GAME_CATEGORY,
+                                    Configuration.Events.RESET_PROGRESS,
+                                    null
+                                );
+
                                 Configuration.getInstance().resetProgress();
 
                                 Intent intent = new Intent(SettingsActivity.this, MainActivity.class);

@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import mobi.guessit.guessit.R;
+import mobi.guessit.guessit.model.Configuration;
 
 public class HelpView extends Dialog {
 
@@ -20,28 +21,8 @@ public class HelpView extends Dialog {
     private OnPlaceCorrectLetterListener onPlaceCorrectLetterListener;
 
     private Button skipLevelButton;
-    private Button getSkipLevelButton() {
-        if (skipLevelButton == null) {
-            skipLevelButton = (Button) findViewById(R.id.help_skip_button);
-        }
-        return skipLevelButton;
-    }
-
     private Button eliminateWrongLetterButton;
-    private Button getEliminateWrongLetterButton() {
-        if (eliminateWrongLetterButton == null) {
-            eliminateWrongLetterButton = (Button) findViewById(R.id.help_eliminate_wrong_letter_button);
-        }
-        return eliminateWrongLetterButton;
-    }
-
     private Button placeCorrectLetterButton;
-    private Button getPlaceCorrectLetterButton() {
-        if (placeCorrectLetterButton == null) {
-            placeCorrectLetterButton = (Button) findViewById(R.id.help_place_correct_letter_button);
-        }
-        return placeCorrectLetterButton;
-    }
 
     public HelpView(Context context) {
         super(context);
@@ -56,6 +37,27 @@ public class HelpView extends Dialog {
     protected HelpView(Context context, boolean cancelable, OnCancelListener cancelListener) {
         super(context, cancelable, cancelListener);
         setupUI(context);
+    }
+
+    private Button getSkipLevelButton() {
+        if (skipLevelButton == null) {
+            skipLevelButton = (Button) findViewById(R.id.help_skip_button);
+        }
+        return skipLevelButton;
+    }
+
+    private Button getEliminateWrongLetterButton() {
+        if (eliminateWrongLetterButton == null) {
+            eliminateWrongLetterButton = (Button) findViewById(R.id.help_eliminate_wrong_letter_button);
+        }
+        return eliminateWrongLetterButton;
+    }
+
+    private Button getPlaceCorrectLetterButton() {
+        if (placeCorrectLetterButton == null) {
+            placeCorrectLetterButton = (Button) findViewById(R.id.help_place_correct_letter_button);
+        }
+        return placeCorrectLetterButton;
     }
 
     @Override
@@ -142,16 +144,19 @@ public class HelpView extends Dialog {
 
     public interface OnSkipLevelListener {
         public void onSkipLevelRequested(HelpView view);
+
         public boolean canSkipLevel(HelpView view);
     }
 
     public interface OnEliminateWrongLetterListener {
         public void onEliminateWrongLetterRequested(HelpView view);
+
         public boolean canEliminateWrongLetter(HelpView view);
     }
 
     public interface OnPlaceCorrectLetterListener {
         public void onPlaceCorrectLetterRequested(HelpView view);
+
         public boolean canPlaceCorrectLetter(HelpView view);
     }
 }

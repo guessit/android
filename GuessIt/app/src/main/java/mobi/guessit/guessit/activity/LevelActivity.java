@@ -2,7 +2,6 @@ package mobi.guessit.guessit.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -34,7 +33,19 @@ public class LevelActivity extends Activity {
                     if (conf.showAds() && conf.isTimeToShowAd()) {
                         AdHelper.getInstance().presentAd(LevelActivity.this);
                         conf.resetCountersAfterShowingAd();
+
+                        conf.trackEvent(
+                            Configuration.Events.GAME_CATEGORY,
+                            Configuration.Events.AD_SHOWN,
+                            null
+                        );
                     }
+
+                    conf.trackEvent(
+                        Configuration.Events.GAME_CATEGORY,
+                        Configuration.Events.LEVEL_CORRECT,
+                        level.getImageName()
+                    );
 
                     if (level.isLastLevel()) {
                         showGameOver(true);
@@ -46,6 +57,11 @@ public class LevelActivity extends Activity {
     }
 
     private void showGameOver(boolean animated) {
+        Configuration.getInstance().trackEvent(
+            Configuration.Events.GAME_CATEGORY,
+            Configuration.Events.GAME_OVER,
+            null
+        );
         setContentView(R.layout.activity_level_game_over);
     }
 
@@ -69,6 +85,7 @@ public class LevelActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
+        Configuration.getInstance().trackView(Configuration.Views.LEVEL_VIEW);
 
         if (Configuration.getInstance().showAds()) {
             AdHelper.getInstance().loadAd(this);

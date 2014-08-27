@@ -34,6 +34,14 @@ public class Game {
         this.adUnitId = adUnitId;
     }
 
+    public String getAnalyticsTrackingId() {
+        return analyticsTrackingId;
+    }
+
+    public void setAnalyticsTrackingId(String analyticsTrackingId) {
+        this.analyticsTrackingId = analyticsTrackingId;
+    }
+
     public UserInterface getUserInterface() {
         return userInterface;
     }

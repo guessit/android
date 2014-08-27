@@ -30,6 +30,10 @@ public class InputView extends LinearLayout {
         super(context, attrs, defStyle);
     }
 
+    public Level getLevel() {
+        return level;
+    }
+
     public void setLevel(Level level) {
         setLevel(level, true);
     }
@@ -112,6 +116,11 @@ public class InputView extends LinearLayout {
 
                 @Override
                 public void onHelpRequested(KeypadView keypad, Button helpButton) {
+                    Configuration.getInstance().trackEvent(
+                        Configuration.Events.GAME_CATEGORY,
+                        Configuration.Events.HELP_REQUESTED,
+                        getLevel().getImageName()
+                    );
                     getHelpView().show();
                 }
             });
@@ -144,6 +153,12 @@ public class InputView extends LinearLayout {
             helpView.setOnSkipLevelListener(new HelpView.OnSkipLevelListener() {
                 @Override
                 public void onSkipLevelRequested(HelpView view) {
+                    Configuration.getInstance().trackEvent(
+                        Configuration.Events.HELP_CATEGORY,
+                        Configuration.Events.PLACE_CORRECT_LETTER,
+                        getLevel().getImageName()
+                    );
+
                     notifyLevelSkipped();
 
                     Configuration.getInstance().incrementNumberOfHelpRequested();
@@ -159,6 +174,12 @@ public class InputView extends LinearLayout {
             helpView.setOnEliminateWrongLetterListener(new HelpView.OnEliminateWrongLetterListener() {
                 @Override
                 public void onEliminateWrongLetterRequested(HelpView view) {
+                    Configuration.getInstance().trackEvent(
+                        Configuration.Events.HELP_CATEGORY,
+                        Configuration.Events.ELIMINATE_WRONG_LETTER,
+                        getLevel().getImageName()
+                    );
+
                     getKeypadView().removeWrongLetter();
                     Configuration.getInstance().incrementNumberOfHelpRequested();
                     helpView.dismiss();
@@ -173,6 +194,12 @@ public class InputView extends LinearLayout {
             helpView.setOnPlaceCorrectLetterListener(new HelpView.OnPlaceCorrectLetterListener() {
                 @Override
                 public void onPlaceCorrectLetterRequested(HelpView view) {
+                    Configuration.getInstance().trackEvent(
+                        Configuration.Events.HELP_CATEGORY,
+                        Configuration.Events.SKIP_LEVEL,
+                        getLevel().getImageName()
+                    );
+
                     LetterButton correctLetter = firstCorrectLetterAvailable();
                     getKeypadView().removeLetter(correctLetter);
                     getAnswerView().addLetterToCorrectPlace(correctLetter);

@@ -22,8 +22,15 @@ public class MainActivity extends Activity {
 
         Configuration config = Configuration.getInstance();
         config.setGame(Game.fromJson(loadJSONFile()));
+        config.initializeTracker(this);
 
         initializeView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Configuration.getInstance().trackView(Configuration.Views.MAIN_VIEW);
     }
 
     private String loadJSONFile() {

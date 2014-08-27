@@ -2,6 +2,10 @@ package mobi.guessit.guessit.model;
 
 import android.content.Context;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -16,6 +20,28 @@ public class Configuration {
     private static final String FINISHED_LEVELS = "key_finished_levels";
     private static final String CURRENT_LEVEL = "key_current_level";
 
+    public class Events {
+        public static final String HELP_CATEGORY = "help";
+        public static final String GAME_CATEGORY = "game";
+
+        public static final String PLACE_CORRECT_LETTER = "place_correct_letter";
+        public static final String ELIMINATE_WRONG_LETTER = "eliminate_wrong_letter";
+        public static final String SKIP_LEVEL = "skip_level";
+
+        public static final String LEVEL_LOADED = "level_loaded";
+        public static final String LEVEL_CORRECT = "level_correct";
+        public static final String HELP_REQUESTED = "help_requested";
+        public static final String GAME_OVER = "game_over";
+        public static final String RESET_PROGRESS = "reset_progress";
+        public static final String AD_SHOWN = "ad_shown";
+    }
+
+    public class Views {
+        public static final String MAIN_VIEW = "MainView";
+        public static final String LEVEL_VIEW = "LevelView";
+        public static final String SETTINGS_VIEW = "SettingsView";
+    }
+
     private static Configuration _instance;
     private Game game;
 
@@ -25,6 +51,12 @@ public class Configuration {
     public static Configuration getInstance() {
         if (_instance == null) _instance = new Configuration();
         return _instance;
+    }
+
+    private Tracker tracker;
+
+    public void initializeTracker(Context context) {
+        tracker = GoogleAnalytics.getInstance(context).newTracker(getGame().getAnalyticsTrackingId());
     }
 
     public Game getGame() {
@@ -173,6 +205,20 @@ public class Configuration {
         Set<String> levels = getFinishedLevelNames();
         levels.add(level.getImageName());
         Storage.getInstance().setStringSet(FINISHED_LEVELS, levels);
+    }
+
+    public void trackEvent(String category, String action, String label) {
+        tracker.send(new HitBuilders.EventBuilder()
+                .setCategory(category)
+                .setAction(action)
+                .setLabel(label)
+                .build()
+        );
+    }
+
+    public void trackView(String name) {
+        tracker.setScreenName(name);
+        tracker.send(new HitBuilders.AppViewBuilder().build());
     }
 }
 
