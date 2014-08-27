@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Retro Games?</string>
+
+    <string name="img_001">Adventure</string>
+    <string name="img_002">Age of Empires</string>
+    <string name="img_003">Alex Kidd</string>
+    <string name="img_004">Altered Beast</string>
+    <string name="img_005">Arkanoid</string>
+    <string name="img_006">Asteroids</string>
+    <string name="img_007">Baldurs Gate</string>
+    <string name="img_008">Black Belt</string>
+    <string name="img_009">Bomberman</string>
+    <string name="img_011">Chrono Trigger</string>
+    <string name="img_012">Civilization</string>
+    <string name="img_013">Contra</string>
+    <string name="img_014">Counter Strike</string>
+    <string name="img_015">Diablo</string>
+    <string name="img_016">Donkey Kong</string>
+    <string name="img_017">Doom</string>
+    <string name="img_018">Duke Nukem 3d</string>
+    <string name="img_019">Enduro</string>
+    <string name="img_020">Fantasy Zone</string>
+    <string name="img_021">Fatal Fury</string>
+    <string name="img_022">Final Fantasy</string>
+    <string name="img_023">Frogger</string>
+    <string name="img_024">F Zero</string>
+    <string name="img_025">Golden Axe</string>
+    <string name="img_026">Gran Turismo</string>
+    <string name="img_027">Grand Theft Auto</string>
+    <string name="img_028">Haunted House</string>
+    <string name="img_029">Lemmings</string>
+    <string name="img_030">Megaman</string>
+    <string name="img_031">Metal Gear Solid</string>
+    <string name="img_032">Metal Slug</string>
+    <string name="img_033">Missile Command</string>
+    <string name="img_034">Moonwalker</string>
+    <string name="img_035">Mortal Kombat</string>
+    <string name="img_036">NBA Jam</string>
+    <string name="img_037">Pacman</string>
+    <string name="img_038">Paperboy</string>
+    <string name="img_039">Phantasy Star</string>
+    <string name="img_040">Pitfall</string>
+    <string name="img_041">Pokemon</string>
+    <string name="img_042">Pong</string>
+    <string name="img_043">Populous</string>
+    <string name="img_044">Prince of Persia</string>
+    <string name="img_045">Puzzle Bobble</string>
+    <string name="img_046">Quake</string>
+    <string name="img_047">R Type</string>
+    <string name="img_048">Resident Evil</string>
+    <string name="img_049">River Raid</string>
+    <string name="img_051">Secret of Mana</string>
+    <string name="img_052">Simcity</string>
+    <string name="img_053">Sonic</string>
+    <string name="img_054">Space Invaders</string>
+    <string name="img_055">Starcraft</string>
+    <string name="img_056">Street Fighter</string>
+    <string name="img_057">Streets of Rage</string>
+    <string name="img_058">Sunset Riders</string>
+    <string name="img_059">Super Mario Kart</string>
+    <string name="img_061">Super Mario</string>
+    <string name="img_062">Super Metroid</string>
+    <string name="img_063">Super Monaco GP</string>
+    <string name="img_064">Super Punch Out</string>
+    <string name="img_065">Super Smash Bros</string>
+    <string name="img_066">Tekken</string>
+    <string name="img_067">Tetris</string>
+    <string name="img_068">The Lost Vikings</string>
+    <string name="img_069">The Sims</string>
+    <string name="img_070">Tomb Raider</string>
+    <string name="img_071">Top Gear</string>
+    <string name="img_072">Warcraft</string>
+    <string name="img_073">Zelda</string>
+
+    <string name="img_guessit_final">Guess It</string>
+
+</resources>
