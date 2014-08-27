@@ -7,6 +7,7 @@
       <module fileurl="file://$PROJECT_DIR$/dragon_ball/dragon_ball.iml" filepath="$PROJECT_DIR$/dragon_ball/dragon_ball.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/retro_games/retro_games.iml" filepath="$PROJECT_DIR$/retro_games/retro_games.iml" />
+      <module fileurl="file://$PROJECT_DIR$/technology/technology.iml" filepath="$PROJECT_DIR$/technology/technology.iml" />
     </modules>
   </component>
 </project>

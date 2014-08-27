@@ -1,1 +1,1 @@
-include ':country_flags', ':framework', ':retro_games', ':dragon_ball'
+include ':country_flags', ':framework', ':retro_games', ':dragon_ball', ':technology'
