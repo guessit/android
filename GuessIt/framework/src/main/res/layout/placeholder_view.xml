@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mobi.guessit.framework.view.PlaceholderView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/level_placeholder_width"
+    android:layout_height="@dimen/level_placeholder_height"
+    android:padding="@dimen/level_placeholder_padding"
+    android:layout_marginLeft="@dimen/level_placeholder_margin"
+    android:layout_marginRight="@dimen/level_placeholder_margin"
+    >
+
+    <mobi.guessit.framework.view.LetterButton
+        android:id="@+id/letter_button"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="0dp"
+        android:text="A"
+        />
+
+</mobi.guessit.framework.view.PlaceholderView>

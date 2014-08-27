@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:guessit="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/alert_congratulations_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    android:paddingBottom="80dp"
+    >
+
+    <mobi.guessit.framework.view.components.FontFaceTextView
+        android:id="@+id/alert_congratulations_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:gravity="center"
+        android:text="@string/alert_congratulations"
+        guessit:fontFace="Lobster.ttf"
+        android:textSize="44sp"
+        />
+
+    <mobi.guessit.framework.view.components.FontFaceTextView
+        android:id="@+id/alert_correct_answer_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/alert_congratulations_text_view"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="@string/alert_correct_answer"
+        android:textColor="@android:color/white"
+        android:shadowColor="@android:color/black"
+        android:shadowDy="-1"
+        android:shadowRadius="1"
+        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+        guessit:fontStyle="Bold"
+        android:textSize="18sp"
+        />
+
+    <mobi.guessit.framework.view.components.FontFaceTextView
+        android:id="@+id/alert_answer_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:text="BRAZIL"
+        android:textColor="@android:color/white"
+        android:shadowColor="@android:color/black"
+        android:shadowDy="-1"
+        android:shadowRadius="1"
+        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+        guessit:fontStyle="Bold"
+        android:textSize="36sp"
+        android:background="@android:color/black"
+        />
+
+    <mobi.guessit.framework.view.components.FontFaceTextView
+        android:id="@+id/alert_answer_was_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/alert_answer_text_view"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:text="@string/alert_answer_was"
+        android:textColor="@android:color/white"
+        android:shadowColor="@android:color/black"
+        android:shadowDy="-1"
+        android:shadowRadius="1"
+        guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+        guessit:fontStyle="Bold"
+        android:textSize="18sp"
+        />
+
+</RelativeLayout>

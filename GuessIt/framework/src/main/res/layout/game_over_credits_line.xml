@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- GameOverCreditsLine extends LinearLayout -->
+<mobi.guessit.framework.view.GameOverCreditsLine
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:guessit="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <mobi.guessit.framework.view.components.FontFaceTextView
+        android:id="@+id/game_over_credits_role"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        guessit:fontFace="Avenir Next Condensed-Medium.ttf"
+        android:textSize="@dimen/game_over_role_text_size"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:alpha="0.8"
+        android:gravity="right"
+        android:text="BLA"
+        />
+
+    <mobi.guessit.framework.view.components.FontFaceTextView
+        android:id="@+id/game_over_credits_person"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        guessit:fontFace="Avenir Next Condensed-DemiBold.ttf"
+        android:textSize="@dimen/game_over_person_text_size"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:text="BLE"
+        />
+
+</mobi.guessit.framework.view.GameOverCreditsLine>

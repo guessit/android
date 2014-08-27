@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:guessit="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <!-- GameOverCongratulationsView extends RelativeLayout -->
+        <mobi.guessit.framework.view.GameOverCongratulationsView
+            android:id="@+id/game_over_congratulations_view"
+            android:layout_width="match_parent"
+            android:layout_height="400dp">
+
+            <mobi.guessit.framework.view.components.FontFaceTextView
+                android:id="@+id/game_over"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_over"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/game_over_margin_top"
+                android:textSize="@dimen/game_over_text_size"
+                android:alpha="0.03"
+                guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+                guessit:fontStyle="Bold"
+                />
+
+            <mobi.guessit.framework.view.components.FontFaceTextView
+                android:id="@+id/game_over_congratulations"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_over_congratulations"
+                android:layout_centerInParent="true"
+                guessit:fontFace="Lobster.ttf"
+                android:textSize="@dimen/game_over_congratulations_text_size"
+                />
+
+            <mobi.guessit.framework.view.components.FontFaceTextView
+                android:id="@+id/game_over_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_over_description"
+                guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+                guessit:fontStyle="Bold"
+                android:textSize="@dimen/game_over_description_text_size"
+                android:layout_centerHorizontal="true"
+                android:layout_alignBottom="@id/game_over_congratulations"
+                android:layout_marginBottom="-24dp"
+                />
+
+            <mobi.guessit.framework.view.components.FontFaceTextView
+                android:id="@+id/game_over_reset_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_over_reset_progress"
+                android:layout_centerHorizontal="true"
+                guessit:fontFace="Avenir Next Condensed-DemiBold.ttf"
+                guessit:fontStyle="Bold"
+                android:textSize="@dimen/game_over_reset_progress_text_size"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                />
+
+        </mobi.guessit.framework.view.GameOverCongratulationsView>
+
+        <!-- GameOverOtherGamesView extends RelativeLayout -->
+        <mobi.guessit.framework.view.GameOverOtherGamesView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/background_soon"
+                android:scaleType="centerCrop"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/guessit_soon"
+                android:layout_centerInParent="true"
+                />
+
+            <mobi.guessit.framework.view.components.FontFaceTextView
+                android:id="@+id/game_over_liked_guessit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_over_liked_guessit"
+                guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+                android:textSize="@dimen/game_over_liked_guessit_text_size"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="180dp"
+                />
+
+            <mobi.guessit.framework.view.components.FontFaceTextView
+                android:id="@+id/game_over_other_games"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_over_other_games"
+                guessit:fontFace="Avenir Next Condensed-DemiBold.ttf"
+                android:textSize="@dimen/game_over_other_games_text_size"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="220dp"
+                />
+
+            <mobi.guessit.framework.view.components.FontFaceTextView
+                android:id="@+id/game_over_visit_website"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_over_visit_website"
+                guessit:fontFace="Avenir Next Condensed-DemiBold.ttf"
+                android:textSize="@dimen/game_over_visit_website_text_size"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="350dp"
+                />
+
+            <mobi.guessit.framework.view.components.FontFaceTextView
+                android:id="@+id/game_over_website"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_over_website"
+                guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+                android:textSize="@dimen/game_over_website_text_size"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="370dp"
+                />
+
+        </mobi.guessit.framework.view.GameOverOtherGamesView>
+
+        <!-- GameOverCreditsView extends RelativeLayout -->
+        <mobi.guessit.framework.view.GameOverCreditsView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/black"
+            android:paddingTop="40dp"
+            android:paddingBottom="20dp"
+            >
+
+            <mobi.guessit.framework.view.components.FontFaceTextView
+                android:id="@+id/game_over_credits"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_over_credits"
+                guessit:fontFace="Avenir Next Condensed-Bold.ttf"
+                android:textSize="@dimen/game_over_credits_text_size"
+                android:layout_centerHorizontal="true"
+                />
+
+            <LinearLayout
+                android:id="@+id/game_over_credits_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="70dp"
+                android:layout_marginBottom="50dp"
+                >
+
+            </LinearLayout>
+
+            <mobi.guessit.framework.view.components.FontFaceTextView
+                android:id="@+id/game_over_thank_you"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/game_over_thank_your"
+                guessit:fontFace="Avenir Next Condensed-DemiBold.ttf"
+                android:textSize="@dimen/game_over_thank_you_text_size"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                />
+
+        </mobi.guessit.framework.view.GameOverCreditsView>
+
+    </LinearLayout>
+
+</ScrollView>

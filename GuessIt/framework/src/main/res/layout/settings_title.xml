@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<mobi.guessit.framework.view.components.FontFaceTextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:guessit="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settings_title_text_view"
+    android:gravity="center"
+    android:text="Teste"
+    android:background="@android:color/darker_gray"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:minHeight="40dp"
+    guessit:fontFace="Avenir Next Condensed-Medium.ttf"
+    android:textSize="19sp"
+    >
+
+</mobi.guessit.framework.view.components.FontFaceTextView>
