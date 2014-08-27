@@ -8,6 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/anime" />
             <option value="$PROJECT_DIR$/country_flags" />
             <option value="$PROJECT_DIR$/dragon_ball" />
             <option value="$PROJECT_DIR$/framework" />

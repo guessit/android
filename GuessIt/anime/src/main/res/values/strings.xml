@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Anime?</string>
+
+    <string name="img_001">One Piece</string>
+    <string name="img_002">Chobits</string>
+    <string name="img_003">Kanon</string>
+    <string name="img_004">Evangelion</string>
+    <string name="img_005">Tenchi Muyo</string>
+    <string name="img_006">Death Note</string>
+    <string name="img_007">Akira</string>
+    <string name="img_008">Naruto</string>
+    <string name="img_009">Blood+</string>
+    <string name="img_010">Eureka Seven</string>
+    <string name="img_011">Claymore</string>
+    <string name="img_012">Sakura</string>
+    <string name="img_013">School Rumble</string>
+    <string name="img_014">Bleach</string>
+    <string name="img_015">Karin</string>
+    <string name="img_016">Shaman King</string>
+    <string name="img_017">Digimon</string>
+    <string name="img_018">InuYasha</string>
+    <string name="img_019">Yu Yu Hakusho</string>
+    <string name="img_020">Onegai Teacher</string>
+    <string name="img_021">Dragon Ball Z</string>
+    <string name="img_022">Sailor Moon</string>
+    <string name="img_023">Love Hina</string>
+    <string name="img_024">YuGiOh</string>
+    <string name="img_025">Fushigi Yuugi</string>
+    <string name="img_026">Dragon Ball</string>
+    <string name="img_027">Negima</string>
+    <string name="img_028">Samurai X</string>
+    <string name="img_029">Shurato</string>
+    <string name="img_030">Pokemon</string>
+    <string name="img_031">XXXHolic</string>
+    <string name="img_032">Hunter X Hunter</string>
+    <string name="img_033">Tsubasa Chronicles</string>
+    <string name="img_034">Afro Samurai</string>
+    <string name="img_035">Ah Megami Sama</string>
+    <string name="img_036">Ayashi No Ceres</string>
+    <string name="img_037">Bakuman</string>
+    <string name="img_038">Blade</string>
+    <string name="img_039">Cowboy Bebop</string>
+    <string name="img_040">Dr. Slump</string>
+    <string name="img_041">Elfen Lied</string>
+    <string name="img_042">Fruits Basket</string>
+    <string name="img_043">Soul Eater</string>
+    <string name="img_044">Gintama</string>
+    <string name="img_045">Gundam Wing</string>
+    <string name="img_046">Ranma 1/2</string>
+    <string name="img_047">Shakugan no Shana</string>
+    <string name="img_048">FullMetal</string>
+    <string name="img_049">FullMetal Panic</string>
+    <string name="img_050">Ghost In The Shell</string>
+    <string name="img_051">Samurai Champloo</string>
+    <string name="img_052">Slayers</string>
+
+</resources>
