@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GuessIt.iml" filepath="$PROJECT_DIR$/GuessIt.iml" />
       <module fileurl="file://$PROJECT_DIR$/country_flags/country_flags.iml" filepath="$PROJECT_DIR$/country_flags/country_flags.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dragon_ball/dragon_ball.iml" filepath="$PROJECT_DIR$/dragon_ball/dragon_ball.iml" />
       <module fileurl="file://$PROJECT_DIR$/framework/framework.iml" filepath="$PROJECT_DIR$/framework/framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/retro_games/retro_games.iml" filepath="$PROJECT_DIR$/retro_games/retro_games.iml" />
     </modules>
