@@ -155,7 +155,7 @@ public class InputView extends LinearLayout {
                 public void onSkipLevelRequested(HelpView view) {
                     Configuration.getInstance().trackEvent(
                         Configuration.Events.HELP_CATEGORY,
-                        Configuration.Events.PLACE_CORRECT_LETTER,
+                        Configuration.Events.SKIP_LEVEL,
                         getLevel().getImageName()
                     );
 
@@ -196,7 +196,7 @@ public class InputView extends LinearLayout {
                 public void onPlaceCorrectLetterRequested(HelpView view) {
                     Configuration.getInstance().trackEvent(
                         Configuration.Events.HELP_CATEGORY,
-                        Configuration.Events.SKIP_LEVEL,
+                        Configuration.Events.PLACE_CORRECT_LETTER,
                         getLevel().getImageName()
                     );
 
