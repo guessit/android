@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="app_name">Bandeiras de Países?</string>
+
     <string name="img_001">afeganistao</string>
     <string name="img_002">albania</string>
     <string name="img_003">argelia</string>
