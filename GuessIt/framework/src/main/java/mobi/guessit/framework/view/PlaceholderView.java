@@ -2,7 +2,9 @@ package mobi.guessit.framework.view;
 
 import android.content.Context;
 import android.graphics.drawable.PaintDrawable;
+import android.os.Handler;
 import android.util.AttributeSet;
+import android.view.animation.Animation;
 import android.widget.RelativeLayout;
 
 import mobi.guessit.framework.R;
@@ -85,5 +87,36 @@ public class PlaceholderView extends RelativeLayout {
     public void reset() {
         getLetterButton().setAlpha(0.f);
         getLetterButton().setOriginLetter(null);
+
+        resetAlphaIfButtonIsAnimating();
+    }
+
+    /**
+     * For some reason the getAnimation is not returning an animation,
+     * it happens when the user types too fast and finish guessing an anwser.
+     *
+     * If we do not reset the alpha, the letter continues showing on the
+     * answer placeholder, and if the uses clicks on it the app crashes.
+     *
+     * Dont know if this overhead can slow down the app on slow devices.
+     *
+     * 300 ms is the default animation duration, so it is the last postDelayed call
+     */
+    private void resetAlphaIfButtonIsAnimating() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (getLetterButton().getAlpha() != 0) {
+                    getLetterButton().setAlpha(0);
+                }
+            }
+        };
+
+        new Handler().postDelayed(runnable, 50);
+        new Handler().postDelayed(runnable, 100);
+        new Handler().postDelayed(runnable, 150);
+        new Handler().postDelayed(runnable, 200);
+        new Handler().postDelayed(runnable, 250);
+        new Handler().postDelayed(runnable, 300);
     }
 }
