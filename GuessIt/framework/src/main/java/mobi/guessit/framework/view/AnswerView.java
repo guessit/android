@@ -211,20 +211,25 @@ public class AnswerView extends LinearLayout {
                 boolean isFirstLetter = i == 0;
                 boolean isLastLetter = i == answerLength - 1;
 
-                setupPlaceholder(letter, letterIndex, width, height, previousLetterWasSpace,
+                PlaceholderView placeholderView = setupPlaceholder(
+                        letter, letterIndex, width, height, previousLetterWasSpace,
                         isFirstLetter, isLastLetter, isLongWord);
+
+                float proportionalRatio = width / initialWidth;
+
+                LetterButton letterButton = placeholderView.getLetterButton();
+                letterButton.adjustTextSize(proportionalRatio);
+
                 letterIndex++;
                 previousLetterWasSpace = false;
             }
         }
     }
 
-    private void setupPlaceholder(String letter, int letterIndex,
-                                  float width, float height,
-                                  boolean previousLetterWasSpace,
-                                  boolean isFirstLetter,
-                                  boolean isLastLetter,
-                                  boolean isLongWord) {
+    private PlaceholderView setupPlaceholder(
+            String letter, int letterIndex, float width, float height,
+            boolean previousLetterWasSpace, boolean isFirstLetter,
+            boolean isLastLetter, boolean isLongWord) {
         PlaceholderView placeholderView = getPlaceholderAtIndex(letterIndex);
         placeholderView.setLetter(letter);
 
@@ -256,6 +261,8 @@ public class AnswerView extends LinearLayout {
         layoutParams.rightMargin = (int) rightMargin;
 
         addView(placeholderView, layoutParams);
+
+        return placeholderView;
     }
 
     public boolean canAddLetter() {
