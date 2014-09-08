@@ -143,4 +143,9 @@ public class LetterButton extends Button {
         setOriginLetter(letter);
         BumpAnimator.getInstance().animateIn(this);
     }
+
+    public void adjustTextSize(float proportionalRatio) {
+        float size = getResources().getDimension(R.dimen.level_keypad_text_size);
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, size * proportionalRatio);
+    }
 }
