@@ -17,7 +17,6 @@ public class Level {
     private String bundle;
 
     private String mAnswer;
-    private transient Drawable mImage;
 
     public static Level guessItLevel() {
         Level guessIt = new Level();
@@ -38,17 +37,13 @@ public class Level {
         return result;
     }
 
-    public void loadResources(Context context) {
-        ResourceHelper helper = ResourceHelper.getInstance();
-
-        String keyName = "img_" + getImageName();
-
-        mAnswer = helper.getString(context, keyName).toUpperCase();
-        mImage = helper.getImage(context, keyName);
+    public String getKeyName() {
+        return "img_" + getImageName();
     }
 
-    public Drawable getImage() {
-        return mImage;
+    public void loadAnswerI18n(Context context) {
+        ResourceHelper helper = ResourceHelper.getInstance();
+        mAnswer = helper.getString(context, getKeyName()).toUpperCase();
     }
 
     public String getAnswer() {

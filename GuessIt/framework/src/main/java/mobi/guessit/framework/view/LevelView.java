@@ -1,6 +1,7 @@
 package mobi.guessit.framework.view;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PaintDrawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import mobi.guessit.framework.R;
 import mobi.guessit.framework.helper.BackgroundHelper;
 import mobi.guessit.framework.helper.BumpAnimator;
 import mobi.guessit.framework.helper.ColorHelper;
+import mobi.guessit.framework.helper.ResourceHelper;
 import mobi.guessit.framework.model.Configuration;
 import mobi.guessit.framework.model.Game;
 import mobi.guessit.framework.model.GuessingResult;
@@ -53,7 +55,7 @@ public class LevelView extends RelativeLayout {
 
     public void setLevel(Level level, boolean animated) {
         this.level = level;
-        this.level.loadResources(getContext());
+        this.level.loadAnswerI18n(getContext());
 
         Configuration.getInstance().trackEvent(
             Configuration.Events.GAME_CATEGORY,
@@ -64,7 +66,10 @@ public class LevelView extends RelativeLayout {
         getInputView().setLevel(level, animated);
 
         ImageView imageView = (ImageView) findViewById(R.id.level_image_view);
-        imageView.setImageDrawable(level.getImage());
+
+        ResourceHelper helper = ResourceHelper.getInstance();
+        Drawable image = helper.getImage(getContext(), level.getKeyName());
+        imageView.setImageDrawable(image);
 
         if (animated) {
             BumpAnimator.getInstance().animateIn(imageView);
@@ -163,7 +168,7 @@ public class LevelView extends RelativeLayout {
         Level previousLevel = getLevel();
 
         Level nextLevel = Configuration.getInstance().getCurrentLevel();
-        nextLevel.loadResources(getContext());
+        nextLevel.loadAnswerI18n(getContext());
         setLevel(nextLevel);
 
         if (getOnLevelGuessedCorrect() != null) {
