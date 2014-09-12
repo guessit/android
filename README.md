@@ -1,6 +1,5 @@
-## GuessIt Android
+## GuessIt Android Project
 
-GuessIt android project.  
 Android app that contains a library with the code and other projects that contains all images and configuration needed for the games.
 
 Games:
