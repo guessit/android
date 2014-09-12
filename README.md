@@ -1,1 +1,15 @@
-# GuessIt! Android Version
+## GuessIt Android
+
+GuessIt android project.  
+Android app that contains a library with the code and other projects that contains all images and configuration needed for the games.
+
+Games:
+
+* Anime?
+* Brazilian Football?
+* Country Flags?
+* Dragon Ball?
+* Retro Games?
+* Technology?
+
+Please see http://marlonandrade.com.br/2014/09/11/guessit-going-opensource/ for details.
